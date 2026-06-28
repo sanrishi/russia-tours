@@ -6,12 +6,6 @@ export default function TrustBadges() {
           <span className="text-white/30 tracking-widest uppercase text-[10px] sm:text-xs">
             Trusted Partners
           </span>
-          {/* PLACEHOLDER — replace with real Google rating from client's listing */}
-          <span>★ 4.9 Google Rating</span>
-          {/* PLACEHOLDER — replace with real traveler count */}
-          <span>1,000+ Happy Indian Travelers</span>
-          {/* PLACEHOLDER — replace once Russian tour license obtained */}
-          <span>Registered Tour Operator</span>
         </div>
       </div>
     </section>
