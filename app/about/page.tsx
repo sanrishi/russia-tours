@@ -25,39 +25,54 @@ export default function AboutPage() {
           </div>
 
           <div className="space-y-8">
-            {/* PLACEHOLDER — bio: replace with client's actual background */}
             <div>
               <h2 className="text-xl font-bold text-white mb-3">
-                {/* PLACEHOLDER — add client name here */}
-                About Indosvetka
+                About Sveta
               </h2>
               <div className="space-y-4 text-white/50 text-sm leading-relaxed">
                 <p>
-                  {/* PLACEHOLDER — write client's story: how they moved to Russia,
-                  what inspired them to start guiding Indian travelers, their
-                  qualifications, languages spoken, etc. */}
-                  This section will tell your story — how you came to Russia,
-                  your experience with Indian travelers, and why you are the
-                  right person to guide them through this incredible country.
+                  Hi, I&apos;m Sveta. I have visited India many times and spent
+                  a lot of time interacting with local people. These experiences
+                  helped me understand Indian culture, traditions, and daily life
+                  from the inside, not just as a tourist. I truly admire India
+                  and feel a strong connection to its people.
                 </p>
                 <p>
-                  Share your background, your language skills (Hindi, English,
-                  Russian), any certifications, and what makes your tours unique.
+                  During my travels, I often heard from Indians that they feel a
+                  close cultural bond with Russia and are very interested in
+                  visiting the country. This inspired me to create guided tours
+                  in Russia specifically for Indian travelers.
+                </p>
+                <p>
+                  My goal is to make travel in Russia comfortable, well-organized,
+                  and stress-free. I personally accompany groups during tours,
+                  stay available throughout the journey, and help with any
+                  questions or situations that may arise — so guests can fully
+                  enjoy their experience.
+                </p>
+                <p>
+                  I speak English and have basic knowledge of Hindi (at a very
+                  simple level). While I&apos;m not fluent, I&apos;m able to
+                  communicate on a practical level and understand key expressions,
+                  especially in travel and everyday situations.
                 </p>
               </div>
             </div>
 
-            {/* PLACEHOLDER — contact info: replace with client's actual contact details */}
             <div className="rounded-xl border border-white/5 bg-white/[0.02] p-6 space-y-4">
               <h3 className="text-white font-semibold text-sm">Contact</h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-sm text-white/50">
                   <Mail size={14} className="text-gold shrink-0" />
-                  <span>your.email@example.com</span>
+                  <span>svetaindia07@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-white/50">
                   <Phone size={14} className="text-gold shrink-0" />
-                  <span>+91 XXXXX XXXXX</span>
+                  <span>+91 70429 87451</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-white/50">
+                  <Phone size={14} className="text-gold shrink-0" />
+                  <span>+91 77172 51915</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-white/50">
                   <MapPin size={14} className="text-gold shrink-0" />

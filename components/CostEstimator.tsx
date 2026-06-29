@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import { IndianRupee, Minus, Plus, Users } from "lucide-react";
 import { useState } from "react";
 
-/* PLACEHOLDER — pricing: confirm actual per-person price with client, do not deploy as-is */
-const PRICE_PER_PERSON = 85000;
+const PRICE_PER_PERSON = 160000;
 
 export default function CostEstimator() {
   const [groupSize, setGroupSize] = useState(4);

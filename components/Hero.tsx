@@ -111,7 +111,7 @@ export default function Hero() {
           >
             Curated small-group tours to Moscow, St. Petersburg &amp; Kazan.
             Designed exclusively for Indian travelers — with visa assistance,
-            Indian cuisine, and Hindi-speaking guides.
+            Indian cuisine, and English-speaking guides.
           </motion.p>
 
           <motion.div
