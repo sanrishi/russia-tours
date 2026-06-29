@@ -10,7 +10,7 @@ const photos = [
     tag: "Day 3 — Rooftop Visit",
   },
   {
-    src: "/restaurant.jpg",
+    src: "/restraunt_photo.jpeg",
     alt: "Indian restaurant dining",
     tag: "Dinner Inclusions",
   },
