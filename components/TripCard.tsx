@@ -34,7 +34,7 @@ const trips: Trip[] = [
   {
     title: "Moscow Discovery — 7 Days",
     tagline: "August 2026 — Limited to 8 Seats",
-    image: "/moscow-hero.jpg",
+    image: "/IMG_6225.jpeg",
     pricePerPerson: 160000,
     duration: "7 days / 6 nights",
     groupSize: "Max 8 people",
