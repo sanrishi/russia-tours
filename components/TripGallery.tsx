@@ -41,12 +41,12 @@ export default function TripGallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.4 }}
-            className={`relative group ${p.featured ? "row-span-2" : ""}`}
+            className={`relative group ${p.featured ? "row-span-2 h-full" : ""}`}
           >
             <div
               className={`relative rounded-xl overflow-hidden border border-white/5 ${
                 p.featured
-                  ? "aspect-[9/16] sm:aspect-[3/4]"
+                  ? "h-full"
                   : "aspect-[4/3] sm:aspect-[4/5]"
               }`}
             >
