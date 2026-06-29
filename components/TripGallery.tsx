@@ -8,16 +8,19 @@ const photos = [
     src: "/rooftop.jpeg",
     alt: "Rooftop view — Moscow skyline",
     tag: "Day 3 — Rooftop Visit",
+    featured: true,
   },
   {
     src: "/restraunt_photo.jpeg",
     alt: "Indian restaurant dining",
     tag: "Dinner Inclusions",
+    featured: false,
   },
   {
     src: "/cafe-two-women.jpg",
     alt: "Café atmosphere",
     tag: null,
+    featured: false,
   },
 ];
 
@@ -30,17 +33,30 @@ export default function TripGallery() {
       className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8"
     >
       <h3 className="text-lg font-bold text-white mb-6">Trip Gallery</h3>
-      <div className="grid sm:grid-cols-3 gap-4">
-        {photos.map((p) => (
-          <div key={p.src} className="relative group">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/5">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
+        {photos.map((p, i) => (
+          <motion.div
+            key={p.src}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.4 }}
+            className={`relative group ${p.featured ? "row-span-2" : ""}`}
+          >
+            <div
+              className={`relative rounded-xl overflow-hidden border border-white/5 ${
+                p.featured
+                  ? "aspect-[9/16] sm:aspect-[3/4]"
+                  : "aspect-[4/3] sm:aspect-[4/5]"
+              }`}
+            >
               <Image
                 src={p.src}
                 alt={p.alt}
                 fill
                 unoptimized
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="(max-width: 768px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent" />
               {p.tag && (
@@ -49,7 +65,7 @@ export default function TripGallery() {
                 </span>
               )}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </motion.div>
