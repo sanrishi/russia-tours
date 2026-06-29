@@ -10,7 +10,7 @@ const signatureTours = [
   "Fixed 7-day itinerary",
   "Small groups (4-8 people)",
   "All transfers & accommodation",
-  "English/Hindi-speaking guide",
+  "English-speaking guide (basic Hindi support)",
   "Daily breakfast + 2 Indian meals",
   "Visa assistance included",
 ];

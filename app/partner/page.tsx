@@ -14,7 +14,7 @@ export default function PartnerPage() {
             </h1>
             <p className="text-white/50 text-base sm:text-lg leading-relaxed mb-10">
               Indian travel agents — offer your clients curated Russia tours
-              with full visa support, Indian cuisine, and Hindi-speaking guides.
+              with full visa support, Indian cuisine, and English-speaking guides with basic Hindi support.
             </p>
 
             <div className="space-y-6 mb-10">
@@ -57,7 +57,7 @@ export default function PartnerPage() {
                     Indian-Friendly Tours
                   </h3>
                   <p className="text-white/50 text-sm leading-relaxed">
-                    Hindi-speaking guides, Indian meal options, and curated
+                    English-speaking guides with basic Hindi support, Indian meal options, and curated
                     experiences designed for Indian travelers.
                   </p>
                 </div>

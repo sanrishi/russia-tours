@@ -13,7 +13,7 @@ import {
 const highlights = [
   { icon: MapPin, text: "Private Red Square & Kremlin access" },
   { icon: UtensilsCrossed, text: "Halal-friendly & Indian dining options" },
-  { icon: Languages, text: "Hindi-speaking guides available" },
+  { icon: Languages, text: "English-speaking guides, basic Hindi support" },
   { icon: HeadphonesIcon, text: "24/7 WhatsApp support in India" },
 ];
 
@@ -65,7 +65,7 @@ export default function CulturalImmersion() {
               We don&apos;t just show you buildings — we unlock Russia through
               an Indian lens. From private access to the Red Square to
               halal-friendly dining in St. Petersburg, every detail is curated
-              with your comfort in mind. Verified local experts, Hindi-speaking
+              with your comfort in mind. Verified local guides with basic Hindi
               guides, and absolute peace of mind.
             </p>
 
