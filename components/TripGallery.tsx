@@ -9,21 +9,18 @@ const photos = [
     alt: "Rooftop view — Moscow skyline",
     tag: "Day 3 — Rooftop Visit",
     featured: true,
-    objectPosition: "object-[center_40%]",
   },
   {
     src: "/restraunt_photo.jpeg",
     alt: "Indian restaurant dining",
     tag: "Dinner Inclusions",
     featured: false,
-    objectPosition: "object-[center_25%]",
   },
   {
     src: "/cafe-two-women.jpg",
     alt: "Café atmosphere — group gathering",
     tag: "Group Atmosphere",
     featured: false,
-    objectPosition: "object-[center_15%]",
   },
 ];
 
@@ -50,7 +47,7 @@ export default function TripGallery() {
               className={`relative rounded-xl overflow-hidden border border-white/5 ${
                 p.featured
                   ? "h-full"
-                  : "aspect-[3/4] sm:aspect-[4/5]"
+                  : "aspect-[9/16] sm:aspect-[3/4]"
               }`}
             >
               <Image
@@ -58,7 +55,7 @@ export default function TripGallery() {
                 alt={p.alt}
                 fill
                 unoptimized
-                className={`object-cover transition-transform duration-500 group-hover:scale-105 ${p.objectPosition}`}
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent" />
