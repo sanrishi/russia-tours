@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 import CertificationsSection from "@/components/CertificationsSection";
 
@@ -19,9 +20,15 @@ export default function AboutPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-10 items-start">
-          {/* PLACEHOLDER — photo: replace with actual client photo */}
-          <div className="aspect-[4/5] rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
-            <p className="text-white/20 text-sm">Your photo here</p>
+          <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-white/[0.03] border border-white/5 relative">
+            <Image
+              src="/profile_sveta.JPG"
+              alt="Sveta — Indosvetka"
+              fill
+              unoptimized
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
 
           <div className="space-y-8">
