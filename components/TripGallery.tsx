@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const photos = [
   {
-    src: "/rooftop.jpg",
+    src: "/rooftop.jpeg",
     alt: "Rooftop view — Moscow skyline",
     tag: "Day 3 — Rooftop Visit",
   },
