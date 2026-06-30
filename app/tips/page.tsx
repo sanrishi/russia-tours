@@ -104,15 +104,71 @@ export default function TipsPage() {
 
         <SafetyCallout />
 
-        {/* PLACEHOLDER — packing & weather tips: add seasonal guidance */}
+        {/* Weather & Packing */}
         <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 mt-6">
-          <h2 className="text-xl font-bold text-white mb-3">
-            Weather &amp; Packing
+          <h2 className="text-xl font-bold text-white mb-4">
+            Weather &amp; Packing — Moscow in August
           </h2>
-          <p className="text-white/50 text-sm leading-relaxed">
-            Seasonal packing tips and weather guidance for Moscow &amp; St.
-            Petersburg will appear here once confirmed.
+          <p className="text-white/60 text-sm leading-relaxed mb-4">
+            Moscow in August is warm and pleasant by day, cooler at night — typically 23–24°C (73–75°F) during the day, dropping to 12–15°C (54–59°F) in the evening. Expect a mix of sunny stretches and occasional rain showers throughout the month.
           </p>
+          <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+            <p className="text-white text-sm font-semibold mb-2">What to pack:</p>
+            <ul className="space-y-1.5">
+              {[
+                "Light layers — t-shirts and breathable clothing for daytime",
+                "A light jacket or sweater for cooler evenings and air-conditioned transport",
+                "A compact umbrella or light rain jacket (August sees scattered rain)",
+                "Comfortable walking shoes — you'll be on your feet for city tours, Red Square, and the limousine/rooftop evening",
+                "Sunglasses and sunscreen for sunny days",
+                "One smart-casual outfit for the rooftop and goodbye dinner",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2 text-xs text-white/50">
+                  <span className="text-gold shrink-0 mt-0.5">•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Practical Tips for Indian Travelers */}
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 mt-6">
+          <h2 className="text-xl font-bold text-white mb-4">
+            Practical Tips for Indian Travellers
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: "Payments & Cash",
+                body: "VISA and Mastercard issued outside Russia don't work. Carry USD or EUR in cash and exchange at airport or bank. Get a Yoomoney Tourist Card before your trip for QR-code payments — it works everywhere.",
+              },
+              {
+                title: "Internet & Apps",
+                body: "Instagram and Facebook are blocked in Russia. Download a reliable VPN before departure and set it up before you land. Yandex Maps and Yandex Translate work well for navigation and menus.",
+              },
+              {
+                title: "Metro Tips",
+                body: "The Moscow Metro is an attraction itself — palaces with chandeliers and mosaics. Trains run 5:30 AM–1 AM, every minute at peak. One ride costs under ₹40. Stations have English signs.",
+              },
+              {
+                title: "Language",
+                body: "English is limited outside hotels and tourist zones. Learn a few words: Здравствуйте (hello), Спасибо (thank you), Сколько? (how much). Yandex Translate handles menus and signs via your camera.",
+              },
+            ].map((tip) => (
+              <div
+                key={tip.title}
+                className="p-4 rounded-xl border border-white/5 bg-white/[0.02]"
+              >
+                <h3 className="text-white font-semibold text-sm mb-1.5">
+                  {tip.title}
+                </h3>
+                <p className="text-xs text-white/50 leading-relaxed">
+                  {tip.body}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </main>
