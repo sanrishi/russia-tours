@@ -132,11 +132,11 @@ export default function TipsPage() {
             </ul>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-6">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/5 bg-charcoal/50">
-              <Image src="/moscow-summer-1.webp" alt="Saint Basil's Cathedral on a sunny summer day" fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+            <div className="relative aspect-[1/1] rounded-xl overflow-hidden border border-white/5 bg-charcoal/50">
+              <Image src="/moscow-summer-1.webp" alt="Saint Basil's Cathedral on a sunny summer day" fill unoptimized className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
             </div>
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/5 bg-charcoal/50">
-              <Image src="/moscow-summer-2.webp" alt="Kremlin tower and Red Square in summer" fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+            <div className="relative aspect-[1/1] rounded-xl overflow-hidden border border-white/5 bg-charcoal/50">
+              <Image src="/moscow-summer-2.webp" alt="Kremlin tower and Red Square in summer" fill unoptimized className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
             </div>
           </div>
         </div>
