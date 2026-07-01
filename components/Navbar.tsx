@@ -41,7 +41,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-full mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-[1728px] mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex flex-col leading-tight">
           <span className="text-xl font-bold tracking-tight">
             <span className="text-gold">Trips to</span>
