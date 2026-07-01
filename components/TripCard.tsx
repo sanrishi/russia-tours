@@ -2,8 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, IndianRupee, Clock, Utensils, Bus, Shield, Check, X, ArrowRight } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 
 interface Day {
@@ -278,9 +277,22 @@ const slides = [
 function HeaderSlideshow({ tagline, title }: { tagline: string; title: string }) {
   const [index, setIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const readyRef = useRef<boolean[]>(slides.map(() => false));
+  const indexRef = useRef(0);
+
+  useEffect(() => {
+    slides.forEach((src, i) => {
+      const img = new Image();
+      img.onload = () => { readyRef.current[i] = true; };
+      img.src = src;
+    });
+  }, []);
 
   const next = useCallback(() => {
-    setIndex((i) => (i + 1) % slides.length);
+    const nextIndex = (indexRef.current + 1) % slides.length;
+    if (!readyRef.current[nextIndex]) return;
+    indexRef.current = nextIndex;
+    setIndex(nextIndex);
     setProgress(0);
   }, []);
 
@@ -308,12 +320,10 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
           transition={{ duration: 0.6, ease: "easeInOut" }}
           className="absolute inset-0"
         >
-          <Image
+          <img
             src={slides[index]}
             alt=""
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            className="absolute inset-0 w-full h-full object-cover"
             style={{ transform: `scale(${1 + progress * 0.15})` }}
           />
         </motion.div>
