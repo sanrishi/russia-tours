@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, IndianRupee, Clock, Utensils, Bus, Shield, Check, X, ArrowRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, IndianRupee, Clock, Utensils, Bus, Shield, Check, X, ArrowRight } from "lucide-react";
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 
@@ -277,7 +277,6 @@ const slides = [
 
 function HeaderSlideshow({ tagline, title }: { tagline: string; title: string }) {
   const [index, setIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
   const readyRef = useRef<boolean[]>(slides.map(() => false));
   const indexRef = useRef(0);
 
@@ -289,29 +288,15 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
     });
   }, []);
 
-  const next = useCallback(() => {
-    const nextIndex = (indexRef.current + 1) % slides.length;
+  const goTo = useCallback((i: number) => {
+    const nextIndex = (i + slides.length) % slides.length;
     if (!readyRef.current[nextIndex]) return;
     indexRef.current = nextIndex;
     setIndex(nextIndex);
-    setProgress(0);
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((p) => {
-        if (p >= 1) {
-          next();
-          return 0;
-        }
-        return Math.min(p + 0.01, 1);
-      });
-    }, 40);
-    return () => clearInterval(timer);
-  }, [next]);
-
   return (
-    <div className="relative aspect-[4/3] sm:aspect-[16/9] bg-charcoal/50 overflow-hidden">
+    <div className="relative aspect-[4/3] sm:aspect-[16/9] bg-charcoal/50 overflow-hidden group">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
@@ -324,8 +309,7 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
           <img
             src={slides[index]}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ transform: `scale(${1 + progress * 0.15})` }}
+            className="absolute inset-0 w-full h-full object-cover scale-110"
           />
         </motion.div>
       </AnimatePresence>
@@ -338,14 +322,31 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
           {title}
         </h3>
       </div>
-      <div className="absolute top-3 left-3 right-3 flex gap-1.5">
+
+      {/* Arrows */}
+      <button
+        onClick={() => goTo(index - 1)}
+        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+      >
+        <ChevronLeft size={20} />
+      </button>
+      <button
+        onClick={() => goTo(index + 1)}
+        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+      >
+        <ChevronRight size={20} />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute top-3 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
-          <div key={i} className="flex-1 h-0.5 rounded-full bg-white/20 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gold transition-all duration-100"
-              style={{ width: i === index ? `${progress * 100}%` : i < index ? "100%" : "0%" }}
-            />
-          </div>
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+              i === index ? "bg-gold w-5" : "bg-white/40 hover:bg-white/60"
+            }`}
+          />
         ))}
       </div>
     </div>
