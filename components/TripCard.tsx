@@ -273,8 +273,6 @@ const slides = [
   "/unsplash-sidewalk.jpg",
   "/unsplash-traffic.jpg",
   "/unsplash-city.jpg",
-  "/riverside_smiling.jpeg",
-  "/rooftop.jpeg",
 ];
 
 function HeaderSlideshow({ tagline, title }: { tagline: string; title: string }) {
