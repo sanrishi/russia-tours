@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, IndianRupee, Clock, Utensils, Bus, Shield, Check, X, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -138,24 +138,7 @@ export default function TripCard() {
           transition={{ delay: i * 0.15, duration: 0.6 }}
           className="rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden hover:border-gold/20 transition-all duration-500"
         >
-          <div className="relative aspect-[4/3] sm:aspect-[16/9] bg-charcoal/50">
-            <Image
-              src="/soultrain-sunset-8064078.jpg"
-              alt={trip.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <p className="text-gold text-xs font-medium tracking-[0.15em] uppercase mb-1">
-                {trip.tagline}
-              </p>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                {trip.title}
-              </h3>
-            </div>
-          </div>
+          <HeaderSlideshow tagline={trip.tagline} title={trip.title} />
 
             <div className="p-6">
               <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-white/50">
@@ -281,6 +264,78 @@ export default function TripCard() {
           </div>
         </motion.div>
       ))}
+    </div>
+  );
+}
+
+const slides = [
+  "/soultrain-sunset-8064078.jpg",
+  "/riverside_smiling.jpeg",
+  "/rooftop.jpeg",
+];
+
+function HeaderSlideshow({ tagline, title }: { tagline: string; title: string }) {
+  const [index, setIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const next = useCallback(() => {
+    setIndex((i) => (i + 1) % slides.length);
+    setProgress(0);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 1) {
+          next();
+          return 0;
+        }
+        return Math.min(p + 0.02, 1);
+      });
+    }, 40);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  return (
+    <div className="relative aspect-[4/3] sm:aspect-[16/9] bg-charcoal/50 overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={slides[index]}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ transform: `scale(${1 + progress * 0.15})` }}
+          />
+        </motion.div>
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 p-6">
+        <p className="text-gold text-xs font-medium tracking-[0.15em] uppercase mb-1">
+          {tagline}
+        </p>
+        <h3 className="text-2xl sm:text-3xl font-bold text-white">
+          {title}
+        </h3>
+      </div>
+      <div className="absolute top-3 left-3 right-3 flex gap-1.5">
+        {slides.map((_, i) => (
+          <div key={i} className="flex-1 h-0.5 rounded-full bg-white/20 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-gold transition-all duration-100"
+              style={{ width: i === index ? `${progress * 100}%` : i < index ? "100%" : "0%" }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
