@@ -269,7 +269,7 @@ export default function TripCard() {
 
 const slides = [
   "/soultrain-sunset-8064078.jpg",
-  "/unsplash-sidewalk.jpg",
+  "/unsplash-stbasil.jpg",
   "/unsplash-traffic.jpg",
   "/unsplash-city.jpg",
 ];
