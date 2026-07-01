@@ -77,8 +77,13 @@ export default function FloatingWhatsApp() {
       rel="noopener noreferrer"
       style={{ x }}
       initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 1, duration: 0.3, ease: "easeOut" }}
+      animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
+      transition={{
+        delay: 1,
+        duration: 0.3,
+        ease: "easeOut",
+        y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 },
+      }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       drag
