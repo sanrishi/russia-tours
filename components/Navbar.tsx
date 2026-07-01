@@ -80,10 +80,11 @@ export default function Navbar() {
           )}
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-2 bg-gold hover:bg-gold/90 text-charcoal font-semibold text-sm px-5 py-2.5 rounded-full transition-all hover:shadow-lg hover:shadow-gold/20"
+            className="group relative inline-flex items-center gap-2 overflow-hidden bg-gold text-charcoal font-semibold text-sm px-5 py-2.5 rounded-full transition-shadow hover:shadow-lg hover:shadow-gold/20"
           >
-            <Phone size={14} />
-            Plan Your Tour
+            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ffd700] via-[#ff1493] to-[#8b5cf6] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <Phone size={14} className="relative z-10" />
+            <span className="relative z-10">Plan Your Tour</span>
           </Link>
         </nav>
 
@@ -135,10 +136,11 @@ export default function Navbar() {
               <Link
                 href="/#contact"
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-charcoal font-semibold text-sm px-5 py-3 rounded-full transition-all mt-2"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden bg-gold text-charcoal font-semibold text-sm px-5 py-3 rounded-full transition-all mt-2"
               >
-                <Phone size={14} />
-                Plan Your Tour
+                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ffd700] via-[#ff1493] to-[#8b5cf6] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <Phone size={14} className="relative z-10" />
+                <span className="relative z-10">Plan Your Tour</span>
               </Link>
             </div>
           </motion.div>
