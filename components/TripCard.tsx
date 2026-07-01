@@ -299,10 +299,10 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
 
   return (
     <div className="relative aspect-[4/3] sm:aspect-[16/9] bg-charcoal/50 overflow-hidden">
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
