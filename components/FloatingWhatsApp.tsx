@@ -40,9 +40,9 @@ export default function FloatingWhatsApp() {
     const mid = window.innerWidth / 2;
 
     if (cx < mid) {
-      animate(x, cur - rect.width + 8, { type: "spring", stiffness: 300, damping: 30 });
+      animate(x, cur - rect.width + 12, { type: "spring", stiffness: 300, damping: 30 });
     } else {
-      animate(x, cur + rect.width - 8, { type: "spring", stiffness: 300, damping: 30 });
+      animate(x, cur + rect.width - 12, { type: "spring", stiffness: 300, damping: 30 });
     }
   }, [x]);
 
@@ -76,18 +76,21 @@ export default function FloatingWhatsApp() {
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1, duration: 0.3, ease: "easeOut" }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
       drag
       dragMomentum={false}
       onDragStart={() => { dragging.current = true; if (hideTimer.current) clearTimeout(hideTimer.current); }}
       onDragEnd={() => { dragging.current = false; snap(); onActivity(); }}
       onMouseEnter={() => { if (hideTimer.current) clearTimeout(hideTimer.current); reveal(); }}
       onMouseLeave={onActivity}
-      className="fixed bottom-6 right-6 z-50 touch-none flex items-center gap-2 bg-whatsapp text-white px-5 py-3.5 rounded-full shadow-xl shadow-whatsapp/20 cursor-pointer"
+      className="fixed bottom-6 right-6 z-50 touch-none flex items-center gap-2 bg-whatsapp text-white px-5 py-3.5 rounded-full shadow-xl shadow-whatsapp/20 cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] hover:brightness-110 active:brightness-95 md:hover:scale-105"
     >
-      <MessageCircle size={22} className="shrink-0 fill-white" />
-      <span className="text-sm font-semibold whitespace-nowrap hidden sm:inline">
+      <motion.span
+        className="absolute inset-0 rounded-full bg-whatsapp/40"
+        animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0, 0.4] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <MessageCircle size={22} className="shrink-0 fill-white relative z-10" />
+      <span className="text-sm font-semibold whitespace-nowrap hidden sm:inline relative z-10">
         Chat on WhatsApp
       </span>
     </motion.a>
