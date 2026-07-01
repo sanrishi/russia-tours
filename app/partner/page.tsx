@@ -3,7 +3,7 @@ import { Handshake, Globe, Users, ShieldCheck, ArrowRight } from "lucide-react";
 export default function PartnerPage() {
   return (
     <main className="min-h-screen pt-20">
-      <div className="max-w-screen-2xl mx-auto px-6 py-16 sm:py-20">
+      <div className="max-w-full mx-auto px-6 py-16 sm:py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
             <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase mb-3 block">

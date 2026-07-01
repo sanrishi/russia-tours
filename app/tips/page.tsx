@@ -48,7 +48,7 @@ const restaurants = [
 export default function TipsPage() {
   return (
     <main className="min-h-screen pt-20">
-      <div className="max-w-screen-2xl mx-auto px-6 py-16 sm:py-20">
+      <div className="max-w-full mx-auto px-6 py-16 sm:py-20">
         <div className="max-w-3xl mb-14">
           <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase mb-3 block">
             Useful Tips
