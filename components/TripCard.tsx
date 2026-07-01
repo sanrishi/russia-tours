@@ -280,6 +280,7 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
   const [index, setIndex] = useState(0);
   const readyRef = useRef<boolean[]>(slides.map(() => false));
   const indexRef = useRef(0);
+  const touchStartX = useRef(0);
 
   useEffect(() => {
     slides.forEach((src, i) => {
@@ -296,8 +297,23 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
     setIndex(nextIndex);
   }, []);
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? goTo(indexRef.current + 1) : goTo(indexRef.current - 1);
+    }
+  };
+
   return (
-    <div className="relative aspect-[4/3] sm:aspect-[16/9] bg-charcoal/50 overflow-hidden group">
+    <div
+      className="relative aspect-[4/3] sm:aspect-[16/9] bg-charcoal/50 overflow-hidden group"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
@@ -327,13 +343,13 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
       {/* Arrows */}
       <button
         onClick={() => goTo(index - 1)}
-        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
       >
         <ChevronLeft size={20} />
       </button>
       <button
         onClick={() => goTo(index + 1)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
       >
         <ChevronRight size={20} />
       </button>
