@@ -303,7 +303,7 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          transition={{ duration: 0.15, ease: "easeInOut" }}
           className="absolute inset-0"
         >
           <img
