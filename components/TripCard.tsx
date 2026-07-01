@@ -309,7 +309,7 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
           <img
             src={slides[index]}
             alt=""
-            className="absolute inset-0 w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
         </motion.div>
       </AnimatePresence>
