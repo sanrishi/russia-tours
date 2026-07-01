@@ -76,14 +76,17 @@ export default function FloatingWhatsApp() {
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1, duration: 0.3, ease: "easeOut" }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       drag
       dragMomentum={false}
       onDragStart={() => { dragging.current = true; if (hideTimer.current) clearTimeout(hideTimer.current); }}
       onDragEnd={() => { dragging.current = false; snap(); onActivity(); }}
       onMouseEnter={() => { if (hideTimer.current) clearTimeout(hideTimer.current); reveal(); }}
       onMouseLeave={onActivity}
-      className="fixed bottom-6 right-6 z-50 touch-none flex items-center gap-2 text-white px-5 py-3.5 rounded-full shadow-xl cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] active:brightness-95 bg-whatsapp hover:bg-gradient-to-r hover:from-gold hover:via-[#e864a8] hover:to-[#a855f7]"
+      className="fixed bottom-6 right-6 z-50 touch-none flex items-center gap-2 text-white px-5 py-3.5 rounded-full shadow-xl shadow-whatsapp/20 cursor-pointer bg-whatsapp overflow-hidden group hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-shadow duration-500"
     >
+      <span className="absolute inset-0 rounded-full bg-gradient-to-r from-gold via-[#e864a8] to-[#a855f7] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <motion.span
         className="absolute inset-0 rounded-full bg-whatsapp/40"
         animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0, 0.4] }}
