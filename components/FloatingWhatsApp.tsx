@@ -82,7 +82,7 @@ export default function FloatingWhatsApp() {
       onDragEnd={() => { dragging.current = false; snap(); onActivity(); }}
       onMouseEnter={() => { if (hideTimer.current) clearTimeout(hideTimer.current); reveal(); }}
       onMouseLeave={onActivity}
-      className="fixed bottom-6 right-6 z-50 touch-none flex items-center gap-2 bg-whatsapp text-white px-5 py-3.5 rounded-full shadow-xl shadow-whatsapp/20 cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] hover:brightness-110 active:brightness-95 md:hover:scale-105"
+      className="fixed bottom-6 right-6 z-50 touch-none flex items-center gap-2 text-white px-5 py-3.5 rounded-full shadow-xl cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] active:brightness-95 bg-whatsapp hover:bg-gradient-to-r hover:from-gold hover:via-[#e864a8] hover:to-[#a855f7]"
     >
       <motion.span
         className="absolute inset-0 rounded-full bg-whatsapp/40"
