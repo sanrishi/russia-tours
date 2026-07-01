@@ -323,7 +323,7 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
           <img
             src={slides[index]}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover"
+            className={`absolute inset-0 w-full h-full ${index === 2 ? "object-cover object-bottom" : "object-cover"}`}
             style={{ transform: `scale(${1 + progress * 0.15})` }}
           />
         </motion.div>
