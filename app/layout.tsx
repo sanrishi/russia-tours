@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
 
+// cache-bust
 const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
