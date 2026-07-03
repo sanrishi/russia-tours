@@ -11,15 +11,15 @@ type Rates = {
 
 export default function CurrencyBar() {
   const [rates, setRates] = useState<Rates | null>(null);
-  const [dismissed, setDismissed] = useState(true);
+  const [dismissed, setDismissed] = useState<boolean | null>(null);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("currencyBarDismissed");
-    if (stored !== "true") setDismissed(false);
+    setDismissed(stored === "true");
   }, []);
 
   useEffect(() => {
-    if (dismissed) return;
+    if (dismissed !== false) return;
 
     let cancelled = false;
 
