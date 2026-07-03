@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
+import CurrencyPopover from "@/components/CurrencyPopover";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -77,6 +78,10 @@ export default function Navbar() {
             ),
           )}
           <div className="flex items-center gap-1.5 border-l border-white/10 pl-5">
+            <div className="relative">
+              <CurrencyPopover />
+            </div>
+            <span className="text-white/20 text-xs mx-1.5">|</span>
             <button
               onClick={() => setLang("en")}
               className={`text-xs font-semibold tracking-wider uppercase px-2 py-1 rounded transition-colors ${
@@ -124,7 +129,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-charcoal/95 backdrop-blur-xl border-t border-white/5 overflow-hidden"
+            className="md:hidden bg-charcoal/95 backdrop-blur-xl border-t border-white/5 overflow-visible"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) =>
@@ -155,6 +160,10 @@ export default function Navbar() {
                 ),
               )}
               <div className="flex items-center gap-3 pt-2 border-t border-white/10 mt-2">
+                <div className="relative">
+                  <CurrencyPopover />
+                </div>
+                <span className="text-white/20 text-xs">|</span>
                 <button
                   onClick={() => setLang("en")}
                   className={`text-xs font-semibold tracking-wider uppercase px-3 py-1.5 rounded transition-colors ${
