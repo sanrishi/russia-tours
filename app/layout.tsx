@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import CurrencyBar from "@/components/CurrencyBar";
 import Navbar from "@/components/Navbar";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
@@ -23,11 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full bg-charcoal text-white">
-        <div className="bg-[#1a1a1a] border-b border-white/5" data-testid="inline-currencybar">
-          <div className="max-w-[1728px] mx-auto px-6 py-2">
-            <p className="text-[11px] text-white/40">TEST: Inline bar renders</p>
-          </div>
-        </div>
+        <CurrencyBar />
         <Navbar />
         {children}
         <FloatingWhatsApp />
