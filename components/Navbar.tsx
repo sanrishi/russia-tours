@@ -19,6 +19,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [lang, setLang] = useState<"en" | "ru">("en");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -78,6 +79,29 @@ export default function Navbar() {
               </Link>
             ),
           )}
+          <div className="flex items-center gap-1.5 border-l border-white/10 pl-5">
+            <button
+              onClick={() => setLang("en")}
+              className={`text-xs font-semibold tracking-wider uppercase px-2 py-1 rounded transition-colors ${
+                lang === "en"
+                  ? "text-gold"
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              EN
+            </button>
+            <span className="text-white/20 text-xs">|</span>
+            <button
+              onClick={() => setLang("ru")}
+              className={`text-xs font-semibold tracking-wider uppercase px-2 py-1 rounded transition-colors ${
+                lang === "ru"
+                  ? "text-gold"
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              RU
+            </button>
+          </div>
           <Link
             href="/#contact"
             className="group relative inline-flex items-center gap-2 overflow-hidden bg-gold text-charcoal font-semibold text-sm px-5 py-2.5 rounded-full transition-shadow hover:shadow-lg hover:shadow-gold/20"
@@ -133,6 +157,29 @@ export default function Navbar() {
                   </Link>
                 ),
               )}
+              <div className="flex items-center gap-3 pt-2 border-t border-white/10 mt-2">
+                <button
+                  onClick={() => setLang("en")}
+                  className={`text-xs font-semibold tracking-wider uppercase px-3 py-1.5 rounded transition-colors ${
+                    lang === "en"
+                      ? "text-gold"
+                      : "text-white/40 hover:text-white/70"
+                  }`}
+                >
+                  EN
+                </button>
+                <span className="text-white/20 text-xs">|</span>
+                <button
+                  onClick={() => setLang("ru")}
+                  className={`text-xs font-semibold tracking-wider uppercase px-3 py-1.5 rounded transition-colors ${
+                    lang === "ru"
+                      ? "text-gold"
+                      : "text-white/40 hover:text-white/70"
+                  }`}
+                >
+                  RU
+                </button>
+              </div>
               <Link
                 href="/#contact"
                 onClick={() => setMobileOpen(false)}
