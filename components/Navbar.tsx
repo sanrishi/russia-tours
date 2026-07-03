@@ -33,10 +33,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-charcoal/80 backdrop-blur-xl border-b border-white/5"
-          : "bg-charcoal/40 backdrop-blur-sm"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-[1728px] mx-auto px-6 h-20 flex items-center justify-between">
