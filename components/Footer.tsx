@@ -11,7 +11,7 @@ export default function Footer() {
           className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
         />
         <div className="relative w-full bg-charcoal text-white mix-blend-multiply text-center flex items-center justify-center">
-          <h1 className="w-full text-center text-[12vw] sm:text-[9.5vw] font-black uppercase tracking-[[-0.05em]] whitespace-nowrap leading-none select-none transform scale-y-[1.3] translate-y-[15%]">
+          <h1 className="text-[18vw] sm:text-[20vw] font-black uppercase tracking-tighter whitespace-nowrap leading-none select-none transform scale-y-[1.3] translate-y-[15%]">
             DISCOVER MOSCOW
           </h1>
         </div>
