@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import CurrencyBar from "@/components/CurrencyBar";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full bg-charcoal text-white">
+        <CurrencyBar />
         <Navbar />
         {children}
         <FloatingWhatsApp />
