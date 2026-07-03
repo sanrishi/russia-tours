@@ -1,18 +1,18 @@
 export default function Footer() {
   return (
     <footer className="relative">
-      <div className="relative w-full overflow-hidden flex justify-center items-center bg-charcoal min-h-[40vh]">
+      <div className="relative w-full overflow-hidden flex justify-center items-center bg-charcoal min-h-[30vh]">
         <video
           src="https://cdn.discover.moscow/videos/footer_video.mp4"
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-80"
         />
-        <div className="relative w-full bg-charcoal text-white mix-blend-multiply text-center py-20 flex items-center justify-center">
+        <div className="relative w-full bg-charcoal text-white mix-blend-multiply text-center py-12 flex items-center justify-center">
           <h1 className="text-[12vw] sm:text-[15vw] font-black uppercase tracking-tighter leading-none select-none">
-            TRIPS TO RUSSIA
+            DISCOVER MOSCOW
           </h1>
         </div>
       </div>
