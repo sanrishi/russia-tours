@@ -94,7 +94,7 @@ export default function CurrencyPopover() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full right-0 mt-2 w-[340px] sm:w-[380px] bg-charcoal/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/40 z-50"
+            className="absolute top-full mt-2 w-[340px] sm:w-[380px] max-w-[calc(100vw-2rem)] left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0 bg-charcoal/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/40 z-50"
           >
             <div className="relative p-5">
               <button
