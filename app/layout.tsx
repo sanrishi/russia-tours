@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
 
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className="min-h-full bg-charcoal text-white">
         <Navbar />
         {children}
+        <Footer />
         <FloatingWhatsApp />
       </body>
     </html>
