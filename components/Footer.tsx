@@ -11,9 +11,9 @@ export default function Footer() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-80"
           />
-          <div className="relative z-10 w-full h-full bg-black text-white mix-blend-multiply flex flex-col sm:flex-row justify-center items-center sm:gap-x-6 leading-[0.8] text-[15vw] sm:text-[9vw] font-black uppercase tracking-[calc(-0.06em)] select-none transform scale-y-[1.8] sm:scale-y-[2.2] origin-center py-8">
-            <span>DISCOVER</span>
-            <span>MOSCOW</span>
+          <div className="relative z-10 w-full h-full bg-black text-white mix-blend-multiply flex flex-col sm:flex-row justify-center items-center gap-y-6 sm:gap-x-6 leading-[0.8] text-[15vw] sm:text-[9vw] font-black uppercase tracking-[calc(-0.06em)] select-none py-24">
+            <span className="transform scale-y-[1.8] sm:scale-y-[2.2] origin-center">DISCOVER</span>
+            <span className="transform scale-y-[1.8] sm:scale-y-[2.2] origin-center">MOSCOW</span>
           </div>
         </div>
       </div>
