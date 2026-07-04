@@ -27,6 +27,7 @@ interface Trip {
   visaInfo: string;
   included: string[];
   excluded: string[];
+  comingSoon?: boolean;
 }
 
 const trips: Trip[] = [
@@ -121,6 +122,40 @@ const trips: Trip[] = [
     visaInfo:
       "Indian passport holders need a tourist visa. We assist with the invitation letter (visa support) included in the package. Standard visa processing takes 7–10 business days.",
   },
+  {
+    title: "St. Petersburg — Coming Soon",
+    tagline: "The Cultural Soul of Russia",
+    image: "/stpetersburg-card.jpg",
+    pricePerPerson: 0,
+    duration: "Coming Soon",
+    groupSize: "TBA",
+    ageGroup: "TBA",
+    seats: 0,
+    description:
+      "Discover the Venice of the North — the Hermitage, canal cruises, ballet, and Indian-friendly dining in Russia's imperial capital.",
+    included: [],
+    excluded: [],
+    itinerary: [],
+    visaInfo: "",
+    comingSoon: true,
+  },
+  {
+    title: "Kazan — Coming Soon",
+    tagline: "The Crossroad of Worlds",
+    image: "/kazan-card.jpg",
+    pricePerPerson: 0,
+    duration: "Coming Soon",
+    groupSize: "TBA",
+    ageGroup: "TBA",
+    seats: 0,
+    description:
+      "Explore Russia's Muslim heritage — the Kul Sharif Mosque, the Kazan Kremlin, and a halal food paradise on the Volga River.",
+    included: [],
+    excluded: [],
+    itinerary: [],
+    visaInfo: "",
+    comingSoon: true,
+  },
 ];
 
 export default function TripCard() {
@@ -135,11 +170,31 @@ export default function TripCard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.15, duration: 0.6 }}
-          className="rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden hover:border-gold/20 transition-all duration-500"
+          className={`rounded-2xl border overflow-hidden transition-all duration-500 ${
+            trip.comingSoon
+              ? "border-white/5 bg-white/[0.02] opacity-60"
+              : "border-white/10 bg-white/[0.02] hover:border-gold/20"
+          }`}
         >
-          <HeaderSlideshow tagline={trip.tagline} title={trip.title} />
+          {trip.comingSoon ? (
+            <div className="p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <h3 className="text-white font-semibold text-base">{trip.title.replace(" — Coming Soon", "")}</h3>
+                  <p className="text-white/40 text-xs mt-0.5">{trip.tagline}</p>
+                  <p className="text-white/30 text-[11px] leading-relaxed mt-2">{trip.description}</p>
+                </div>
+                <span className="inline-flex items-center bg-gold/10 text-gold text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap shrink-0">
+                  Coming Soon
+                </span>
+              </div>
+            </div>
+          ) : (
+            <HeaderSlideshow tagline={trip.tagline} title={trip.title} />
+          )}
 
-            <div className="p-6">
+          <div className="p-6">
+            {!trip.comingSoon && (
               <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-white/50">
                 <span className="flex items-center gap-1.5">
                   <Clock size={14} /> {trip.duration}
@@ -151,115 +206,118 @@ export default function TripCard() {
                   Age {trip.ageGroup}
                 </span>
               </div>
+            )}
 
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
-              {trip.description}
-            </p>
-
-            {/* Inclusions / Exclusions */}
-            <div className="grid sm:grid-cols-2 gap-4 mb-6">
-              <div className="p-4 rounded-xl border border-emerald-500/10 bg-emerald-500/[0.02]">
-                <p className="text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                  Included
-                </p>
-                <ul className="space-y-1.5">
-                  {trip.included.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-xs text-white/60">
-                      <Check size={12} className="text-emerald-400 shrink-0 mt-0.5" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="p-4 rounded-xl border border-red-500/10 bg-red-500/[0.02]">
-                <p className="text-red-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                  Not Included
-                </p>
-                <ul className="space-y-1.5">
-                  {trip.excluded.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-xs text-white/60">
-                      <X size={12} className="text-red-400 shrink-0 mt-0.5" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* Visa Info */}
-            <div className="flex items-start gap-3 mb-4 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
-              <Shield size={18} className="text-gold shrink-0 mt-0.5" />
-              <div>
-                <p className="text-white text-sm font-semibold mb-0.5">
-                  Visa Information
-                </p>
-                <p className="text-white/50 text-xs leading-relaxed">
-                  {trip.visaInfo}
-                </p>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <Link
-              href="/#contact"
-              className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gold text-charcoal font-semibold text-sm hover:bg-gold/90 transition-all duration-300 mb-6"
-            >
-              Check Availability <ArrowRight size={16} />
-            </Link>
-
-            {/* Accordion Itinerary */}
-            <div className="border-t border-white/5 pt-4">
-              <p className="text-xs text-white/30 uppercase tracking-wider mb-3 font-medium">
-                Day-by-Day Itinerary
+            {!trip.comingSoon && (
+              <p className="text-white/60 text-sm leading-relaxed mb-6">
+                {trip.description}
               </p>
-              <div className="space-y-2">
-                {trip.itinerary.map((day) => (
-                  <div key={day.day} className="rounded-xl border border-white/5 overflow-hidden">
-                    <button
-                      onClick={() =>
-                        setOpenIndex(openIndex === day.day ? null : day.day)
-                      }
-                      className="w-full flex items-center justify-between p-4 text-left hover:bg-white/[0.02] transition-colors"
-                    >
-                      <div>
-                        <p className="text-white text-sm font-semibold">
-                          Day {day.day} — {day.title}
-                        </p>
-                        <div className="flex flex-wrap gap-3 mt-1">
-                          <span className="flex items-center gap-1 text-xs text-white/40">
-                            <Utensils size={11} /> {day.meals}
-                          </span>
-                          <span className="flex items-center gap-1 text-xs text-white/40">
-                            <Bus size={11} /> {day.transport}
-                          </span>
-                        </div>
-                      </div>
-                      <ChevronDown
-                        size={16}
-                        className={`text-white/30 shrink-0 transition-transform duration-300 ${
-                          openIndex === day.day ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                    <AnimatePresence>
-                      {openIndex === day.day && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <p className="px-4 pb-4 text-sm text-white/50 leading-relaxed">
-                            {day.description}
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+            )}
+
+            {!trip.comingSoon && (
+              <>
+                <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                  <div className="p-4 rounded-xl border border-emerald-500/10 bg-emerald-500/[0.02]">
+                    <p className="text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                      Included
+                    </p>
+                    <ul className="space-y-1.5">
+                      {trip.included.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-xs text-white/60">
+                          <Check size={12} className="text-emerald-400 shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div className="p-4 rounded-xl border border-red-500/10 bg-red-500/[0.02]">
+                    <p className="text-red-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                      Not Included
+                    </p>
+                    <ul className="space-y-1.5">
+                      {trip.excluded.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-xs text-white/60">
+                          <X size={12} className="text-red-400 shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 mb-4 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                  <Shield size={18} className="text-gold shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-white text-sm font-semibold mb-0.5">
+                      Visa Information
+                    </p>
+                    <p className="text-white/50 text-xs leading-relaxed">
+                      {trip.visaInfo}
+                    </p>
+                  </div>
+                </div>
+
+                <Link
+                  href="/#contact"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gold text-charcoal font-semibold text-sm hover:bg-gold/90 transition-all duration-300 mb-6"
+                >
+                  Check Availability <ArrowRight size={16} />
+                </Link>
+
+                <div className="border-t border-white/5 pt-4">
+                  <p className="text-xs text-white/30 uppercase tracking-wider mb-3 font-medium">
+                    Day-by-Day Itinerary
+                  </p>
+                  <div className="space-y-2">
+                    {trip.itinerary.map((day) => (
+                      <div key={day.day} className="rounded-xl border border-white/5 overflow-hidden">
+                        <button
+                          onClick={() =>
+                            setOpenIndex(openIndex === day.day ? null : day.day)
+                          }
+                          className="w-full flex items-center justify-between p-4 text-left hover:bg-white/[0.02] transition-colors"
+                        >
+                          <div>
+                            <p className="text-white text-sm font-semibold">
+                              Day {day.day} — {day.title}
+                            </p>
+                            <div className="flex flex-wrap gap-3 mt-1">
+                              <span className="flex items-center gap-1 text-xs text-white/40">
+                                <Utensils size={11} /> {day.meals}
+                              </span>
+                              <span className="flex items-center gap-1 text-xs text-white/40">
+                                <Bus size={11} /> {day.transport}
+                              </span>
+                            </div>
+                          </div>
+                          <ChevronDown
+                            size={16}
+                            className={`text-white/30 shrink-0 transition-transform duration-300 ${
+                              openIndex === day.day ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                        <AnimatePresence>
+                          {openIndex === day.day && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <p className="px-4 pb-4 text-sm text-white/50 leading-relaxed">
+                                {day.description}
+                              </p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </motion.div>
       ))}

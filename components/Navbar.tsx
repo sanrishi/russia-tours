@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
 import CurrencyPopover from "@/components/CurrencyPopover";
+import WeatherWidget from "@/components/WeatherWidget";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -41,14 +42,17 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-[1728px] mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="flex flex-col leading-tight">
-          <span className="text-xl font-bold tracking-tight">
-            <span className="text-gold">Trips to</span>
-            <span className="text-white"> Russia</span>
-          </span>
-          <span className="text-[10px] text-white/40 tracking-widest uppercase">
-            by Indosvetka
-          </span>
+        <Link href="/" className="flex items-center gap-3">
+          <div className="flex flex-col leading-tight">
+            <span className="text-xl font-bold tracking-tight">
+              <span className="text-gold">Trips to</span>
+              <span className="text-white"> Russia</span>
+            </span>
+            <span className="text-[10px] text-white/40 tracking-widest uppercase">
+              by Indosvetka
+            </span>
+          </div>
+          <WeatherWidget />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">

@@ -12,9 +12,8 @@ const destinations = [
       "Red Square, Kremlin, world-class Indian restaurants, and halal dining in Russia's majestic capital.",
     image: "/moscow-hero.jpg",
     gradient: "from-crimson/80 via-crimson/40 to-transparent",
-    // PLACEHOLDER — confirm actual price with client
-    price: "₹85,000",
-    href: "#",
+    price: "₹1,60,000",
+    href: "/places",
   },
   {
     city: "St. Petersburg",
@@ -23,9 +22,9 @@ const destinations = [
       "Hermitage, canals, ballet — with Indian-friendly amenities in the Venice of the North.",
     image: "/stpetersburg-card.jpg",
     gradient: "from-amber/80 via-amber/40 to-transparent",
-    // PLACEHOLDER — confirm actual price with client
-    price: "₹75,000",
+    price: "TBD",
     href: "#",
+    comingSoon: true,
   },
   {
     city: "Kazan",
@@ -34,9 +33,9 @@ const destinations = [
       "Russia's Muslim heritage, Kul Sharif Mosque, and a halal food paradise on the Volga.",
     image: "/kazan-card.jpg",
     gradient: "from-emerald/80 via-emerald/40 to-transparent",
-    // PLACEHOLDER — confirm actual price with client
-    price: "₹65,000",
+    price: "TBD",
     href: "#",
+    comingSoon: true,
   },
 ];
 
@@ -88,7 +87,12 @@ export default function DestinationsGrid() {
 
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
 
-              <div className="absolute top-4 left-4 z-10">
+              <div className="absolute top-4 left-4 z-10 flex gap-2">
+                {dest.comingSoon && (
+                  <span className="inline-flex items-center bg-gold text-charcoal text-xs font-bold px-3 py-1.5 rounded-full">
+                    Coming Soon
+                  </span>
+                )}
                 <span className="inline-flex items-center gap-1 bg-charcoal/60 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full border border-white/10">
                   <IndianRupee size={11} />
                   {dest.price}/person

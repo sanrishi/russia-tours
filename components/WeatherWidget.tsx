@@ -18,7 +18,6 @@ const weatherEmoji: Record<number, string> = {
 
 const cities = [
   { name: "Moscow", lat: 55.7558, lon: 37.6173 },
-  { name: "St. Petersburg", lat: 59.9343, lon: 30.3351 },
 ];
 
 export default function WeatherWidget() {
@@ -51,24 +50,22 @@ export default function WeatherWidget() {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center"
+      className="flex items-center gap-1.5 text-sm"
     >
-      <CloudSun size={16} className="text-gold" />
       {cities.map((city) => {
         const w = weather[city.name];
         return (
-          <div key={city.name} className="flex items-center gap-2 text-sm">
-            <MapPin size={12} className="text-white/40" />
-            <span className="text-white/60">{city.name}:</span>
+          <div key={city.name} className="flex items-center gap-1">
             {w ? (
               <>
-                <span>{weatherEmoji[w.weathercode] ?? "☀️"}</span>
-                <span className="text-white font-medium">
+                <span className="text-xs leading-none">{weatherEmoji[w.weathercode] ?? "☀️"}</span>
+                <span className="text-white/50 text-[10px]">{city.name}:</span>
+                <span className="text-white/70 font-medium text-xs">
                   {Math.round(w.temperature)}°C
                 </span>
               </>
             ) : (
-              <span className="text-white/30">—</span>
+              <span className="text-white/30 text-xs">—</span>
             )}
           </div>
         );
