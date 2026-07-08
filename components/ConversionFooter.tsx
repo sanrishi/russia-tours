@@ -232,8 +232,10 @@ export default function ConversionFooter() {
                   {sending ? "Sending..." : "Send via WhatsApp"}
                 </button>
                 <a
-                  href="#"
-                  className="inline-flex items-center justify-center gap-2 border border-whatsapp/30 hover:border-whatsapp/60 text-whatsapp hover:text-whatsapp px-8 py-4 rounded-full text-base transition-all"
+                  href="https://wa.me/917042987451"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 border border-gold/30 hover:border-gold/60 text-gold hover:text-gold px-8 py-4 rounded-full text-base transition-all"
                 >
                   <Phone size={16} />
                   Chat Now
