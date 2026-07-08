@@ -1,47 +1,92 @@
 import Image from "next/image";
 import SafetyCallout from "@/components/SafetyCallout";
-import { MapPin, UtensilsCrossed, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Sun, UtensilsCrossed, Lightbulb, Shield, FileText, Banknote, Map, Building, Plane, Globe, Wifi, Languages } from "lucide-react";
 
-const restaurants = [
+const articles = [
   {
-    name: "Tkhali I Karri",
-    address: "Tverskaya St., 17",
-    distance: "10–15 min walk from Red Square",
-    description:
-      "Authentic Indian cuisine with chefs from India. Features a tropical interior with many plants.",
-    website: null,
+    href: "/tips/weather-packing",
+    icon: Sun,
+    label: "Weather & Packing",
+    title: "Moscow in August — What to Pack",
+    desc: "Daytime 23°C, cool evenings, and exactly what to bring for your trip.",
   },
   {
-    name: "Jagannath",
-    address: "Kuznetsky Most St., 11",
-    distance: "~10 min walk from Red Square",
-    description:
-      "Popular vegetarian café with a wide variety of Indian dishes.",
-    website: null,
+    href: "/tips/indian-food",
+    icon: UtensilsCrossed,
+    label: "Indian Food Guide",
+    title: "Indian & Halal Food Near Red Square",
+    desc: "Authentic Indian restaurants within walking distance of the Kremlin.",
   },
   {
-    name: "Curry",
-    address: "Arbat St., 32 (1st floor)",
-    distance: "On Arbat Street",
-    description:
-      "Authentic Indian cuisine prepared with traditional spices and high-quality ingredients.",
-    website: null,
+    href: "/tips/itineraries",
+    icon: Map,
+    label: "Itineraries",
+    title: "Moscow in 1, 3 & 7 Days",
+    desc: "Perfect plans for any trip length — from a quick layover to a full week.",
   },
   {
-    name: "Moscow Delhi",
-    address: "Yermolayevsky Lane, 7",
-    distance: "Patriarch Ponds area",
-    description:
-      "Authentic Indian restaurant known for traditional dishes and warm atmosphere.",
-    website: null,
+    href: "/tips/hotels",
+    icon: Building,
+    label: "Hotels",
+    title: "Where to Stay in Moscow",
+    desc: "Best areas and hotels for Indian travellers — with prices and tips.",
   },
   {
-    name: "Dhaba",
-    address: "Novolesnaya St., 2",
-    distance: "A bit further from the centre",
-    description:
-      "Wide selection of halal, fish, and vegetarian dishes with authentic spices.",
-    website: "https://dhaba.ru",
+    href: "/tips/transport",
+    icon: Plane,
+    label: "Transport",
+    title: "Getting Around Moscow",
+    desc: "Airports, Aeroexpress, metro, taxis, and trains between cities.",
+  },
+  {
+    href: "/tips/first-time",
+    icon: Globe,
+    label: "First-Time Guide",
+    title: "A First-Time Visitor's Guide to Moscow",
+    desc: "Visa, cash, safety, and daily life tips for your first trip to Russia.",
+  },
+  {
+    href: "/tips/connectivity",
+    icon: Wifi,
+    label: "Connectivity",
+    title: "SIM, VPN & Apps for Moscow",
+    desc: "Stay connected — local SIMs, essential VPN setup, and must-have apps.",
+  },
+  {
+    href: "/tips/phrasebook",
+    icon: Languages,
+    label: "Phrasebook",
+    title: "Basic Russian for Indian Travellers",
+    desc: "Essential words and phrases for greetings, food, shopping, and emergencies.",
+  },
+  {
+    href: "/tips/practical-tips",
+    icon: Lightbulb,
+    label: "Practical Tips",
+    title: "Payments, Internet, Metro & Language",
+    desc: "Navigate Russia with confidence — cash, SIM cards, metro, and basic Russian phrases.",
+  },
+  {
+    href: "/tips/safety",
+    icon: Shield,
+    label: "Safety Guide",
+    title: "Safety for Indian Travelers",
+    desc: "Emergency contacts, embassy info, health tips, and general safety advice.",
+  },
+  {
+    href: "/tips/visa-guide",
+    icon: FileText,
+    label: "Visa Guide",
+    title: "Russia E-Visa for Indian Citizens",
+    desc: "Step-by-step process, documents required, and important notes for your application.",
+  },
+  {
+    href: "/tips/currency",
+    icon: Banknote,
+    label: "Currency Guide",
+    title: "Currency & Payments in Russia",
+    desc: "Cash, Yoomoney card, and how to pay when VISA/Mastercard don't work.",
   },
 ];
 
@@ -57,127 +102,36 @@ export default function TipsPage() {
             Travel Tips for Indian Visitors
           </h1>
           <p className="text-white/50 text-base sm:text-lg leading-relaxed">
-            Weather, packing, food, safety — everything you need to know before
-            visiting Russia.
+            Weather, packing, food, safety, visa, currency — everything you need
+            to know before visiting Russia.
           </p>
         </div>
 
-        {/* Indian Food Guide — verified with client */}
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 mb-6">
-          <div className="flex items-center gap-3 mb-6">
-            <UtensilsCrossed size={20} className="text-gold" />
-            <h2 className="text-xl font-bold text-white">
-              Indian Food Near Red Square
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {restaurants.map((r) => (
-              <div
-                key={r.name}
-                className="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:border-gold/10 transition-colors"
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {articles.map((a) => {
+            const Icon = a.icon;
+            return (
+              <Link
+                key={a.href}
+                href={a.href}
+                className="group p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-gold/20 hover:bg-white/[0.04] transition-all duration-500"
               >
-                <h3 className="text-white font-semibold text-sm mb-1">
-                  {r.name}
-                </h3>
-                <p className="flex items-start gap-1.5 text-xs text-white/50 mb-1">
-                  <MapPin size={11} className="text-gold shrink-0 mt-0.5" />
-                  {r.address}
+                <Icon size={20} className="text-gold mb-3" />
+                <span className="text-gold text-xs font-medium tracking-[0.15em] uppercase">
+                  {a.label}
+                </span>
+                <h2 className="text-base font-bold text-white mt-2 group-hover:text-gold transition-colors">
+                  {a.title}
+                </h2>
+                <p className="text-sm text-white/50 mt-2 leading-relaxed">
+                  {a.desc}
                 </p>
-                <p className="text-xs text-white/40 mb-2">{r.distance}</p>
-                <p className="text-xs text-white/50 leading-relaxed">
-                  {r.description}
-                </p>
-                {r.website && (
-                  <a
-                    href={r.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-gold text-xs hover:underline mt-2"
-                  >
-                    <ExternalLink size={10} />
-                    View website
-                  </a>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <SafetyCallout />
-
-        {/* Weather & Packing */}
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 mt-6">
-          <h2 className="text-xl font-bold text-white mb-4">
-            Weather &amp; Packing — Moscow in August
-          </h2>
-          <p className="text-white/60 text-sm leading-relaxed mb-4">
-            Moscow in August is warm and pleasant by day, cooler at night — typically 23–24°C (73–75°F) during the day, dropping to 12–15°C (54–59°F) in the evening. Expect a mix of sunny stretches and occasional rain showers throughout the month.
-          </p>
-          <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
-            <p className="text-white text-sm font-semibold mb-2">What to pack:</p>
-            <ul className="space-y-1.5">
-              {[
-                "Light layers — t-shirts and breathable clothing for daytime",
-                "A light jacket or sweater for cooler evenings and air-conditioned transport",
-                "A compact umbrella or light rain jacket (August sees scattered rain)",
-                "Comfortable walking shoes — you'll be on your feet for city tours, Red Square, and the limousine/rooftop evening",
-                "Sunglasses and sunscreen for sunny days",
-                "One smart-casual outfit for the rooftop and goodbye dinner",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2 text-xs text-white/50">
-                  <span className="text-gold shrink-0 mt-0.5">•</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-6">
-            <div className="relative aspect-[1/1] rounded-xl overflow-hidden border border-white/5 bg-charcoal/50 group">
-              <Image src="/moscow-summer-1.webp" alt="Saint Basil's Cathedral on a sunny summer day" fill unoptimized className="object-cover transition-transform duration-500 group-hover:scale-125" sizes="(max-width: 768px) 50vw, 33vw" />
-            </div>
-            <div className="relative aspect-[1/1] rounded-xl overflow-hidden border border-white/5 bg-charcoal/50 group">
-              <Image src="/moscow-summer-2.webp" alt="Kremlin tower and Red Square in summer" fill unoptimized className="object-cover transition-transform duration-500 group-hover:scale-125" sizes="(max-width: 768px) 50vw, 33vw" />
-            </div>
-          </div>
-        </div>
-
-        {/* Practical Tips for Indian Travelers */}
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 mt-6">
-          <h2 className="text-xl font-bold text-white mb-4">
-            Practical Tips for Indian Travellers
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {[
-              {
-                title: "Payments & Cash",
-                body: "VISA and Mastercard issued outside Russia don't work. Carry USD or EUR in cash and exchange at airport or bank. Get a Yoomoney Tourist Card before your trip for QR-code payments — widely accepted.",
-              },
-              {
-                title: "Internet & Apps",
-                body: "Instagram and Facebook are blocked in Russia. Download a reliable VPN before departure and set it up before you land. Yandex Maps and Yandex Translate work well for navigation and menus.",
-              },
-              {
-                title: "Metro Tips",
-                body: "The Moscow Metro is an attraction itself — palaces with chandeliers and mosaics. Trains run 5:30 AM–1 AM, every minute at peak. One ride costs around ₹65–75. Stations have English signs.",
-              },
-              {
-                title: "Language",
-                body: "English is limited outside hotels and tourist zones. Learn a few words: Здравствуйте (hello), Спасибо (thank you), Сколько? (how much). Yandex Translate handles menus and signs via your camera.",
-              },
-            ].map((tip) => (
-              <div
-                key={tip.title}
-                className="p-4 rounded-xl border border-white/5 bg-white/[0.02]"
-              >
-                <h3 className="text-white font-semibold text-sm mb-1.5">
-                  {tip.title}
-                </h3>
-                <p className="text-xs text-white/50 leading-relaxed">
-                  {tip.body}
-                </p>
-              </div>
-            ))}
-          </div>
+                <span className="inline-flex items-center gap-1 text-gold text-sm font-medium mt-3 group-hover:gap-2 transition-all">
+                  Read More <ArrowRight size={14} />
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </main>
