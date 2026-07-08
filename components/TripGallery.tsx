@@ -32,7 +32,7 @@ export default function TripGallery() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 pb-20 sm:pb-8"
+      className="rounded-2xl border border-white/10 bg-[#161412] p-6 sm:p-8 pb-20 sm:pb-8"
     >
       <h3 className="text-lg font-bold text-white mb-6">Trip Gallery</h3>
       <div className="grid grid-cols-2 gap-3 sm:gap-4">

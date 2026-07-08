@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Image from "next/image";
 import {
   MapPin,
@@ -8,6 +8,7 @@ import {
   Languages,
   HeadphonesIcon,
 } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 
 // PLACEHOLDER — section not in SOW homepage spec. Confirm with client if this stays or goes.
 const highlights = [
@@ -18,8 +19,22 @@ const highlights = [
 ];
 
 export default function CulturalImmersion() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const rawImgY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : -40]);
+  const imgY = useSpring(rawImgY, { stiffness: 60, damping: 20, mass: 0.5 });
+
   return (
-    <section id="stories" className="relative py-24 md:py-32">
+    <section id="stories" ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <motion.div
@@ -29,6 +44,7 @@ export default function CulturalImmersion() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative aspect-[4/5] md:aspect-[3/4] rounded-2xl overflow-hidden"
           >
+            <motion.div className="absolute inset-0" style={{ y: imgY }}>
               <Image
                 src="/tour-style.jpg"
                 alt="Tour style concept"
@@ -36,6 +52,7 @@ export default function CulturalImmersion() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
+            </motion.div>
 
             <div className="absolute inset-0 bg-gradient-to-br from-gold/20 via-crimson/15 to-charcoal/60" />
 
