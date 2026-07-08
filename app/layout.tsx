@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lora, Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
 
-// cache-bust
+const lora = Lora({
+  variable: "--font-heading",
+  subsets: ["latin"],
+});
+
 const inter = Inter({
-  variable: "--font-geist-sans",
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
@@ -23,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full bg-charcoal text-white">
+    <html lang="en" className={`${lora.variable} ${inter.variable} h-full antialiased`}>
+      <body className="min-h-full bg-[#0c0a0a] text-white">
         <Navbar />
         {children}
         <Footer />

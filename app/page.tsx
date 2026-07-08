@@ -6,8 +6,6 @@ import CulturalImmersion from "@/components/CulturalImmersion";
 import Testimonials from "@/components/Testimonials";
 import IndiaRussiaTrust from "@/components/IndiaRussiaTrust";
 import ConversionFooter from "@/components/ConversionFooter";
-import CertificationsSection from "@/components/CertificationsSection";
-
 export default function Home() {
   return (
     <>
@@ -19,7 +17,6 @@ export default function Home() {
       <Testimonials />
       <IndiaRussiaTrust />
       <ConversionFooter />
-      <CertificationsSection />
     </>
   );
 }
