@@ -3,11 +3,15 @@
 import { motion, useMotionValue, animate } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { useRef, useCallback, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const WHATSAPP_NUMBER = "917042987451";
 const MESSAGE = "Hi Sveta! I'm interested in your Russia tours. Can you share more details?";
 
 export default function FloatingWhatsApp() {
+  const pathname = usePathname()
+  if (pathname === "/moscow-express") return null
+
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(MESSAGE)}`;
   const x = useMotionValue(0);
   const ref = useRef<HTMLAnchorElement>(null);

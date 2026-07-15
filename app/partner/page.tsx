@@ -1,9 +1,31 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import { Handshake, Globe, Users, ShieldCheck, ArrowRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Partner with Us — B2B Russia Tours for Indian Travel Agents | Indosvetka",
+  description:
+    "Indian travel agents: partner with us for ready-to-sell Russia tour packages. Commission-based model with full operational support, visa assistance, and Indian-friendly itineraries.",
+};
 
 export default function PartnerPage() {
   return (
-    <main className="min-h-screen pt-20">
-      <div className="max-w-[1728px] mx-auto px-6 py-16 sm:py-20">
+    <main className="min-h-screen pt-20 relative overflow-hidden">
+      {/* Full-page faded background */}
+      <div className="absolute inset-0">
+        <Image
+          src="/unsplash-city.jpg"
+          alt=""
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0c0a0a] via-[#0c0a0a]/85 to-[#0c0a0a]/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a0a] via-transparent to-[#0c0a0a]/30" />
+      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(circle at 30% 50%, #d4af37 0.5px, transparent 0.5px)`, backgroundSize: "40px 40px" }} />
+      <div className="relative z-10 max-w-[1728px] mx-auto px-6 py-16 sm:py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
             <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase mb-3 block">
@@ -81,7 +103,7 @@ export default function PartnerPage() {
           </div>
 
           {/* PLACEHOLDER — contact form: replace with real form handler or mailto */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-6 sm:p-8">
             <h2 className="text-xl font-bold text-white mb-2">
               Get in Touch
             </h2>

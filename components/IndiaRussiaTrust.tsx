@@ -1,12 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView, animate } from "framer-motion";
 import { Plane, Users, IndianRupee, ShieldCheck } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-const stats = [
+interface Stat {
+  icon: typeof Users;
+  value: string;
+  numericTarget?: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+}
+
+const stats: Stat[] = [
   {
     icon: Users,
     value: "~120K",
+    numericTarget: 120,
+    prefix: "~",
+    suffix: "K",
     label: "Indian tourists visited Russia in 2024 (up from ~60K in 2023)",
   },
   {
@@ -17,6 +30,9 @@ const stats = [
   {
     icon: IndianRupee,
     value: "₹12K",
+    numericTarget: 12,
+    prefix: "₹",
+    suffix: "K",
     label: "Starting round-trip airfare from India",
   },
   {
@@ -25,6 +41,24 @@ const stats = [
     label: "Indian e-visa processing in 4 days",
   },
 ];
+
+function CountUp({ from = 0, to, prefix = "", suffix = "" }: { from?: number; to: number; prefix?: string; suffix?: string }) {
+  const [count, setCount] = useState(from);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(from, to, {
+      duration: 2,
+      ease: "easeOut",
+      onUpdate: (v) => setCount(Math.floor(v)),
+    });
+    return controls.stop;
+  }, [inView, from, to]);
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+}
 
 export default function IndiaRussiaTrust() {
   return (
@@ -62,7 +96,11 @@ export default function IndiaRussiaTrust() {
                     <Icon size={20} className="text-gold" />
                   </div>
                   <p className="text-2xl font-bold text-gold mb-1 shrink-0">
-                    {s.value}
+                    {s.numericTarget != null ? (
+                      <CountUp to={s.numericTarget} prefix={s.prefix} suffix={s.suffix} />
+                    ) : (
+                      s.value
+                    )}
                   </p>
                   <p className="text-sm text-white/50 leading-relaxed">
                     {s.label}

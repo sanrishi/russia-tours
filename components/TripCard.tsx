@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronLeft, ChevronRight, IndianRupee, Clock, Utensils, Bus, Shield, Check, X, ArrowRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, IndianRupee, Clock, Utensils, Bus, Shield, Check, X, ArrowRight, MessageCircle, Calculator } from "lucide-react";
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
+import type { MouseEvent } from "react";
 
 interface Day {
   day: number;
@@ -122,43 +123,9 @@ const trips: Trip[] = [
     visaInfo:
       "Indian passport holders need a tourist visa. We assist with the invitation letter (visa support) included in the package. Standard visa processing takes 7–10 business days.",
   },
-  {
-    title: "St. Petersburg — Coming Soon",
-    tagline: "The Cultural Soul of Russia",
-    image: "/stpetersburg-card.jpg",
-    pricePerPerson: 0,
-    duration: "Coming Soon",
-    groupSize: "TBA",
-    ageGroup: "TBA",
-    seats: 0,
-    description:
-      "Discover the Venice of the North — the Hermitage, canal cruises, ballet, and Indian-friendly dining in Russia's imperial capital.",
-    included: [],
-    excluded: [],
-    itinerary: [],
-    visaInfo: "",
-    comingSoon: true,
-  },
-  {
-    title: "Kazan — Coming Soon",
-    tagline: "The Crossroad of Worlds",
-    image: "/kazan-card.jpg",
-    pricePerPerson: 0,
-    duration: "Coming Soon",
-    groupSize: "TBA",
-    ageGroup: "TBA",
-    seats: 0,
-    description:
-      "Explore Russia's Muslim heritage — the Kul Sharif Mosque, the Kazan Kremlin, and a halal food paradise on the Volga River.",
-    included: [],
-    excluded: [],
-    itinerary: [],
-    visaInfo: "",
-    comingSoon: true,
-  },
 ];
 
-export default function TripCard() {
+export default function TripCard({ costBtnRef }: { costBtnRef?: React.RefObject<HTMLButtonElement | null> }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -170,11 +137,11 @@ export default function TripCard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.15, duration: 0.6 }}
-          className={`rounded-2xl border overflow-hidden transition-all duration-500 ${
+            className={`rounded-2xl overflow-hidden transition-all duration-500 ${
             trip.comingSoon
-              ? "border-white/5 bg-white/[0.02] opacity-60"
-              : "border-white/10 bg-white/[0.02] hover:border-gold/20"
-          }`}
+              ? "border border-white/5 bg-[#1C1917] opacity-60"
+              : "border border-white/[0.06] bg-black/50 backdrop-blur-xl hover:shadow-[0_0_50px_-20px_rgba(202,138,4,0.15)]"
+            }`}
         >
           {trip.comingSoon ? (
             <div className="p-4">
@@ -195,7 +162,7 @@ export default function TripCard() {
 
           <div className="p-6">
             {!trip.comingSoon && (
-              <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-white/50">
+              <div className="flex flex-wrap items-center gap-3 mb-4 text-sm text-white/50">
                 <span className="flex items-center gap-1.5">
                   <Clock size={14} /> {trip.duration}
                 </span>
@@ -205,6 +172,34 @@ export default function TripCard() {
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-gold/10 text-gold text-xs font-medium">
                   Age {trip.ageGroup}
                 </span>
+                <div className="ml-auto flex items-center gap-2">
+                    <button
+                      type="button"
+                      ref={costBtnRef}
+                      className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-white/20 text-white/60 hover:text-gold hover:border-gold/40 bg-transparent text-xs transition-all cursor-pointer"
+                    >
+                      <Calculator size={12} /> Cost
+                    </button>
+                  <button
+                    type="button"
+                    onClick={(e: MouseEvent) => {
+                      e.preventDefault();
+                      document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-gold text-gold bg-transparent font-semibold text-xs hover:bg-gold/10 transition-all cursor-pointer"
+                  >
+                    Check Availability <ArrowRight size={12} />
+                  </button>
+                  <a
+                    href="https://wa.me/?text=Check%20out%20this%20Russia%20tour%3A%20Moscow%20Discovery%20%E2%80%94%207%20Days%20-%20https%3A%2F%2Frussia-tours-poc.vercel.app%2Fmoscow-express"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-gold/50 text-white/50 hover:text-gold hover:border-gold bg-transparent text-xs transition-all cursor-pointer"
+                    aria-label="Share on WhatsApp"
+                  >
+                    <MessageCircle size={14} />
+                  </a>
+                </div>
               </div>
             )}
 
@@ -216,9 +211,9 @@ export default function TripCard() {
 
             {!trip.comingSoon && (
               <>
-                <div className="grid sm:grid-cols-2 gap-4 mb-6">
-                  <div className="p-4 rounded-xl border border-emerald-500/10 bg-emerald-500/[0.02]">
-                    <p className="text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+                  <div className="p-4 rounded-xl border border-white/10 bg-white/[0.05] lg:col-span-2">
+                    <p className="text-gold text-xs font-semibold uppercase tracking-wider mb-3">
                       Included
                     </p>
                     <ul className="space-y-1.5">
@@ -230,8 +225,8 @@ export default function TripCard() {
                       ))}
                     </ul>
                   </div>
-                  <div className="p-4 rounded-xl border border-red-500/10 bg-red-500/[0.02]">
-                    <p className="text-red-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                  <div className="p-4 rounded-xl border border-white/10 bg-white/[0.05] lg:col-span-1">
+                    <p className="text-white/80 text-xs font-semibold uppercase tracking-wider mb-3">
                       Not Included
                     </p>
                     <ul className="space-y-1.5">
@@ -257,63 +252,60 @@ export default function TripCard() {
                   </div>
                 </div>
 
-                <Link
-                  href="/#contact"
-                  className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gold text-charcoal font-semibold text-sm hover:bg-gold/90 transition-all duration-300 mb-6"
-                >
-                  Check Availability <ArrowRight size={16} />
-                </Link>
-
                 <div className="border-t border-white/5 pt-4">
                   <p className="text-xs text-white/30 uppercase tracking-wider mb-3 font-medium">
-                    Day-by-Day Itinerary
+                    <span className="text-gold">Day-by-Day Itinerary</span>
                   </p>
-                  <div className="space-y-2">
-                    {trip.itinerary.map((day) => (
-                      <div key={day.day} className="rounded-xl border border-white/5 overflow-hidden">
-                        <button
-                          onClick={() =>
-                            setOpenIndex(openIndex === day.day ? null : day.day)
-                          }
-                          className="w-full flex items-center justify-between p-4 text-left hover:bg-white/[0.02] transition-colors"
-                        >
-                          <div>
-                            <p className="text-white text-sm font-semibold">
-                              Day {day.day} — {day.title}
-                            </p>
-                            <div className="flex flex-wrap gap-3 mt-1">
-                              <span className="flex items-center gap-1 text-xs text-white/40">
-                                <Utensils size={11} /> {day.meals}
-                              </span>
-                              <span className="flex items-center gap-1 text-xs text-white/40">
-                                <Bus size={11} /> {day.transport}
-                              </span>
-                            </div>
-                          </div>
-                          <ChevronDown
-                            size={16}
-                            className={`text-white/30 shrink-0 transition-transform duration-300 ${
-                              openIndex === day.day ? "rotate-180" : ""
+                  <div className="space-y-2 pl-8 relative">
+                    <div className="absolute left-[11px] top-2 bottom-2 w-[2px] bg-gold/20" />
+                    {trip.itinerary.map((day) => {
+                      const isOpen = openIndex === day.day;
+                      return (
+                        <div key={day.day} className="relative">
+                          <div
+                            className={`absolute -left-[26px] top-5 w-[9px] h-[9px] rounded-full border-2 border-charcoal z-10 transition-all duration-300 ${
+                              isOpen ? "bg-gold shadow-[0_0_12px_rgba(212,175,55,0.8)] animate-pulse-dot" : "bg-gold/70"
                             }`}
                           />
-                        </button>
-                        <AnimatePresence>
-                          {openIndex === day.day && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="overflow-hidden"
+                          <div
+                            className={`rounded-xl border overflow-hidden transition-all duration-300 ${
+                              isOpen
+                              ? "bg-white/[0.08] border-t-gold/20 border-white/5 -translate-y-2 shadow-[0_12px_40px_rgba(212,175,55,0.2)]"
+                              : "bg-white/[0.03] border-white/5 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(0,0,0,0.3)] hover:bg-white/[0.06]"
+                            }`}
+                          >
+                            <button
+                              onClick={() =>
+                                setOpenIndex(isOpen ? null : day.day)
+                              }
+                              className="w-full flex items-center justify-between p-4 text-left"
                             >
-                              <p className="px-4 pb-4 text-sm text-white/50 leading-relaxed">
-                                {day.description}
-                              </p>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ))}
+                              <div>
+                                <p className="text-sm font-semibold">
+                                  <span className="text-gold">Day {day.day}</span>
+                                  <span className="text-white"> — {day.title}</span>
+                                </p>
+                                <div className="flex flex-wrap gap-3 mt-1">
+                                  <span className="flex items-center gap-1 text-xs text-white/40">
+                                    <Utensils size={11} /> {day.meals}
+                                  </span>
+                                  <span className="flex items-center gap-1 text-xs text-white/40">
+                                    <Bus size={11} /> {day.transport}
+                                  </span>
+                                </div>
+                              </div>
+                              <ChevronDown
+                                size={16}
+                                className={`text-white/30 shrink-0 transition-transform duration-300 ${
+                                  isOpen ? "rotate-180" : ""
+                                }`}
+                              />
+                            </button>
+                            <DayContent day={day} isOpen={isOpen} />
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </>
@@ -334,6 +326,106 @@ const slides = [
   "/cattu-moscow-964445.jpg",
   "/serbuxarev-street-4630827.jpg",
 ];
+
+const dayImages: Record<number, string> = {
+  1: "/day1-river.jpg",
+  2: "/day2-red-square.jpg",
+  3: "/day3-rooftop.jpg",
+  4: "/day4-arbat.jpg",
+  5: "/day5-viewpoint.jpg",
+  6: "/day6-vdnkh.jpg",
+  7: "/day7-departure.jpg",
+};
+
+const dayPositions: Record<number, string> = {
+  1: "object-center",
+  2: "object-[50%_75%]",
+  3: "object-center",
+  4: "object-center",
+  5: "object-center",
+  6: "object-center",
+  7: "object-center",
+};
+
+const dayHighlights: Record<number, string[]> = {
+  1: ["Airport meet & transfer", "Welcome river cruise", "City lights from Moskva River"],
+  2: ["Red Square & St. Basil's Cathedral", "Kremlin grounds tour", "GUM department store", "Zaryadye Park", "Indian-friendly lunch"],
+  3: ["Limousine city tour", "Rooftop observation deck", "Evening nightlife experience"],
+  4: ["Cold War bunker tour", "Arbat Street stroll"],
+  5: ["Sparrow Hills viewpoint", "Moscow City skyline panorama", "Horror quest group activity"],
+  6: ["VDNKh exhibition park", "Izmailovo Kremlin complex", "Cable car ride", "Farewell dinner"],
+  7: ["Breakfast at hotel", "Airport transfer included"],
+};
+
+function DayContent({ day, isOpen }: { day: Day; isOpen: boolean }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setContentHeight(contentRef.current.scrollHeight);
+    }
+  }, [isOpen]);
+
+  const listVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -12 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  };
+
+  return (
+    <motion.div
+      initial={false}
+      animate={{ height: isOpen ? contentHeight : 0, opacity: isOpen ? 1 : 0 }}
+      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      className="overflow-hidden"
+    >
+      <div ref={contentRef} className="px-4 pb-4 space-y-3">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
+          className="relative w-full aspect-video rounded-lg overflow-hidden border border-gold/20"
+        >
+          <img
+            src={dayImages[day.day]}
+            alt=""
+            className={`w-full h-full object-cover ${dayPositions[day.day]}`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent" />
+        </motion.div>
+        <motion.ul
+          variants={listVariants}
+          initial="hidden"
+          animate={isOpen ? "visible" : "hidden"}
+          className="space-y-1.5"
+        >
+          {dayHighlights[day.day]?.map((h) => (
+            <motion.li key={h} variants={itemVariants} className="flex items-start gap-2 text-sm text-white/70">
+              <span className="text-gold mt-1">&#9679;</span>
+              {h}
+            </motion.li>
+          ))}
+        </motion.ul>
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
+          className="text-xs text-white/40 leading-relaxed"
+        >
+          {day.description}
+        </motion.p>
+      </div>
+    </motion.div>
+  );
+}
 
 function HeaderSlideshow({ tagline, title }: { tagline: string; title: string }) {
   const [index, setIndex] = useState(0);
@@ -397,7 +489,7 @@ function HeaderSlideshow({ tagline, title }: { tagline: string; title: string })
         <p className="text-gold text-xs font-medium tracking-[0.15em] uppercase mb-1">
           {tagline}
         </p>
-        <h3 className="text-2xl sm:text-3xl font-bold text-white">
+        <h3 className="text-2xl sm:text-3xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
           {title}
         </h3>
       </div>

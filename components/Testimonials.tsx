@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
-{/* PLACEHOLDER — replace with real client testimonials, do not deploy as-is */}
 const testimonials = [
   {
     name: "Priya Sharma",

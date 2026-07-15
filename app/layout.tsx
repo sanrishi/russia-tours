@@ -3,6 +3,7 @@ import { Lora, Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import Preloader from "@/components/Preloader";
 import "./globals.css";
 
 const lora = Lora({
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${lora.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full bg-[#0c0a0a] text-white">
+        <Preloader />
         <Navbar />
         {children}
         <Footer />

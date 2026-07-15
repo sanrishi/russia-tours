@@ -13,7 +13,7 @@ const slides = [
     subtitle: "Moscow • St. Petersburg • Kazan",
     tagline: "For Indian Travelers, by Indosvetka",
     cta: "View Upcoming Trips",
-    href: "/moscow-express",
+    href: "/places",
   },
   {
     image: "/moscow-city-2.webp",
@@ -38,6 +38,7 @@ export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [slidesStarted, setSlidesStarted] = useState(false);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -52,19 +53,26 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    const delay = setTimeout(() => setSlidesStarted(true), 5000);
+    return () => clearTimeout(delay);
+  }, []);
+
+  useEffect(() => {
+    if (!slidesStarted) return;
     const interval = setInterval(() => {
       setCurrent((c) => (c + 1) % slides.length);
       setProgress(0);
     }, 8000);
     return () => clearInterval(interval);
-  }, []);
+  }, [slidesStarted]);
 
   useEffect(() => {
+    if (!slidesStarted) return;
     const tick = setInterval(() => {
       setProgress((p) => Math.min(p + 100 / 80, 100));
     }, 100);
     return () => clearInterval(tick);
-  }, [current]);
+  }, [current, slidesStarted]);
 
   const goTo = useCallback((i: number) => {
     setCurrent(i);

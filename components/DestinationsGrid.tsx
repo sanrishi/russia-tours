@@ -13,7 +13,7 @@ const destinations = [
     image: "/moscow-hero.jpg",
     gradient: "from-crimson/80 via-crimson/40 to-transparent",
     price: "₹1,60,000",
-    href: "/places",
+    href: "/moscow-express",
   },
   {
     city: "St. Petersburg",

@@ -34,7 +34,7 @@ export default function AnimalSilhouettes({ slideIndex }: Props) {
   }, [slideIndex]);
 
   return (
-    <div className="absolute bottom-0 right-0 pointer-events-none z-[5] w-full max-w-[1130px] max-md:bottom-40 lg:max-w-[720px]">
+    <div className="absolute bottom-0 right-0 pointer-events-none z-[5] w-full max-w-[1130px] max-sm:bottom-32 max-sm:max-w-[300px] sm:max-md:bottom-40 lg:max-w-[720px]">
       <svg
         width="1130"
         height="498"

@@ -1,138 +1,43 @@
-import Link from "next/link";
-import { ArrowLeft, Phone, Shield, ExternalLink, Heart } from "lucide-react";
+
+import { ShieldCheck, Phone, FileText, AlertTriangle, CarTaxiFront } from "lucide-react";
+import TipsArticleShell, { Section, Card } from "@/components/TipsArticleShell";
+
+const sections = [
+  { icon: ShieldCheck, title: "Is Moscow Safe?", items: ["Moscow is very safe for tourists — the city centre is well-lit, heavily policed, and patrolled by tourist police.", "Violent crime against tourists is extremely rare. Petty theft (pickpocketing in metro/buses) is the main concern.", "Police officers actively help tourists — don't hesitate to approach them if you need directions or assistance.", "Avoid walking alone late at night in unfamiliar residential areas, especially as a solo traveller."] },
+  { icon: AlertTriangle, title: "Police & Document Checks", items: ["Police can ask for documents at any time — always carry a photocopy of your passport and visa.", "If stopped, stay calm and polite. Show your photocopy — they rarely need the original.", "Tourist police speak some English. Regular police may not — use Google Translate if needed.", "If you lose your passport, visit the Indian Embassy immediately (6/8 ul. Obukha, Moscow)."] },
+  { icon: CarTaxiFront, title: "Scams to Avoid", items: ["Don't take unlicensed taxis — use Yandex Go only. Fixed price displayed before booking.", "Ignore 'friendly' strangers who offer to exchange money or take pictures — common near Red Square.", "Beware of the 'lost wallet' scam — someone drops a wallet near you, then demands money.", "Don't buy metro tickets from touts — use official ticket offices or the Troika card vending machines."] },
+  { icon: Phone, title: "Emergency Contacts", items: ["112 — Universal emergency number (works in English)", "+7 499 157-29-31 — Tourist police hotline", "+7 495 783-15-15 — Indian Embassy in Moscow", "+7 495 232-29-19 — 24-hour consular helpline"] },
+];
 
 export default function SafetyPage() {
   return (
-    <main className="min-h-screen pt-20">
-      <div className="max-w-[1728px] mx-auto px-6 py-16 sm:py-20">
-        <Link
-          href="/tips"
-          className="inline-flex items-center gap-1.5 text-gold text-sm hover:underline mb-8"
-        >
-          <ArrowLeft size={14} /> Back to all tips
-        </Link>
-
-        <div className="max-w-3xl mb-10">
-          <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase mb-3 block">
-            Safety Guide
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-            Safety for Indian Travelers in Russia
-          </h1>
-          <p className="text-white/50 text-base sm:text-lg leading-relaxed">
-            Your safety is our priority. Here are all the contacts and tips you
-            need for a worry-free trip.
-          </p>
+    <TipsArticleShell label="Safety Guide" title="Moscow Safety Guide for Indian Travellers" description="Moscow is one of the safest capital cities in the world for tourists. Here's what you need to know to stay safe and avoid common issues.">
+      <Section>
+        <div className="relative rounded-2xl overflow-hidden mb-6 aspect-[16/9]">
+          <img src="/safety-hero.jpg" alt="Moscow safety" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a0a] via-[#0c0a0a]/20 to-transparent" />
         </div>
-
-        {/* Emergency Contact */}
-        <div className="rounded-2xl border border-red-500/10 bg-red-500/[0.02] p-6 sm:p-8 mb-6">
-          <div className="flex items-center gap-3 mb-6">
-            <Phone size={20} className="text-red-400" />
-            <h2 className="text-xl font-bold text-white">
-              24/7 Emergency Contacts
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex items-start gap-4 p-4 rounded-xl border border-red-500/10 bg-red-500/[0.03]">
-              <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center shrink-0">
-                <Phone size={20} className="text-red-400" />
-              </div>
-              <div>
-                <p className="text-white text-sm font-semibold">
-                  SVETA Emergency Helpline
-                </p>
-                <a
-                  href="tel:+79652773414"
-                  className="text-gold text-lg hover:underline font-bold"
-                >
-                  +7 965 277 3414
-                </a>
-                <p className="text-white/40 text-xs mt-1">
-                  Available 24/7 for urgent assistance — call or WhatsApp
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
-              <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center shrink-0">
-                <ExternalLink size={20} className="text-gold" />
-              </div>
-              <div>
-                <p className="text-white text-sm font-semibold">
-                  Indian Embassy — Moscow
-                </p>
-                <p className="text-white/50 text-sm">
-                  Consular Dept: +7 495 916-23-43
-                </p>
-                <a
-                  href="mailto:cons.moscow@mea.gov.in"
-                  className="text-gold text-sm hover:underline"
-                >
-                  cons.moscow@mea.gov.in
-                </a>
-                <p className="text-white/40 text-xs mt-1">
-                  For non-urgent queries, lost passport, and documentation
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="space-y-5">
+          {sections.map((s) => {
+            const Icon = s.icon;
+            return (
+              <Card key={s.title} className="!p-6 sm:!p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center shrink-0"><Icon size={18} className="text-gold" /></div>
+                  <h2 className="text-xl font-bold text-white">{s.title}</h2>
+                </div>
+                <ul className="space-y-2 ml-[52px]">
+                  {s.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-white/50">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold/40 shrink-0 mt-2" />{item}
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            );
+          })}
         </div>
-
-        {/* General Safety */}
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            <Shield size={20} className="text-gold" />
-            <h2 className="text-xl font-bold text-white">
-              General Safety Tips
-            </h2>
-          </div>
-          <ul className="space-y-3">
-            {[
-              "Moscow and St. Petersburg are generally safe — standard city precautions apply",
-              "Keep your passport and e-visa printed copy with you at all times",
-              "Use only official taxis (Yandex Go) — avoid unmarked cars at the airport",
-              "Store emergency contacts in your phone before departure",
-              "Your guide is available throughout the trip — contact them first in any situation",
-              "Register with the Indian Embassy's MADAD portal for travel alerts",
-            ].map((tip) => (
-              <li
-                key={tip}
-                className="flex items-start gap-2 text-sm text-white/60"
-              >
-                <span className="text-gold mt-0.5 shrink-0">•</span>
-                {tip}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Health */}
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Heart size={20} className="text-gold" />
-            <h2 className="text-xl font-bold text-white">Health & Medical</h2>
-          </div>
-          <ul className="space-y-3">
-            {[
-              "Travel insurance is strongly recommended — ensure it covers medical evacuation",
-              "Tap water in Moscow is safe to drink (boiled/filtered recommended for sensitive stomachs)",
-              "Pharmacies (Apteka) are everywhere — most have English-speaking staff",
-              "Indian restaurants can adjust spice levels — just ask",
-              "Carry basic medicines: paracetamol, antacids, ORS packets, and any prescription meds",
-            ].map((tip) => (
-              <li
-                key={tip}
-                className="flex items-start gap-2 text-sm text-white/60"
-              >
-                <span className="text-gold mt-0.5 shrink-0">•</span>
-                {tip}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </main>
+      </Section>
+    </TipsArticleShell>
   );
 }
