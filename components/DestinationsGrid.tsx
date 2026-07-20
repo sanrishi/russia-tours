@@ -4,13 +4,32 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, IndianRupee } from "lucide-react";
 
-const destinations = [
+interface TourCardData {
+  city: string;
+  tagline: string;
+  description: string;
+  image: string;
+  gradient: string;
+  price: string;
+  href: string;
+  comingSoon?: boolean;
+}
+
+interface Props {
+  moscowTitle?: string;
+  moscowTagline?: string;
+  moscowDescription?: string;
+  moscowImage?: string;
+  moscowPrice?: string;
+}
+
+const fallbackDestinations: TourCardData[] = [
   {
     city: "Moscow",
     tagline: "The Imperial Pulse",
     description:
       "Red Square, Kremlin, world-class Indian restaurants, and halal dining in Russia's majestic capital.",
-    image: "/moscow-hero.jpg",
+    image: "/moscow-hero.webp",
     gradient: "from-crimson/80 via-crimson/40 to-transparent",
     price: "₹1,60,000",
     href: "/moscow-express",
@@ -20,7 +39,7 @@ const destinations = [
     tagline: "The Cultural Soul",
     description:
       "Hermitage, canals, ballet — with Indian-friendly amenities in the Venice of the North.",
-    image: "/stpetersburg-card.jpg",
+    image: "/stpetersburg-card.webp",
     gradient: "from-amber/80 via-amber/40 to-transparent",
     price: "TBD",
     href: "#",
@@ -31,7 +50,7 @@ const destinations = [
     tagline: "The Crossroad of Worlds",
     description:
       "Russia's Muslim heritage, Kul Sharif Mosque, and a halal food paradise on the Volga.",
-    image: "/kazan-card.jpg",
+    image: "/kazan-card.webp",
     gradient: "from-emerald/80 via-emerald/40 to-transparent",
     price: "TBD",
     href: "#",
@@ -39,7 +58,21 @@ const destinations = [
   },
 ];
 
-export default function DestinationsGrid() {
+export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDescription, moscowImage, moscowPrice }: Props) {
+  const destinations: TourCardData[] = moscowPrice
+    ? [
+        {
+          city: "Moscow",
+          tagline: moscowTagline || fallbackDestinations[0].tagline,
+          description: moscowDescription || fallbackDestinations[0].description,
+          image: moscowImage || fallbackDestinations[0].image,
+          gradient: "from-crimson/80 via-crimson/40 to-transparent",
+          price: moscowPrice,
+          href: "/moscow-express",
+        },
+        ...fallbackDestinations.slice(1),
+      ]
+    : fallbackDestinations;
   return (
     <section id="destinations" className="relative py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6">

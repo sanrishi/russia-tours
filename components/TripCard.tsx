@@ -35,7 +35,7 @@ const trips: Trip[] = [
   {
     title: "Moscow Discovery — 7 Days",
     tagline: "August 2026 — Limited to 8 Seats",
-    image: "/riverside_smiling.jpeg",
+    image: "/riverside_smiling.webp",
     pricePerPerson: 160000,
     duration: "7 days / 6 nights",
     groupSize: "Max 8 people",
@@ -125,12 +125,30 @@ const trips: Trip[] = [
   },
 ];
 
-export default function TripCard({ costBtnRef }: { costBtnRef?: React.RefObject<HTMLButtonElement | null> }) {
+interface CmsOverride {
+  price?: string;
+  duration?: string;
+  highlights?: string[];
+  inclusions?: string[];
+  exclusions?: string[];
+  itinerary?: { day: number; title: string; meals: string; transport: string; description: string }[];
+}
+
+export default function TripCard({ costBtnRef, cmsData }: { costBtnRef?: React.RefObject<HTMLButtonElement | null>; cmsData?: CmsOverride }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const tripsWithCms: Trip[] = cmsData ? trips.map(t => ({
+    ...t,
+    pricePerPerson: cmsData.price ? parseInt(cmsData.price.replace(/[^0-9]/g, "")) || t.pricePerPerson : t.pricePerPerson,
+    duration: cmsData.duration || t.duration,
+    included: cmsData.inclusions || t.included,
+    excluded: cmsData.exclusions || t.excluded,
+    itinerary: cmsData.itinerary || t.itinerary,
+  })) : trips;
 
   return (
     <div className="space-y-8">
-      {trips.map((trip, i) => (
+      {tripsWithCms.map((trip, i) => (
         <motion.div
           key={trip.title}
           initial={{ opacity: 0, y: 30 }}
@@ -140,9 +158,10 @@ export default function TripCard({ costBtnRef }: { costBtnRef?: React.RefObject<
             className={`rounded-2xl overflow-hidden transition-all duration-500 ${
             trip.comingSoon
               ? "border border-white/5 bg-[#1C1917] opacity-60"
-              : "border border-white/[0.06] bg-black/50 backdrop-blur-xl hover:shadow-[0_0_50px_-20px_rgba(202,138,4,0.15)]"
+              : "border border-white/[0.04] bg-[#1C1917]/85 backdrop-blur-sm hover:shadow-[0_0_50px_-20px_rgba(202,138,4,0.15)]"
             }`}
         >
+          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
           {trip.comingSoon ? (
             <div className="p-4">
               <div className="flex items-start justify-between gap-4">
@@ -191,7 +210,7 @@ export default function TripCard({ costBtnRef }: { costBtnRef?: React.RefObject<
                     Check Availability <ArrowRight size={12} />
                   </button>
                   <a
-                    href="https://wa.me/?text=Check%20out%20this%20Russia%20tour%3A%20Moscow%20Discovery%20%E2%80%94%207%20Days%20-%20https%3A%2F%2Frussia-tours-poc.vercel.app%2Fmoscow-express"
+                    href="https://wa.me/?text=Check%20out%20this%20Russia%20tour%3A%20Moscow%20Discovery%20%E2%80%94%207%20Days%20-%20https%3A%2F%2Ftripstorussia.com%2Fmoscow-express"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-gold/50 text-white/50 hover:text-gold hover:border-gold bg-transparent text-xs transition-all cursor-pointer"
@@ -320,21 +339,21 @@ export default function TripCard({ costBtnRef }: { costBtnRef?: React.RefObject<
 const slides = [
   "/moscow-city-1.webp",
   "/moscow-city-3.webp",
-  "/unsplash-stbasil.jpg",
-  "/soultrain-sunset-8064078.jpg",
+  "/unsplash-stbasil.webp",
+  "/soultrain-sunset-8064078.webp",
   "/moscow-city-2.webp",
-  "/cattu-moscow-964445.jpg",
-  "/serbuxarev-street-4630827.jpg",
+  "/cattu-moscow-964445.webp",
+  "/serbuxarev-street-4630827.webp",
 ];
 
 const dayImages: Record<number, string> = {
-  1: "/day1-river.jpg",
-  2: "/day2-red-square.jpg",
-  3: "/day3-rooftop.jpg",
-  4: "/day4-arbat.jpg",
-  5: "/day5-viewpoint.jpg",
-  6: "/day6-vdnkh.jpg",
-  7: "/day7-departure.jpg",
+  1: "/day1-river.webp",
+  2: "/day2-red-square.webp",
+  3: "/day3-rooftop.webp",
+  4: "/day4-arbat.webp",
+  5: "/day5-viewpoint.webp",
+  6: "/day6-vdnkh.webp",
+  7: "/day7-departure.webp",
 };
 
 const dayPositions: Record<number, string> = {
