@@ -26,7 +26,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="relative py-24 md:py-32 border-t border-white/5">
+    <section className="relative py-32 md:py-44 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,7 +50,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="relative p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-gold/10 transition-all duration-500 group"
+              className="relative p-8 rounded-2xl border border-white/[0.06] bg-black/30 backdrop-blur-sm hover:border-gold/20 transition-all duration-500 group"
             >
               <Quote
                 size={24}
@@ -63,13 +63,13 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="text-white/70 text-sm leading-relaxed mb-6">
+              <p className="text-white/80 text-sm leading-relaxed mb-6">
                 &ldquo;{t.text}&rdquo;
               </p>
 
               <div>
                 <p className="text-white font-semibold text-sm">{t.name}</p>
-                <p className="text-white/40 text-xs">{t.location}</p>
+                <p className="text-white/60 text-xs">{t.location}</p>
               </div>
             </motion.div>
           ))}
@@ -79,22 +79,22 @@ export default function Testimonials() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-8 border-t border-white/5"
+          className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-12 py-5 px-8 rounded-2xl border border-white/[0.06] bg-black/30 backdrop-blur-sm"
         >
           {/* PLACEHOLDER — trust badges: replace with real client verifications, do not deploy as-is */}
-          <span className="text-white/30 text-xs tracking-widest uppercase">
+          <span className="text-white/60 text-xs tracking-widest uppercase">
             Trusted Partners
           </span>
           {/* PLACEHOLDER — real Google rating from client's actual listing */}
-          <span className="text-white/50 text-sm font-medium">
+          <span className="text-white/80 text-sm font-medium">
             ★ 4.9 Google Rating
           </span>
           {/* PLACEHOLDER — real traveler count from client's records */}
-          <span className="text-white/50 text-sm">
+          <span className="text-white/80 text-sm">
             1,000+ Happy Indian Travelers
           </span>
           {/* PLACEHOLDER — real license/certification number once obtained */}
-          <span className="text-white/50 text-sm">
+          <span className="text-white/80 text-sm">
             Registered Tour Operator
           </span>
         </motion.div>

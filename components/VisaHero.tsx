@@ -9,7 +9,7 @@ export default function VisaHero() {
     <section className="relative overflow-hidden min-h-[480px] sm:min-h-[560px] flex items-center">
       <div className="absolute inset-0">
         <Image
-          src="/evisa-hero.png"
+          src="/evisa-hero.webp"
           alt=""
           fill
           className="object-cover object-center"

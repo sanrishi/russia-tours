@@ -14,7 +14,7 @@ export default function PhrasebookPage() {
     <TipsArticleShell label="Phrasebook" title="Basic Russian Phrases for Indian Travellers" description="English is limited outside hotels and tourist zones. Learning a few Russian words will make your trip smoother and friendlier.">
       <Section>
         <div className="relative rounded-2xl overflow-hidden mb-6 aspect-[16/9]">
-          <img src="/phrasebook-hero.png" alt="Russian phrasebook" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <img src="/phrasebook-hero.webp" alt="Russian phrasebook" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a0a] via-[#0c0a0a]/20 to-transparent" />
         </div>
         <div className="space-y-5">

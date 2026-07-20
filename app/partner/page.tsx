@@ -14,7 +14,7 @@ export default function PartnerPage() {
       {/* Full-page faded background */}
       <div className="absolute inset-0">
         <Image
-          src="/unsplash-city.jpg"
+          src="/unsplash-city.webp"
           alt=""
           fill
           className="object-cover object-center"

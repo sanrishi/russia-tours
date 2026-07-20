@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, LockKeyhole } from "lucide-react";
+import { LockKeyhole } from "lucide-react";
 
 export default function CertificationsSection() {
   return (
@@ -22,36 +22,6 @@ export default function CertificationsSection() {
               <p className="text-white text-sm font-semibold">SSL Encrypted</p>
               <p className="text-white/40 text-xs">
                 HTTPS — secure connection
-              </p>
-            </div>
-          </div>
-
-          {/* Russian tourism license — slot ready, empty until client provides */}
-          <div className="flex items-center gap-3 opacity-40">
-            <div className="w-10 h-10 rounded-full border border-dashed border-white/20 flex items-center justify-center">
-              <ShieldCheck size={18} className="text-white/20" />
-            </div>
-            <div>
-              <p className="text-white/40 text-sm font-semibold">
-                Russian Tour License
-              </p>
-              <p className="text-white/20 text-xs">
-                Badge appears once obtained
-              </p>
-            </div>
-          </div>
-
-          {/* Placeholder for additional certifications */}
-          <div className="flex items-center gap-3 opacity-40">
-            <div className="w-10 h-10 rounded-full border border-dashed border-white/20 flex items-center justify-center">
-              <ShieldCheck size={18} className="text-white/20" />
-            </div>
-            <div>
-              <p className="text-white/40 text-sm font-semibold">
-                Additional License
-              </p>
-              <p className="text-white/20 text-xs">
-                Badge appears once obtained
               </p>
             </div>
           </div>

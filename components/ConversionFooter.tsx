@@ -14,33 +14,37 @@ export default function ConversionFooter() {
 
     const f = e.currentTarget.elements;
 
-    const payload = {
-      _captcha: "false",
-      name: (f.namedItem("name") as HTMLInputElement).value,
-      phone: `+91${(f.namedItem("phone") as HTMLInputElement).value}`,
-      city: (f.namedItem("city") as HTMLSelectElement).value,
-      group_size: (f.namedItem("group_size") as HTMLSelectElement).value,
-      budget: (f.namedItem("budget") as HTMLSelectElement).value,
-      travel_period: (f.namedItem("travel_period") as HTMLInputElement).value,
-      requirements: (f.namedItem("requirements") as HTMLTextAreaElement).value,
-    };
+    const name = (f.namedItem("name") as HTMLInputElement).value;
+    const phone = `+91${(f.namedItem("phone") as HTMLInputElement).value}`;
+    const city = (f.namedItem("city") as HTMLSelectElement).value;
+    const group_size = (f.namedItem("group_size") as HTMLSelectElement).value;
+    const budget = (f.namedItem("budget") as HTMLSelectElement).value;
+    const travel_period = (f.namedItem("travel_period") as HTMLInputElement).value;
+    const requirements = (f.namedItem("requirements") as HTMLTextAreaElement).value;
 
-    try {
-      await fetch("https://formsubmit.co/ajax/svetaindia07@gmail.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-    } catch {
-      // Silently fail for PoC — UI still shows success
-    }
+    const msg = `*New Enquiry from tripstorussia.com*
+*Name:* ${name}
+*Phone:* ${phone}
+*City:* ${city}
+*Group Size:* ${group_size}
+*Budget:* ${budget}
+*Travel Period:* ${travel_period}
+*Requirements:* ${requirements}`;
 
     setSending(false);
     setSubmitted(true);
-  };
+
+    window.open(`https://wa.me/917042987451?text=${encodeURIComponent(msg)}`, "_blank");
+
+    fetch("/api/enquiry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ _captcha: "false", name, phone, city, group_size, budget, travel_period, requirements }),
+    }).catch(() => {});
+  }
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 bg-charcoal">
+    <section id="contact" className="relative py-24 md:py-32 bg-transparent">
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
@@ -69,7 +73,7 @@ export default function ConversionFooter() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-2xl mx-auto"
+          className="          max-w-2xl mx-auto rounded-2xl border border-white/[0.06] bg-black/30 backdrop-blur-sm p-8 md:p-10"
         >
           {submitted ? (
             <motion.div

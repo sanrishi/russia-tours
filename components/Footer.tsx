@@ -63,7 +63,8 @@ export default function Footer() {
             WebkitMaskPosition: "bottom center", maskPosition: "bottom center",
           }}
         >
-          <source src="https://cdn.discover.moscow/videos/footer_video.mp4" type="video/mp4" />
+          <source src="/footer_video.mp4" type="video/mp4" />
+          <source src="/footer_video.webm" type="video/webm" />
         </video>
         <video
           autoPlay loop muted playsInline preload="auto"
@@ -76,7 +77,8 @@ export default function Footer() {
             WebkitMaskPosition: "bottom center", maskPosition: "bottom center",
           }}
         >
-          <source src="https://cdn.discover.moscow/videos/footer_video.mp4" type="video/mp4" />
+          <source src="/footer_video.mp4" type="video/mp4" />
+          <source src="/footer_video.webm" type="video/webm" />
         </video>
       </div>
       )}

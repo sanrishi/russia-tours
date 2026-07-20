@@ -49,10 +49,14 @@ export default function CostEstimator({ triggerRefs }: { triggerRefs: React.RefO
       const target = e.currentTarget as HTMLElement
       showTimer.current = setTimeout(() => {
         const rect = target.getBoundingClientRect()
-        setPos({
-          top: rect.bottom + 8,
-          left: Math.max(8, Math.min(rect.left + rect.width / 2 - 240, window.innerWidth - 488)),
-        })
+        const popupHeight = 480
+        const spaceBelow = window.innerHeight - rect.bottom
+        const isMobile = window.innerWidth < 640
+        const popupWidth = isMobile ? window.innerWidth - 16 : 480
+        let top = spaceBelow >= popupHeight ? rect.bottom + 8 : rect.top - popupHeight - 8
+        top = Math.max(8, top)
+        const left = isMobile ? 8 : Math.max(8, Math.min(rect.left + rect.width / 2 - 240, window.innerWidth - popupWidth - 8))
+        setPos({ top, left })
         setShow(true)
       }, 200)
     }
@@ -85,7 +89,7 @@ export default function CostEstimator({ triggerRefs }: { triggerRefs: React.RefO
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92, y: -4 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="fixed z-50 w-[480px]"
+          className="fixed z-50 w-[calc(100vw-16px)] sm:w-[480px]"
           style={{ top: pos.top, left: pos.left }}
           onMouseEnter={() => clearTimeout(hideTimer.current)}
           onMouseLeave={() => setShow(false)}

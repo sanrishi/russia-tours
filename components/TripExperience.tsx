@@ -48,13 +48,13 @@ function useCountUp(target: number, active: boolean, duration = 1200) {
 }
 
 const moodBoard = [
-  { img: "/day1-river.jpg", vibe: "Scenic", caption: "City lights from the river", span: "short", song: "Podmoskovnye Vechera", artist: "Anna Netrebko", url: "https://www.youtube.com/watch?v=r3-z_KKsYhA", tip: "/tips/itineraries" },
-  { img: "/day2-red-square.jpg", vibe: "Iconic", caption: "Where history meets grandeur", span: "tall", song: "Moscow Never Sleeps", artist: "DJ Smash", url: "https://www.youtube.com/watch?v=T5Qnipn6cZc", tip: "/tips/first-time" },
-  { img: "/day3-rooftop.jpg", vibe: "Glamorous", caption: "Moscow by night, in style", span: "short", song: "Komety", artist: "Jony", url: "https://www.youtube.com/watch?v=dON9SgBPQkU", tip: "/tips/practical-tips" },
-  { img: "/day4-arbat.jpg", vibe: "Hidden", caption: "Secrets beneath the city", span: "tall", song: "Sudno", artist: "Molchat Doma", url: "https://www.youtube.com/watch?v=91GTuZWCQmY", tip: "/tips/safety" },
-  { img: "/day5-viewpoint.jpg", vibe: "Thrilling", caption: "Heights, chills & adrenaline", span: "short", song: "Thunder", artist: "Imagine Dragons", url: "https://www.youtube.com/watch?v=fKopy74weus", tip: "/tips/transport" },
-  { img: "/day6-vdnkh.jpg", vibe: "Vibrant", caption: "Fairytale rooftops & farewells", span: "tall", song: "Chto takoe osen", artist: "DDT", url: "https://www.youtube.com/watch?v=5KC-iscJtsI", tip: "/tips/currency" },
-  { img: "/day7-departure.jpg", vibe: "Peaceful", caption: "Until next time, Moscow", span: "short", song: "Spokoynaya Noch", artist: "Kino", url: "https://www.youtube.com/watch?v=SOYkG5VMhp8", tip: "/tips/visa-guide" },
+  { img: "/day1-river.webp", vibe: "Scenic", caption: "City lights from the river", span: "short", song: "Podmoskovnye Vechera", artist: "Anna Netrebko", url: "https://www.youtube.com/watch?v=r3-z_KKsYhA", tip: "/tips/itineraries" },
+  { img: "/day2-red-square.webp", vibe: "Iconic", caption: "Where history meets grandeur", span: "tall", song: "Moscow Never Sleeps", artist: "DJ Smash", url: "https://www.youtube.com/watch?v=T5Qnipn6cZc", tip: "/tips/first-time" },
+  { img: "/day3-rooftop.webp", vibe: "Glamorous", caption: "Moscow by night, in style", span: "short", song: "Komety", artist: "Jony", url: "https://www.youtube.com/watch?v=dON9SgBPQkU", tip: "/tips/practical-tips" },
+  { img: "/day4-arbat.webp", vibe: "Hidden", caption: "Secrets beneath the city", span: "tall", song: "Sudno", artist: "Molchat Doma", url: "https://www.youtube.com/watch?v=91GTuZWCQmY", tip: "/tips/safety" },
+  { img: "/day5-viewpoint.webp", vibe: "Thrilling", caption: "Heights, chills & adrenaline", span: "short", song: "Thunder", artist: "Imagine Dragons", url: "https://www.youtube.com/watch?v=fKopy74weus", tip: "/tips/transport" },
+  { img: "/day6-vdnkh.webp", vibe: "Vibrant", caption: "Fairytale rooftops & farewells", span: "tall", song: "Chto takoe osen", artist: "DDT", url: "https://www.youtube.com/watch?v=5KC-iscJtsI", tip: "/tips/currency" },
+  { img: "/day7-departure.webp", vibe: "Peaceful", caption: "Until next time, Moscow", span: "short", song: "Spokoynaya Noch", artist: "Kino", url: "https://www.youtube.com/watch?v=SOYkG5VMhp8", tip: "/tips/visa-guide" },
 ];
 
 const vlogData = [
@@ -177,7 +177,8 @@ export default function TripExperience() {
       <style>{`@media (prefers-reduced-motion:reduce){.trip-x *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}`}</style>
       <div ref={ref} className={`trip-x transition-all duration-700 ease-out will-change-transform will-change-opacity ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         {/* ─── MOOD BOARD ─── */}
-        <div className="relative rounded-2xl border border-white/[0.06] bg-black/50 backdrop-blur-xl mb-5 overflow-hidden">
+        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 backdrop-blur-sm mb-10 overflow-hidden">
+          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
           <div className="relative px-6 pt-6 sm:px-8 sm:pt-8 pb-2">
             <span className="font-heading text-xs tracking-[0.25em] uppercase text-gold">The Moscow Express</span>
             <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white mt-1.5 tracking-tight">7 Days · Small Group · 1 Adventure</h2>
@@ -217,7 +218,8 @@ export default function TripExperience() {
           </div>
 
         {/* ─── THE DETAILS ─── */}
-        <div className="relative rounded-2xl border border-white/[0.06] bg-black/50 backdrop-blur-xl mb-5 overflow-hidden">
+        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 backdrop-blur-sm mb-10 overflow-hidden">
+          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
         <section className="mb-5">
           <div className="flex items-center gap-3 mb-5 px-1">
             <span className="w-1 h-4 rounded-full bg-gold/40" />
@@ -226,7 +228,8 @@ export default function TripExperience() {
 
           <div className="space-y-4">
             {/* ─── PRICE BREAKDOWN CARD ─── */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-black/50 backdrop-blur-xl p-6 sm:p-7">
+            <div className="relative rounded-2xl overflow-hidden border border-white/[0.04] bg-[#1C1917]/40 backdrop-blur-sm p-6 sm:p-7">
+              <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
               <div className="absolute -top-20 -left-20 w-40 h-40 rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #d4af37 0%, transparent 70%)" }} />
               <div className="relative">
                 <GlassHeader label="Price Breakdown" />
@@ -265,7 +268,8 @@ export default function TripExperience() {
             </div>
 
             {/* ─── SOUNDTRACK CARD ─── */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-black/50 backdrop-blur-xl p-6 sm:p-7">
+            <div className="relative rounded-2xl overflow-hidden border border-white/[0.04] bg-[#1C1917]/40 backdrop-blur-sm p-6 sm:p-7">
+              <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
               <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #d4af37 0%, transparent 70%)" }} />
               <div className="relative">
                 <GlassHeader label="Trip Soundtrack" />
@@ -276,7 +280,7 @@ export default function TripExperience() {
                     const delay = reduced ? 0 : i * 50;
                     return (
                       <div key={item.vibe} onClick={() => window.open(item.url, "_blank", "noopener")}
-                        className="group/track relative flex items-center gap-3 px-4 py-3.5 rounded-xl border border-white/[0.04] bg-white/[0.02] transition-all duration-300 cursor-pointer hover:bg-white/[0.06] hover:border-white/[0.08] hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:-translate-y-0.5"
+                        className="group/track relative flex items-center gap-3 px-4 py-3.5 rounded-xl border border-white/[0.04] bg-[#1C1917]/40 transition-all duration-300 cursor-pointer hover:bg-[#1C1917]/40 hover:border-white/[0.08] hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:-translate-y-0.5"
                         style={{ transitionDelay: `${delay}ms` }}>
                         <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-white/[0.06] shrink-0">
                           <img src={item.img} alt="" className="w-full h-full object-cover" />
@@ -302,7 +306,8 @@ export default function TripExperience() {
         </div>
 
         {/* ─── KNOW BEFORE YOU GO ─── */}
-        <div className="relative rounded-2xl border border-white/[0.06] bg-black/50 backdrop-blur-xl overflow-hidden">
+        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 backdrop-blur-sm overflow-hidden">
+          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
             <section className="p-6 sm:p-7">
           <div className="relative">
             <GlassHeader label="Know Before You Go" />
@@ -311,7 +316,7 @@ export default function TripExperience() {
                 const Icon = item.icon;
                 const delay = reduced ? 0 : 300 + i * 80;
                 return (
-                  <div key={item.label} className="group/sp relative rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 transition-all duration-300 cursor-default hover:bg-white/[0.06] hover:border-gold/15 hover:shadow-[0_8px_30px_-8px_rgba(212,175,55,0.12)] hover:-translate-y-0.5"
+                  <div key={item.label} className="group/sp relative rounded-xl border border-white/[0.04] bg-[#1C1917]/40 p-4 transition-all duration-300 cursor-default hover:bg-[#1C1917]/40 hover:border-gold/15 hover:shadow-[0_8px_30px_-8px_rgba(212,175,55,0.12)] hover:-translate-y-0.5"
                     style={{ transitionDelay: `${delay}ms` }}>
                     <div className="w-10 h-10 rounded-lg bg-gold/[0.08] flex items-center justify-center mb-3 transition-all duration-300 group-hover/sp:bg-gold/[0.15] group-hover/sp:shadow-[0_0_20px_-4px_rgba(212,175,55,0.15)]">
                       <Icon size={17} className="text-gold/70 transition-all duration-300 group-hover/sp:text-gold" />

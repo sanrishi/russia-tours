@@ -6,7 +6,7 @@ const W = 2.4
 
 export default function KremlinSkyline({ noBackground }: { noBackground?: boolean }) {
   return (
-    <svg viewBox="0 0 800 500" fill="none" className="w-full h-auto pointer-events-none select-none">
+    <svg viewBox="0 0 800 500" fill="none" className="h-full w-auto pointer-events-none select-none" style={{ maxWidth: "90vw" }}>
       <defs>
         <radialGradient id="kbg" cx="50%" cy="50%" r="60%">
           <stop offset="0%" stopColor="#3d0808" />

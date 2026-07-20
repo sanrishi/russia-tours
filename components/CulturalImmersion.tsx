@@ -34,7 +34,7 @@ export default function CulturalImmersion() {
   const imgY = useSpring(rawImgY, { stiffness: 60, damping: 20, mass: 0.5 });
 
   return (
-    <section id="stories" ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
+    <section id="stories" ref={sectionRef} className="relative py-32 md:py-44 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <motion.div
@@ -46,7 +46,7 @@ export default function CulturalImmersion() {
           >
             <motion.div className="absolute inset-0" style={{ y: imgY }}>
               <Image
-                src="/tour-style.jpg"
+                src="/tour-style.webp"
                 alt="Tour style concept"
                 fill
                 className="object-cover"
@@ -68,6 +68,7 @@ export default function CulturalImmersion() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            className="rounded-2xl border border-white/[0.06] bg-black/30 backdrop-blur-sm p-8 md:p-10"
           >
             <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase">
               The Experience
@@ -77,7 +78,7 @@ export default function CulturalImmersion() {
               <br />
               <span className="text-white/50">Closer to Home.</span>
             </h2>
-            <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
+            <p className="text-white/70 text-base sm:text-lg leading-relaxed mb-8">
               We don&apos;t just show you buildings — we unlock Russia through
               an Indian lens. From private access to the Red Square to
               halal-friendly dining in St. Petersburg, every detail is curated

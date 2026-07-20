@@ -11,7 +11,7 @@ const cities = [
     name: "Moscow",
     slug: "moscow-express",
     tagline: "The Heart of Russia",
-    image: "/new_moscow.jpg",
+    image: "/enhanced_new_moscow.webp",
     highlights: ["Red Square & Kremlin", "Indian & halal dining", "Hindi-speaking guides", "Metro & Aeroexpress"],
     description: "Russia's vibrant capital. Iconic landmarks, world-class museums, and a thriving Indian food scene — Moscow offers everything for a comfortable stay.",
   },
@@ -19,7 +19,7 @@ const cities = [
     name: "St. Petersburg",
     slug: null,
     tagline: "The Cultural Capital",
-    image: "/stpetersburg-card.jpg",
+    image: "/stpetersburg-card.webp",
     highlights: ["Hermitage Museum", "Peterhof Palace", "Indian restaurants", "Nevsky Prospect"],
     description: "Russia's cultural capital, known for its imperial architecture, canal views, and the world-famous Hermitage. Tour packages coming soon.",
   },
@@ -55,7 +55,7 @@ export default function PlacesContent() {
       <section className="relative overflow-hidden min-h-[400px] sm:min-h-[480px] flex items-start">
         <div className="absolute inset-0">
           <Image
-            src="/moscow-hero.jpg"
+            src="/moscow-hero.webp"
             alt="Moscow cityscape"
             fill
             className="object-cover object-center"

@@ -4,14 +4,14 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, Camera } from "lucide-react";
 
 const photos = [
-  { src: "/riverside_smiling.jpeg", alt: "Group by Moscow River", tag: "Welcome to Moscow", span: "tall" },
-  { src: "/unsplash-stbasil.jpg", alt: "St. Basil's Cathedral", tag: "Iconic Landmark", span: "wide" },
-  { src: "/restraunt_photo.jpeg", alt: "Indian restaurant dining", tag: "Dinner Inclusions", span: "sq" },
-  { src: "/rooftop.jpeg", alt: "Rooftop skyline view", tag: "Day 3 — Rooftop", span: "sq" },
-  { src: "/cafe-two-women.jpg", alt: "Café atmosphere", tag: "Group Moments", span: "sq" },
-  { src: "/unsplash-kremlin.jpg", alt: "Kremlin architecture", tag: "Kremlin Tour", span: "wide" },
+  { src: "/riverside_smiling.webp", alt: "Group by Moscow River", tag: "Welcome to Moscow", span: "tall" },
+  { src: "/unsplash-stbasil.webp", alt: "St. Basil's Cathedral", tag: "Iconic Landmark", span: "wide" },
+  { src: "/restraunt_photo.webp", alt: "Indian restaurant dining", tag: "Dinner Inclusions", span: "sq" },
+  { src: "/rooftop.webp", alt: "Rooftop skyline view", tag: "Day 3 — Rooftop", span: "sq" },
+  { src: "/cafe-two-women.webp", alt: "Café atmosphere", tag: "Group Moments", span: "sq" },
+  { src: "/unsplash-kremlin.webp", alt: "Kremlin architecture", tag: "Kremlin Tour", span: "wide" },
   { src: "/moscow-city-1.webp", alt: "Moscow cityscape", tag: "City Views", span: "tall" },
-  { src: "/unsplash-moscow-river.jpg", alt: "Moscow River at sunset", tag: "River Cruise", span: "sq" },
+  { src: "/unsplash-moscow-river.webp", alt: "Moscow River at sunset", tag: "River Cruise", span: "sq" },
 ];
 
 function useInView() {

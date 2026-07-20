@@ -10,12 +10,12 @@ const articles = [
   { href: "/tips/indian-food", icon: UtensilsCrossed, label: "Indian Food Guide", title: "Indian & Halal Food Near Red Square", desc: "Authentic Indian restaurants within walking distance of the Kremlin.", img: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=400&fit=crop&auto=format" },
   { href: "/tips/itineraries", icon: Map, label: "Itineraries", title: "Moscow in 1, 3 & 7 Days", desc: "Perfect plans for any trip length — from a quick layover to a full week.", img: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=600&h=400&fit=crop&auto=format" },
   { href: "/tips/hotels", icon: Building, label: "Hotels", title: "Where to Stay in Moscow", desc: "Best areas and hotels for Indian travellers — with prices and tips.", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop&auto=format" },
-  { href: "/tips/transport", icon: Plane, label: "Transport", title: "Getting Around Moscow", desc: "Airports, Aeroexpress, metro, taxis, and trains between cities.", img: "/transport-index.jpg" },
-  { href: "/tips/first-time", icon: Globe, label: "First-Time Guide", title: "A First-Time Visitor's Guide to Moscow", desc: "Visa, cash, safety, and daily life tips for your first trip to Russia.", img: "/firsttime-index.jpg" },
-  { href: "/tips/connectivity", icon: Wifi, label: "Connectivity", title: "SIM, VPN & Apps for Moscow", desc: "Stay connected — local SIMs, essential VPN setup, and must-have apps.", img: "/connectivity-index.jpg" },
-  { href: "/tips/phrasebook", icon: Languages, label: "Phrasebook", title: "Basic Russian for Indian Travellers", desc: "Essential words and phrases for greetings, food, shopping, and emergencies.", img: "/phrasebook-index.jpg" },
+  { href: "/tips/transport", icon: Plane, label: "Transport", title: "Getting Around Moscow", desc: "Airports, Aeroexpress, metro, taxis, and trains between cities.", img: "/transport-index.webp" },
+  { href: "/tips/first-time", icon: Globe, label: "First-Time Guide", title: "A First-Time Visitor's Guide to Moscow", desc: "Visa, cash, safety, and daily life tips for your first trip to Russia.", img: "/firsttime-index.webp" },
+  { href: "/tips/connectivity", icon: Wifi, label: "Connectivity", title: "SIM, VPN & Apps for Moscow", desc: "Stay connected — local SIMs, essential VPN setup, and must-have apps.", img: "/connectivity-index.webp" },
+  { href: "/tips/phrasebook", icon: Languages, label: "Phrasebook", title: "Basic Russian for Indian Travellers", desc: "Essential words and phrases for greetings, food, shopping, and emergencies.", img: "/phrasebook-index.webp" },
   { href: "/tips/practical-tips", icon: Lightbulb, label: "Practical Tips", title: "Payments, Internet, Metro & Language", desc: "Navigate Russia with confidence — cash, SIM cards, metro, and basic Russian phrases.", img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&h=400&fit=crop&auto=format" },
-  { href: "/tips/safety", icon: Shield, label: "Safety Guide", title: "Safety for Indian Travelers", desc: "Emergency contacts, embassy info, health tips, and general safety advice.", img: "/safety-index.png" },
+  { href: "/tips/safety", icon: Shield, label: "Safety Guide", title: "Safety for Indian Travelers", desc: "Emergency contacts, embassy info, health tips, and general safety advice.", img: "/safety-index.webp" },
   { href: "/tips/visa-guide", icon: FileText, label: "Visa Guide", title: "Russia E-Visa for Indian Citizens", desc: "Step-by-step process, documents required, and important notes for your application.", img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&auto=format" },
   { href: "/tips/currency", icon: Banknote, label: "Currency Guide", title: "Currency & Payments in Russia", desc: "Cash, Yoomoney card, and how to pay when VISA/Mastercard don't work.", img: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&h=400&fit=crop&auto=format" },
 ];
@@ -27,7 +27,7 @@ export default function TipsPage() {
       <section className="relative overflow-hidden min-h-[480px] sm:min-h-[560px] flex items-start">
         <div className="absolute inset-0">
           <Image
-            src="/unsplash-moscow-river.jpg"
+            src="/unsplash-moscow-river.webp"
             alt="Moscow riverfront"
             fill
             className="object-cover object-center"

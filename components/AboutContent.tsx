@@ -42,7 +42,7 @@ export default function AboutContent() {
       <section className="relative overflow-hidden min-h-[480px] sm:min-h-[560px] flex items-start">
         <div className="absolute inset-0">
           <Image
-            src="/unsplash-stbasil.jpg"
+            src="/unsplash-stbasil.webp"
             alt="St. Basil's Cathedral, Moscow"
             fill
             className="object-cover object-center"
@@ -135,7 +135,7 @@ export default function AboutContent() {
             <div className="md:col-span-2 md:order-2">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-white/5 group">
                 <Image
-                  src="/profile_sveta.JPG"
+                  src="/profile_sveta.webp"
                   alt="Sveta — Indosvetka"
                   fill
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -209,7 +209,7 @@ export default function AboutContent() {
             <div className="md:col-span-2">
               <div className="relative aspect-[16/12] rounded-xl overflow-hidden border border-white/5 group">
                 <Image
-                  src="/riverside_smiling.jpeg"
+                  src="/riverside_smiling.webp"
                   alt="Happy traveler in Russia"
                   fill
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"

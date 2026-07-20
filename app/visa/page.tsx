@@ -201,7 +201,7 @@ export default function VisaPage() {
         {/* Visual separator */}
         <div className="relative h-[120px] sm:h-[180px] rounded-2xl overflow-hidden mb-6 animate-fade-in" style={{ animationDelay: "350ms" }}>
           <Image
-            src="/visa-separator.jpg"
+            src="/visa-separator.webp"
             alt=""
             fill
             className="object-cover object-center"

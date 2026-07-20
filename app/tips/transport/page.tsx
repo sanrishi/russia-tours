@@ -15,7 +15,7 @@ export default function TransportPage() {
     <TipsArticleShell label="Transport Guide" title="Getting Around Moscow" description="Moscow has one of the world's best metro systems. Here's how to navigate the city by metro, bus, taxi, and airport transfers.">
       <Section>
         <div className="relative rounded-2xl overflow-hidden mb-6 aspect-[16/9]">
-          <img src="/transport-hero.png" alt="Moscow transport" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <img src="/transport-hero.webp" alt="Moscow transport" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a0a] via-[#0c0a0a]/20 to-transparent" />
         </div>
         <div className="space-y-5">

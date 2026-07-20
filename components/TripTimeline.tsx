@@ -26,13 +26,13 @@ function useInView() {
 }
 
 const days = [
-  { day: 1, title: "Arrival & River Cruise", highlights: ["Airport meet & transfer", "Welcome river cruise", "City lights from Moskva River"], img: "/day1-river.jpg", desc: "Arrive at Moscow airport. Meet your guide and transfer to hotel. Evening welcome river cruise along the Moskva River." },
-  { day: 2, title: "Red Square, Kremlin & GUM", highlights: ["Red Square & St. Basil's", "Kremlin grounds tour", "GUM department store", "Zaryadye Park"], img: "/day2-red-square.jpg", desc: "Full-day tour: Red Square, St. Basil's Cathedral, Kremlin grounds. Visit GUM and Zaryadye Park." },
-  { day: 3, title: "Limousine, Rooftop & Nightlife", highlights: ["Limousine city tour", "Rooftop observation deck", "Evening nightlife"], img: "/day3-rooftop.jpg", desc: "Explore Moscow in style with a limousine ride. Rooftop panoramic views. Evening nightlife experience." },
-  { day: 4, title: "Stalin's Bunker & Arbat", highlights: ["Cold War bunker tour", "Arbat Street stroll"], img: "/day4-arbat.jpg", desc: "Tour Stalin's Cold War bunker. Afternoon stroll through Arbat Street." },
-  { day: 5, title: "Viewpoints & Horror Quest", highlights: ["Sparrow Hills viewpoint", "Moscow City skyline", "Horror quest activity"], img: "/day5-viewpoint.jpg", desc: "Moscow's best viewpoints. Afternoon horror quest group activity." },
-  { day: 6, title: "VDNKh, Izmailovo & Farewell", highlights: ["VDNKh exhibition park", "Izmailovo Kremlin", "Cable car ride", "Farewell dinner"], img: "/day6-vdnkh.jpg", desc: "Explore VDNKh park, Izmailovo Kremlin. Cable car ride. Farewell dinner." },
-  { day: 7, title: "Departure", highlights: ["Breakfast at hotel", "Airport transfer"], img: "/day7-departure.jpg", desc: "Breakfast at hotel. Transfer to airport for departure." },
+  { day: 1, title: "Arrival & River Cruise", highlights: ["Airport meet & transfer", "Welcome river cruise", "City lights from Moskva River"], img: "/day1-river.webp", desc: "Arrive at Moscow airport. Meet your guide and transfer to hotel. Evening welcome river cruise along the Moskva River." },
+  { day: 2, title: "Red Square, Kremlin & GUM", highlights: ["Red Square & St. Basil's", "Kremlin grounds tour", "GUM department store", "Zaryadye Park"], img: "/day2-red-square.webp", desc: "Full-day tour: Red Square, St. Basil's Cathedral, Kremlin grounds. Visit GUM and Zaryadye Park." },
+  { day: 3, title: "Limousine, Rooftop & Nightlife", highlights: ["Limousine city tour", "Rooftop observation deck", "Evening nightlife"], img: "/day3-rooftop.webp", desc: "Explore Moscow in style with a limousine ride. Rooftop panoramic views. Evening nightlife experience." },
+  { day: 4, title: "Stalin's Bunker & Arbat", highlights: ["Cold War bunker tour", "Arbat Street stroll"], img: "/day4-arbat.webp", desc: "Tour Stalin's Cold War bunker. Afternoon stroll through Arbat Street." },
+  { day: 5, title: "Viewpoints & Horror Quest", highlights: ["Sparrow Hills viewpoint", "Moscow City skyline", "Horror quest activity"], img: "/day5-viewpoint.webp", desc: "Moscow's best viewpoints. Afternoon horror quest group activity." },
+  { day: 6, title: "VDNKh, Izmailovo & Farewell", highlights: ["VDNKh exhibition park", "Izmailovo Kremlin", "Cable car ride", "Farewell dinner"], img: "/day6-vdnkh.webp", desc: "Explore VDNKh park, Izmailovo Kremlin. Cable car ride. Farewell dinner." },
+  { day: 7, title: "Departure", highlights: ["Breakfast at hotel", "Airport transfer"], img: "/day7-departure.webp", desc: "Breakfast at hotel. Transfer to airport for departure." },
 ];
 
 export default function TripTimeline() {

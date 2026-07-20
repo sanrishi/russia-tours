@@ -28,7 +28,7 @@ export default function NewsContent() {
       <section className="relative overflow-hidden min-h-[520px] flex items-start">
         <div className="absolute inset-0">
           <Image
-            src="/newspaper.png"
+            src="/newspaper.webp"
             alt="Newspaper and coffee travel journalism"
             fill
             className="object-cover"

@@ -1,15 +1,13 @@
-import { Bodoni_Moda, Jost } from "next/font/google"
+import { Lora, Inter } from "next/font/google"
 
-const bodoni = Bodoni_Moda({
-  variable: "--font-display",
+const lora = Lora({
+  variable: "--font-heading",
   subsets: ["latin"],
-  display: "swap",
 })
 
-const jost = Jost({
-  variable: "--font-body-alt",
+const inter = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
-  display: "swap",
 })
 
 export const metadata = {
@@ -23,7 +21,7 @@ export default function MoscowExpressLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`${bodoni.variable} ${jost.variable}`}>
+    <div className={`${lora.variable} ${inter.variable}`}>
       {children}
     </div>
   )

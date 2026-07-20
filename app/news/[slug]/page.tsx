@@ -99,7 +99,7 @@ export default async function NewsArticlePage({
     <main className="min-h-screen pt-20 relative">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <Image
-          src="/newspaper.png"
+          src="/newspaper.webp"
           alt=""
           fill
           className="object-cover opacity-[0.45]"

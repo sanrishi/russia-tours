@@ -21,13 +21,13 @@ function useInView() {
 }
 
 const moods = [
-  { day: 1, img: "/day1-river.jpg", vibe: "Scenic", caption: "City lights from the river", span: "short" },
-  { day: 2, img: "/day2-red-square.jpg", vibe: "Iconic", caption: "Where history meets grandeur", span: "tall" },
-  { day: 3, img: "/day3-rooftop.jpg", vibe: "Glamorous", caption: "Moscow by night, in style", span: "short" },
-  { day: 4, img: "/day4-arbat.jpg", vibe: "Hidden", caption: "Secrets beneath the city", span: "tall" },
-  { day: 5, img: "/day5-viewpoint.jpg", vibe: "Thrilling", caption: "Heights, chills & adrenaline", span: "short" },
-  { day: 6, img: "/day6-vdnkh.jpg", vibe: "Vibrant", caption: "Fairytale rooftops & farewells", span: "tall" },
-  { day: 7, img: "/day7-departure.jpg", vibe: "Peaceful", caption: "Until next time, Moscow", span: "short" },
+  { day: 1, img: "/day1-river.webp", vibe: "Scenic", caption: "City lights from the river", span: "short" },
+  { day: 2, img: "/day2-red-square.webp", vibe: "Iconic", caption: "Where history meets grandeur", span: "tall" },
+  { day: 3, img: "/day3-rooftop.webp", vibe: "Glamorous", caption: "Moscow by night, in style", span: "short" },
+  { day: 4, img: "/day4-arbat.webp", vibe: "Hidden", caption: "Secrets beneath the city", span: "tall" },
+  { day: 5, img: "/day5-viewpoint.webp", vibe: "Thrilling", caption: "Heights, chills & adrenaline", span: "short" },
+  { day: 6, img: "/day6-vdnkh.webp", vibe: "Vibrant", caption: "Fairytale rooftops & farewells", span: "tall" },
+  { day: 7, img: "/day7-departure.webp", vibe: "Peaceful", caption: "Until next time, Moscow", span: "short" },
 ];
 
 const vibeColors: Record<string, string> = {

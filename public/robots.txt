@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://russia-tours-poc.vercel.app/sitemap.xml
+Sitemap: https://tripstorussia.com/sitemap.xml

@@ -24,13 +24,13 @@ const stats: Stat[] = [
   },
   {
     icon: Plane,
-    value: "Weekly",
+    value: "Daily",
     label: "Direct flights from Delhi & Mumbai to Moscow",
   },
   {
     icon: IndianRupee,
-    value: "₹12K",
-    numericTarget: 12,
+    value: "₹40K",
+    numericTarget: 40,
     prefix: "₹",
     suffix: "K",
     label: "Starting round-trip airfare from India",
@@ -62,7 +62,7 @@ function CountUp({ from = 0, to, prefix = "", suffix = "" }: { from?: number; to
 
 export default function IndiaRussiaTrust() {
   return (
-    <section className="relative py-20 md:py-28 bg-charcoal border-t border-white/5">
+    <section className="relative py-32 md:py-44 bg-transparent border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -73,7 +73,7 @@ export default function IndiaRussiaTrust() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
             India <span className="text-gold">&amp;</span> Russia
           </h2>
-          <p className="text-white/50 text-base max-w-xl mx-auto">
+          <p className="text-white/70 text-base max-w-xl mx-auto">
             Traveling to Russia is easier, safer, and more connected than ever
             for Indian visitors.
           </p>
@@ -91,7 +91,7 @@ export default function IndiaRussiaTrust() {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="relative group"
               >
-                <div className="h-full rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-center flex flex-col items-center justify-center hover:border-gold/20 hover:bg-gold/[0.02] transition-all duration-300">
+                <div className="h-full rounded-2xl border border-white/[0.06] bg-black/30 backdrop-blur-sm p-6 text-center flex flex-col items-center justify-center hover:border-gold/20 transition-all duration-300">
                   <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-gold/20 transition-colors shrink-0">
                     <Icon size={20} className="text-gold" />
                   </div>
@@ -102,7 +102,7 @@ export default function IndiaRussiaTrust() {
                       s.value
                     )}
                   </p>
-                  <p className="text-sm text-white/50 leading-relaxed">
+                  <p className="text-sm text-white/70 leading-relaxed">
                     {s.label}
                   </p>
                 </div>

@@ -14,7 +14,7 @@ function det(n: number, seed: number) {
 const INFINITY_PATH =
   "M83.604 80c-11.503 0-28.62-4.314-51.855-20.959q-.87.269-1.747.548c-12.25 3.894-22.517 2.683-27.45-3.252-2.624-3.156-3.198-7.202-1.528-10.825 1.261-2.739 3.591-4.89 6.717-6.327A332 332 0 0 1 0 31.74l1.49-1.612a343 343 0 0 0 8.533 8.182c2.735-.865 5.92-1.276 9.443-1.158l.087 2.154c-2.826 0-5.396.233-7.606.769C19.136 46.605 25.85 52.057 32.11 56.6c34.55-10.563 60.77-10.491 70.441.28 2.882 3.212 3.87 7.38 2.702 11.438-1.453 5.052-5.921 8.986-11.956 10.53C90.684 79.513 87.46 80 83.604 80M34.398 58.235C63.868 78.957 82.884 79.213 92.78 76.68c5.285-1.35 9.176-4.715 10.407-9 .943-3.281.135-6.661-2.216-9.279-8.818-9.82-34.106-9.822-66.573-.168M9.52 40.831c-3.113 1.21-5.398 3.134-6.554 5.643-1.289 2.798-.835 5.941 1.216 8.406 1.633 1.964 8.278 7.952 25.188 2.574q.066-.024.139-.044c-6.23-4.6-12.897-10.08-19.989-16.579"
 
-const EMBERS = Array.from({ length: 40 }, (_, i) => ({
+const EMBERS = Array.from({ length: 20 }, (_, i) => ({
   id: i,
   x: 2 + det(i, 42) * 96,
   size: 0.5 + det(i, 73) * 3.5,
@@ -24,7 +24,7 @@ const EMBERS = Array.from({ length: 40 }, (_, i) => ({
   big: det(i, 97) > 0.8,
 }))
 
-const HERO_EMBERS = Array.from({ length: 12 }, (_, i) => ({
+const HERO_EMBERS = Array.from({ length: 6 }, (_, i) => ({
   id: 200 + i,
   x: 8 + i * 8,
   size: 4.5 + det(i, 31) * 3,
@@ -33,7 +33,7 @@ const HERO_EMBERS = Array.from({ length: 12 }, (_, i) => ({
   drift: -12 + det(i, 23) * 24,
 }))
 
-const STARS = Array.from({ length: 60 }, (_, i) => ({
+const STARS = Array.from({ length: 30 }, (_, i) => ({
   id: 400 + i,
   x: 2 + det(i, 5) * 96,
   y: 2 + det(i, 17) * 96,
@@ -42,7 +42,7 @@ const STARS = Array.from({ length: 60 }, (_, i) => ({
   duration: 2 + det(i, 83) * 3,
 }))
 
-const DUST = Array.from({ length: 35 }, (_, i) => ({
+const DUST = Array.from({ length: 18 }, (_, i) => ({
   id: 500 + i,
   x: 3 + det(i, 3) * 94,
   size: 1.5 + det(i, 19) * 2.5,
@@ -187,7 +187,7 @@ export default function Preloader() {
 
     const timer = setTimeout(() => requestAnimationFrame(tick), 50)
     return () => { running = false; clearTimeout(timer) }
-  }, [pathname, ringProgress, phase, shouldShow])
+  }, [pathname, ringProgress, shouldShow])
 
   useEffect(() => {
     if (!shouldShow) return
@@ -301,53 +301,41 @@ export default function Preloader() {
 
           {/* Aurora blobs */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <motion.div
-              className="absolute w-[450px] h-[450px] -left-[120px] -top-[120px] rounded-full"
+            <div
+              className="absolute w-[450px] h-[450px] -left-[120px] -top-[120px] rounded-full aurora-drift-1"
               style={{ background: "radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 60%)" }}
-              animate={{ x: [0, 50, -40, 0], y: [0, -40, 50, 0] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div
-              className="absolute w-[550px] h-[300px] -right-[180px] bottom-[10%] rounded-full"
+            <div
+              className="absolute w-[550px] h-[300px] -right-[180px] bottom-[10%] rounded-full aurora-drift-2"
               style={{ background: "radial-gradient(circle, rgba(212,175,55,0.035) 0%, transparent 60%)" }}
-              animate={{ x: [0, -60, 40, 0], y: [0, 50, -40, 0] }}
-              transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div
-              className="absolute w-[350px] h-[350px] left-[35%] top-[15%] rounded-full"
+            <div
+              className="absolute w-[350px] h-[350px] left-[35%] top-[15%] rounded-full aurora-pulse"
               style={{ background: "radial-gradient(circle, rgba(255,215,0,0.025) 0%, transparent 60%)" }}
-              animate={{ scale: [1, 1.25, 0.9, 1] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div
-              className="absolute w-[300px] h-[300px] -left-[50px] bottom-[5%] rounded-full"
+            <div
+              className="absolute w-[300px] h-[300px] -left-[50px] bottom-[5%] rounded-full aurora-drift-3"
               style={{ background: "radial-gradient(circle, rgba(180,40,40,0.06) 0%, transparent 55%)" }}
-              animate={{ x: [0, 40, -30, 0], y: [0, -20, 30, 0] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div
-              className="absolute w-[400px] h-[250px] right-[10%] top-[40%] rounded-full"
+            <div
+              className="absolute w-[400px] h-[250px] right-[10%] top-[40%] rounded-full aurora-drift-4"
               style={{ background: "radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 55%)" }}
-              animate={{ x: [0, -50, 30, 0], y: [0, 30, -40, 0] }}
-              transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
             />
           </div>
 
           {/* Decorative ring */}
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
             <svg viewBox="0 0 600 600" className="w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] opacity-15">
-              <motion.circle
+              <circle
                 cx="300" cy="300" r="275"
                 fill="none" stroke={theme.ringStroke} strokeWidth="0.25"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 70, repeat: Infinity, ease: "linear" }}
+                className="ring-spin-slow"
                 style={{ transformOrigin: "300px 300px" }}
               />
-              <motion.circle
+              <circle
                 cx="300" cy="300" r="230"
                 fill="none" stroke={theme.ringStroke2} strokeWidth="0.4"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
+                className="ring-spin-reverse"
                 style={{ transformOrigin: "300px 300px" }}
               />
             </svg>
@@ -447,13 +435,11 @@ export default function Preloader() {
                         <stop offset="100%" stopColor={theme.goldFlowV[6]} />
                       </linearGradient>
                     </defs>
-                    <motion.rect x="0" y="0" width="155" height="80" fill="url(#gold-flow-h)" clipPath="url(#infinity-shape-v3)"
-                      animate={{ x: [0, 155, 0] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    <rect x="0" y="0" width="155" height="80" fill="url(#gold-flow-h)" clipPath="url(#infinity-shape-v3)"
+                      className="gold-flow-h"
                     />
-                    <motion.rect x="0" y="0" width="155" height="80" fill="url(#gold-flow-v)" clipPath="url(#infinity-shape-v3)"
-                      animate={{ y: [0, 80, 0] }}
-                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    <rect x="0" y="0" width="155" height="80" fill="url(#gold-flow-v)" clipPath="url(#infinity-shape-v3)"
+                      className="gold-flow-v"
                     />
                   </svg>
                 </div>
@@ -609,7 +595,35 @@ export default function Preloader() {
             "0%, 100% { opacity: 0; }" +
             "30% { opacity: 0.3; }" +
             "60% { opacity: 0.1; }" +
-            "}",
+            "}@keyframes aurora-drift-1 {" +
+            "0%, 100% { transform: translate(0, 0); }" +
+            "50% { transform: translate(50px, -40px); }" +
+            "75% { transform: translate(-40px, 50px); }" +
+            "}@keyframes aurora-drift-2 {" +
+            "0%, 100% { transform: translate(0, 0); }" +
+            "50% { transform: translate(-60px, 50px); }" +
+            "75% { transform: translate(40px, -40px); }" +
+            "}@keyframes aurora-pulse {" +
+            "0%, 100% { transform: scale(1); }" +
+            "50% { transform: scale(1.25); }" +
+            "75% { transform: scale(0.9); }" +
+            "}@keyframes aurora-drift-3 {" +
+            "0%, 100% { transform: translate(0, 0); }" +
+            "50% { transform: translate(40px, -20px); }" +
+            "75% { transform: translate(-30px, 30px); }" +
+            "}@keyframes aurora-drift-4 {" +
+            "0%, 100% { transform: translate(0, 0); }" +
+            "50% { transform: translate(-50px, 30px); }" +
+            "75% { transform: translate(30px, -40px); }" +
+            "}@keyframes ring-spin { to { transform: rotate(360deg); } }" +
+            "@keyframes ring-spin-reverse { to { transform: rotate(-360deg); } }" +
+            ".aurora-drift-1 { animation: aurora-drift-1 12s ease-in-out infinite; }" +
+            ".aurora-drift-2 { animation: aurora-drift-2 14s ease-in-out infinite; }" +
+            ".aurora-pulse { animation: aurora-pulse 8s ease-in-out infinite; }" +
+            ".aurora-drift-3 { animation: aurora-drift-3 10s ease-in-out infinite; }" +
+            ".aurora-drift-4 { animation: aurora-drift-4 11s ease-in-out infinite; }" +
+            ".ring-spin-slow { animation: ring-spin 70s linear infinite; transform-origin: 300px 300px; }" +
+            ".ring-spin-reverse { animation: ring-spin-reverse 55s linear infinite; transform-origin: 300px 300px; }",
         }}
       />
     </motion.div>
