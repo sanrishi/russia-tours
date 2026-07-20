@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import { usePathname } from "next/navigation"
 import SiteLogo from "./SiteLogo"
@@ -140,6 +140,7 @@ export default function Preloader() {
   const [prevPath, setPrevPath] = useState(pathname)
   const [showLogo, setShowLogo] = useState(false)
   const [showTagline, setShowTagline] = useState(false)
+  const startTimeRef = useRef(performance.now())
 
   useLayoutEffect(() => {
     if (prevPath !== pathname && (pathname === "/" || pathname === "/moscow-express")) {
@@ -149,6 +150,7 @@ export default function Preloader() {
       setProgressDone(false)
       setShowLogo(false)
       setShowTagline(false)
+      startTimeRef.current = performance.now()
     } else if (prevPath !== pathname) {
       setPrevPath(pathname)
       setPhase("done")
@@ -164,8 +166,7 @@ export default function Preloader() {
 
   useEffect(() => {
     if (!shouldShow || (phase !== "loading" && phase !== "ready")) return
-    const startTime = performance.now()
-    const totalDuration = 4500
+    const totalDuration = 3500
     let hiddenStart: number | null = null
     let running = true
 
@@ -177,9 +178,10 @@ export default function Preloader() {
         return
       }
       if (hiddenStart) {
+        startTimeRef.current += performance.now() - hiddenStart
         hiddenStart = null
       }
-      const elapsed = performance.now() - startTime
+      const elapsed = performance.now() - startTimeRef.current
       const t = Math.min(elapsed / totalDuration, 1)
       ringProgress.set(1 - Math.pow(1 - t, 3))
       if (t < 1) requestAnimationFrame(tick)
