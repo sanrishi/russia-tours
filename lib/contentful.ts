@@ -1,10 +1,3 @@
-import { createClient } from "contentful";
-
-export const client = createClient({
-  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || "",
-  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN || "",
-});
-
 export interface TourPackageFields {
   title: string;
   slug: string;
@@ -22,19 +15,33 @@ export interface TourPackageFields {
   order?: number;
 }
 
+function apiUrl(path: string): string {
+  const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || "";
+  const token = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN || "";
+  return `https://cdn.contentful.com/spaces/${spaceId}/environments/master${path}?access_token=${token}`;
+}
+
 export async function getTourPackages(): Promise<TourPackageFields[]> {
-  const entries = await client.getEntries({
-    content_type: "tourPackage",
-    order: ["fields.order"],
+  const res = await fetch(apiUrl("/entries"), {
+    next: { revalidate: 60 },
+    headers: { "Content-Type": "application/json" },
   });
-  return entries.items.map((item: any) => item.fields as TourPackageFields);
+  const data = await res.json();
+  const items = data.items || [];
+  const contentTypes: Record<string, any> = {};
+  for (const ct of data.includes?.Entry || []) {
+    contentTypes[ct.sys.id] = ct;
+  }
+  return items
+    .filter((item: any) => item.sys.contentType?.sys?.id === "tourPackage")
+    .map((item: any) => item.fields as TourPackageFields)
+    .sort((a: TourPackageFields, b: TourPackageFields) => (a.order || 0) - (b.order || 0));
 }
 
 export async function getTourPackageBySlug(slug: string): Promise<TourPackageFields | null> {
-  const entries = await client.getEntries({
-    content_type: "tourPackage",
-    "fields.slug[in]": slug,
-    limit: 1,
+  const res = await fetch(apiUrl(`/entries?content_type=tourPackage&fields.slug[in]=${slug}&limit=1`), {
+    next: { revalidate: 60 },
   });
-  return entries.items.length > 0 ? (entries.items[0].fields as unknown as TourPackageFields) : null;
+  const data = await res.json();
+  return data.items?.length > 0 ? (data.items[0].fields as TourPackageFields) : null;
 }
