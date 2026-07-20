@@ -83,7 +83,7 @@ export default function Hero() {
   const contentOpacity = Math.min(1, 1 - scrollY / 800);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-charcoal">
+    <section className="relative h-dvh w-full overflow-hidden bg-charcoal">
       {/* Background images */}
       <div
         className="absolute inset-0"
