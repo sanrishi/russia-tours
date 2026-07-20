@@ -31,16 +31,16 @@ export default function ConversionFooter() {
 *Travel Period:* ${travel_period}
 *Requirements:* ${requirements}`;
 
-    setSending(false);
-    setSubmitted(true);
-
-    window.open(`https://wa.me/917042987451?text=${encodeURIComponent(msg)}`, "_blank");
-
     fetch("/api/enquiry", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ _captcha: "false", name, phone, city, group_size, budget, travel_period, requirements }),
-    }).catch(() => {});
+    }).catch((err) => console.error("enquiry fetch error:", err));
+
+    window.open(`https://wa.me/917042987451?text=${encodeURIComponent(msg)}`, "_blank");
+
+    setSending(false);
+    setSubmitted(true);
   }
 
   return (
