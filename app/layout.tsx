@@ -47,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${lora.variable} ${inter.variable} h-full antialiased`}>
       <head>
+        <meta name="google-site-verification" content="RBIDenN9ZWJY0viDDYeK-mgAv0kSK7K3GDMrxZNgQAo" />
         <link rel="preload" as="image" href="/moscow-hero.webp" fetchPriority="high" />
       </head>
       <body className="min-h-full bg-[#0c0a0a] text-white">
