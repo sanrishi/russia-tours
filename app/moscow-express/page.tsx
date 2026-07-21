@@ -239,7 +239,7 @@ export default function MoscowExpressPage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#CA8A04]/3 blur-[150px] animate-pulse [animation-delay:4s]" />
         </div>
 
-        <div className="relative max-w-4xl mx-auto w-full p-8 sm:p-12 lg:p-16 rounded-2xl border border-white/[0.04] bg-[#1C1917]/70 backdrop-blur-sm shadow-[0_0_60px_-20px_rgba(0,0,0,0.5)]">
+        <div className="relative max-w-4xl mx-auto w-full p-8 sm:p-12 lg:p-16 rounded-2xl border border-white/[0.04] bg-[#1C1917]/70 shadow-[0_0_60px_-20px_rgba(0,0,0,0.5)]">
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
           <div className="text-center">
             {/* Decorative top line */}
@@ -250,7 +250,7 @@ export default function MoscowExpressPage() {
             </div>
 
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl mb-8 hover:border-[#D4AF37]/20 transition-all duration-500">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/[0.06] bg-white/[0.03] mb-8 hover:border-[#D4AF37]/20 transition-all duration-500">
               <Sparkles size={10} className="text-[#D4AF37]" />
               <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/60" style={{ fontFamily: "var(--font-body)" }}>
                 7 Days · Small Group · Indian-Friendly
@@ -320,7 +320,7 @@ export default function MoscowExpressPage() {
         {/* ─── STORY CHAPTERS ─── */}
         <section id="story" className="px-4 sm:px-6 pt-32 pb-24">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-32 max-w-3xl mx-auto relative rounded-2xl border border-white/[0.06] bg-black/80 backdrop-blur-xl p-8 sm:p-10">
+            <div className="text-center mb-32 max-w-3xl mx-auto relative rounded-2xl border border-white/[0.06] bg-black/80 p-8 sm:p-10">
               <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
               <span className="text-[10px] font-semibold uppercase tracking-[0.25em] bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#DC2626] bg-clip-text text-transparent" style={{ fontFamily: "var(--font-body)" }}>
                 Your Journey
@@ -409,7 +409,7 @@ export default function MoscowExpressPage() {
                     {/* Content */}
                     <div className={`pl-14 sm:pl-0 sm:w-1/2 ${isLeft ? "sm:pr-8 sm:text-right" : "sm:pl-8"}`}>
                       <div
-                        className={`group relative rounded-2xl border border-white/[0.06] bg-black/80 backdrop-blur-xl p-6 sm:p-8 transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)] ${
+                        className={`group relative rounded-2xl border border-white/[0.06] bg-black/80 p-6 sm:p-8 transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)] ${
                           activeChapter === ch.id ? "border-white/[0.12] shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)]" : ""
                         }`}
                         style={{ '--card-accent': ch.accent } as React.CSSProperties}
