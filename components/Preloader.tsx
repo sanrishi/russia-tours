@@ -189,7 +189,7 @@ export default function Preloader() {
 
     const timer = setTimeout(() => requestAnimationFrame(tick), 50)
     return () => { running = false; clearTimeout(timer) }
-  }, [pathname, ringProgress, shouldShow])
+  }, [pathname, phase, ringProgress, shouldShow])
 
   useEffect(() => {
     if (!shouldShow) return
@@ -197,7 +197,7 @@ export default function Preloader() {
       if (v >= 0.95) setProgressDone(true)
     })
     return () => unsub()
-  }, [pathname, ringProgress, shouldShow])
+  }, [pathname, phase, ringProgress, shouldShow])
 
   useEffect(() => {
     if (!shouldShow || phase !== "loading") return
