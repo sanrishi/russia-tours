@@ -8,7 +8,7 @@ export default function ConversionFooter() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSending(true);
 
@@ -31,11 +31,10 @@ export default function ConversionFooter() {
 *Travel Period:* ${travel_period}
 *Requirements:* ${requirements}`;
 
-    fetch("/api/enquiry", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ _captcha: "false", name, phone, city, group_size, budget, travel_period, requirements }),
-    }).catch((err) => console.error("enquiry fetch error:", err));
+    navigator.sendBeacon("/api/enquiry", new Blob(
+      [JSON.stringify({ _captcha: "false", name, phone, city, group_size, budget, travel_period, requirements })],
+      { type: "application/json" }
+    ));
 
     window.open(`https://wa.me/917042987451?text=${encodeURIComponent(msg)}`, "_blank");
 
