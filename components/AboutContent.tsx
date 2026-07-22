@@ -134,12 +134,12 @@ export default function AboutContent() {
           <div className="grid md:grid-cols-5 gap-8">
             <div className="md:col-span-2 md:order-2">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-white/5 group">
-                <Image
+                <img
                   src="/profile_sveta.webp"
                   alt="Sveta — Indosvetka"
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#161412]/60 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
