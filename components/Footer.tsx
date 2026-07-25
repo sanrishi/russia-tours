@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import { ArrowRight, Sparkles, ChevronRight, MessageCircle, Camera, Mail, Phone } from "lucide-react";
 import CertificationsSection from "@/components/CertificationsSection";
 
@@ -41,6 +42,16 @@ function GlassLink({ label, href, external }: { label: string; href: string; ext
 export default function Footer() {
   const pathname = usePathname()
   const isNews = pathname?.startsWith("/news")
+  const [maskUrl, setMaskUrl] = useState("/pattern_black_en.svg")
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)")
+    setMaskUrl(mq.matches ? "/pattern_mobile_black_en.svg" : "/pattern_black_en.svg")
+    const handler = (e: MediaQueryListEvent) =>
+      setMaskUrl(e.matches ? "/pattern_mobile_black_en.svg" : "/pattern_black_en.svg")
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
 
   return (
     <footer className="relative">
@@ -54,24 +65,10 @@ export default function Footer() {
         />
         <video
           autoPlay loop muted playsInline preload="auto"
-          className="hidden sm:block w-full h-full object-cover"
+          className="w-full h-full object-cover"
           style={{
-            WebkitMaskImage: "url(https://cdn.discover.moscow/images/pattern_black_en.svg)",
-            maskImage: "url(https://cdn.discover.moscow/images/pattern_black_en.svg)",
-            WebkitMaskSize: "contain", maskSize: "contain",
-            WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat",
-            WebkitMaskPosition: "bottom center", maskPosition: "bottom center",
-          }}
-        >
-          <source src="/footer_video.mp4" type="video/mp4" />
-          <source src="/footer_video.webm" type="video/webm" />
-        </video>
-        <video
-          autoPlay loop muted playsInline preload="auto"
-          className="block sm:hidden w-full h-full object-cover"
-          style={{
-            WebkitMaskImage: "url(https://cdn.discover.moscow/images/pattern_mobile_black_en.svg)",
-            maskImage: "url(https://cdn.discover.moscow/images/pattern_mobile_black_en.svg)",
+            WebkitMaskImage: `url(${maskUrl})`,
+            maskImage: `url(${maskUrl})`,
             WebkitMaskSize: "contain", maskSize: "contain",
             WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat",
             WebkitMaskPosition: "bottom center", maskPosition: "bottom center",
