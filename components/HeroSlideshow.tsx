@@ -7,7 +7,7 @@ import AnimalSilhouettes from "./AnimalSilhouettes";
 
 const slides = [
   {
-    image: "/moscow-hero.webp",
+    image: "/enhanced_a0420511-bb27-4d23-90f1-750eafefa96d_new.webp",
     title: "Trips to Russia",
     subtitle: "Moscow • St. Petersburg • Kazan",
     tagline: "For Indian Travelers, by Indosvetka",
@@ -107,7 +107,7 @@ export default function HeroSlideshow({
             className="flex flex-col items-center gap-8"
           >
             {/* Glass card */}
-            <div className="max-w-2xl w-full rounded-2xl border border-white/[0.06] bg-black/10 backdrop-blur-sm p-8 sm:p-10">
+            <div className="max-w-2xl w-full rounded-2xl border border-white/[0.04] bg-black/5 backdrop-blur-sm p-8 sm:p-10">
               <motion.span
                 initial={{ opacity: 0, filter: "blur(36px)" }}
                 animate={{ opacity: 1, filter: "blur(0px)" }}

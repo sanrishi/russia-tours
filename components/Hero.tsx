@@ -6,7 +6,7 @@ import AnimalSilhouettes from "./AnimalSilhouettes";
 
 const slides = [
   {
-    image: "/moscow-hero.webp",
+    image: "/enhanced_a0420511-bb27-4d23-90f1-750eafefa96d_new.webp",
     title: "Trips to Russia",
     subtitle: "Moscow • St. Petersburg • Kazan",
     tagline: "For Indian Travelers, by Indosvetka",
@@ -121,7 +121,7 @@ export default function Hero() {
           style={{ opacity: contentOpacity }}
         >
           <div className="animate-hero-card flex flex-col items-center gap-8">
-            <div className="max-w-2xl w-full rounded-2xl border border-white/[0.06] bg-black/10 backdrop-blur-sm p-8 sm:p-10">
+            <div className="max-w-2xl w-full rounded-2xl border border-white/[0.04] bg-black/5 backdrop-blur-sm p-8 sm:p-10">
               <span className="animate-blur-in-2 inline-block text-gold text-sm font-medium tracking-[0.2em] uppercase mb-6 border border-gold/20 rounded-full px-5 py-1.5">
                 {s.tagline}
               </span>
