@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    inlineCss: true,
+  },
   images: {
     qualities: [100, 90, 75],
     deviceSizes: [640, 1080, 1920, 2560],

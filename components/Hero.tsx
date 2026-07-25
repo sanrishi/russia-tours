@@ -151,7 +151,7 @@ export default function Hero() {
               <motion.h1
                 initial={{ opacity: 0, filter: "blur(36px)" }}
                 animate={{ opacity: 1, filter: "blur(0px)" }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+                transition={{ delay: 0, duration: 0.5 }}
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-4"
               >
                 {slides[current].title}
