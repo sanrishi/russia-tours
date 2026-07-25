@@ -34,7 +34,7 @@ export default function TourModels() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12 max-w-2xl mx-auto rounded-2xl border border-white/[0.06] bg-black/30 backdrop-blur-sm p-8 sm:p-10"
+          className="text-center mb-12 max-w-2xl mx-auto"
         >
           <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase">
             How We Travel
