@@ -9,11 +9,13 @@ import "./globals.css";
 const lora = Lora({
   variable: "--font-heading",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -49,7 +51,7 @@ export default function RootLayout({
       <head>
         <meta name="google-site-verification" content="RBIDenN9ZWJY0viDDYeK-mgAv0kSK7K3GDMrxZNgQAo" />
         <link rel="preconnect" href="https://api.exchangerate-api.com" />
-        <link rel="preload" as="image" href="/moscow-hero.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/enhanced_a0420511-bb27-4d23-90f1-750eafefa96d_new.webp" fetchPriority="high" />
       </head>
       <body className="min-h-full bg-[#0c0a0a] text-white">
         <Preloader />

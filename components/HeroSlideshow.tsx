@@ -77,7 +77,7 @@ export default function HeroSlideshow({
                 loading="eager"
                 fetchPriority={current === 0 ? "high" : "auto"}
                 className="w-full h-full object-cover"
-                style={{ objectPosition: "center 25%", filter: "brightness(1.25) contrast(1.1) saturate(1.15)" }}
+                 style={{ objectPosition: "center 25%", filter: "brightness(1.25) contrast(1.1) saturate(1.15)" }}
               />
             </div>
           </motion.div>
@@ -107,10 +107,10 @@ export default function HeroSlideshow({
             className="flex flex-col items-center gap-8"
           >
             {/* Glass card */}
-            <div className="max-w-2xl w-full rounded-2xl border border-white/[0.04] bg-black/5 backdrop-blur-sm p-8 sm:p-10">
+            <div className="max-w-2xl w-full rounded-2xl border border-white/[0.04] bg-black/20 p-8 sm:p-10">
               <motion.span
-                initial={{ opacity: 0, filter: "blur(36px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="inline-block text-gold text-sm font-medium tracking-[0.2em] uppercase mb-6 border border-gold/20 rounded-full px-5 py-1.5"
               >
@@ -118,8 +118,8 @@ export default function HeroSlideshow({
               </motion.span>
 
               <motion.h1
-                initial={{ opacity: 0, filter: "blur(36px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0, duration: 0.5 }}
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-4"
               >
@@ -127,8 +127,8 @@ export default function HeroSlideshow({
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, filter: "blur(36px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
                 className="text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed"
               >
@@ -138,8 +138,8 @@ export default function HeroSlideshow({
 
             {/* CTA Button below card */}
             <motion.div
-              initial={{ opacity: 0, filter: "blur(36px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.5 }}
             >
               <Link

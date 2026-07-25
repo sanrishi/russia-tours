@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Trips to Russia by Indosvetka — Guided Group Tours for Indian Travelers",
@@ -15,7 +16,7 @@ import IndiaRussiaTrust from "@/components/IndiaRussiaTrust";
 import ConversionFooter from "@/components/ConversionFooter";
 import FestivalBanner from "@/components/FestivalBanner";
 import { getTourPackages } from "@/lib/contentful";
-export default async function Home() {
+async function MoscowSection() {
   let moscowTitle: string | undefined;
   let moscowTagline: string | undefined;
   let moscowDescription: string | undefined;
@@ -34,6 +35,14 @@ export default async function Home() {
   } catch {}
   return (
     <>
+      <DestinationsGrid moscowTitle={moscowTitle} moscowTagline={moscowTagline} moscowDescription={moscowDescription} moscowImage={moscowImage} moscowPrice={moscowPrice} />
+      <TourModels />
+    </>
+  );
+}
+export default function Home() {
+  return (
+    <>
       <FestivalBanner />
       <Hero />
       <div className="relative">
@@ -41,8 +50,9 @@ export default async function Home() {
         <section className="relative bg-charcoal bg-cover bg-center bg-no-repeat min-h-screen" style={{ backgroundImage: "url(/enhanced_New_kremlin_v2.webp)" }}>
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/50 to-charcoal/80" />
           <div className="relative z-10">
-            <DestinationsGrid moscowTitle={moscowTitle} moscowTagline={moscowTagline} moscowDescription={moscowDescription} moscowImage={moscowImage} moscowPrice={moscowPrice} />
-            <TourModels />
+            <Suspense fallback={<div className="flex items-center justify-center min-h-[50vh]"><div className="w-8 h-8 rounded-full border-2 border-gold/30 border-t-gold animate-spin" /></div>}>
+              <MoscowSection />
+            </Suspense>
           </div>
         </section>
         <section className="relative bg-charcoal bg-cover bg-center bg-no-repeat min-h-screen" style={{ backgroundImage: "url(/visa-separator.webp)" }}>

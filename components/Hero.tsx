@@ -130,18 +130,18 @@ export default function Hero() {
         style={{ opacity: contentOpacity }}
       >
         <div className="animate-hero-card flex flex-col items-center gap-8">
-          <div className="max-w-2xl w-full rounded-2xl border border-white/[0.04] bg-black/5 backdrop-blur-sm p-8 sm:p-10">
-            <span className="animate-blur-in-2 inline-block text-gold text-sm font-medium tracking-[0.2em] uppercase mb-6 border border-gold/20 rounded-full px-5 py-1.5">
+          <div className="max-w-2xl w-full rounded-2xl border border-white/[0.04] bg-black/20 p-8 sm:p-10">
+            <span className="animate-fade-in-2 inline-block text-gold text-sm font-medium tracking-[0.2em] uppercase mb-6 border border-gold/20 rounded-full px-5 py-1.5">
               {s.tagline}
             </span>
-            <h1 className="animate-blur-in-0 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-4">
+            <h1 className="animate-fade-in-0 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-4">
               {s.title}
             </h1>
-            <p className="animate-blur-in-6 text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+            <p className="animate-fade-in-6 text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
               {s.subtitle}
             </p>
           </div>
-          <div className="animate-blur-in-8">
+          <div className="animate-fade-in-8">
             <Link
               href={s.href}
               className="group relative inline-flex items-center gap-2.5 bg-gradient-to-b from-transparent to-gold/[0.03] border border-gold text-gold font-semibold px-8 py-4 rounded-full text-base overflow-hidden transition-all duration-200 ease-in-out active:scale-95 hover:bg-black hover:text-white hover:-translate-y-[0.5px] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_15px_rgba(212,175,55,0.15)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_0_20px_rgba(212,175,55,0.3)] drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] hover:drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]"

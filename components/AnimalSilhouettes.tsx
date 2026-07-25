@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 interface Props {
   slideIndex: number;
 }
@@ -22,16 +20,7 @@ const svgs = [
 ];
 
 export default function AnimalSilhouettes({ slideIndex }: Props) {
-  const pathRef = useRef<SVGPathElement>(null);
   const svg = svgs[slideIndex] ?? svgs[0];
-
-  useEffect(() => {
-    if (pathRef.current) {
-      const len = pathRef.current.getTotalLength();
-      pathRef.current.style.setProperty("--len", String(len));
-      pathRef.current.style.strokeDashoffset = String(len);
-    }
-  }, [slideIndex]);
 
   return (
     <div className="absolute bottom-0 right-0 pointer-events-none z-[5] w-full max-w-[1130px] max-sm:max-w-[300px] sm:max-md:bottom-40 lg:max-w-[720px] max-sm:[bottom:max(8rem,env(safe-area-inset-bottom)+6rem)] max-h-[35dvh]">
@@ -46,13 +35,13 @@ export default function AnimalSilhouettes({ slideIndex }: Props) {
       >
         <path
           key={slideIndex}
-          ref={pathRef}
           d={svg.path}
           stroke="white"
           strokeWidth="4.5"
           strokeLinecap="round"
           fill="none"
-          style={{ strokeDasharray: "var(--len)", strokeDashoffset: "var(--len)" }}
+          pathLength="1"
+          style={{ strokeDasharray: "1", strokeDashoffset: "1" }}
         />
       </svg>
       <style>{`

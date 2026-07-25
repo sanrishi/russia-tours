@@ -14,7 +14,7 @@ export default function SiteLogo({ className = "" }: SiteLogoProps) {
       <text
         x="77"
         y="18"
-        fontFamily="'DM Sans', Helvetica, sans-serif"
+        fontFamily="Helvetica, sans-serif"
         fontSize="14"
         fontWeight="600"
         fill="#d4af37"
