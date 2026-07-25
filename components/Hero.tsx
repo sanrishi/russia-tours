@@ -139,23 +139,32 @@ export default function Hero() {
           >
             {/* Glass card */}
             <div className="max-w-2xl w-full rounded-2xl border border-white/[0.06] bg-black/10 backdrop-blur-sm p-8 sm:p-10">
-              <span
-                className="animate-blur-in-d2 inline-block text-gold text-sm font-medium tracking-[0.2em] uppercase mb-6 border border-gold/20 rounded-full px-5 py-1.5"
+              <motion.span
+                initial={{ opacity: 0, filter: "blur(36px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="inline-block text-gold text-sm font-medium tracking-[0.2em] uppercase mb-6 border border-gold/20 rounded-full px-5 py-1.5"
               >
                 {slides[current].tagline}
-              </span>
+              </motion.span>
 
-              <h1
-                className="animate-blur-in text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-4"
+              <motion.h1
+                initial={{ opacity: 0, filter: "blur(36px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                transition={{ delay: 0, duration: 0.5 }}
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-4"
               >
                 {slides[current].title}
-              </h1>
+              </motion.h1>
 
-              <p
-                className="animate-blur-in-d6 text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed"
+              <motion.p
+                initial={{ opacity: 0, filter: "blur(36px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed"
               >
                 {slides[current].subtitle}
-              </p>
+              </motion.p>
             </div>
 
             {/* CTA Button below card */}
