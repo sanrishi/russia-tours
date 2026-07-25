@@ -96,30 +96,33 @@ export default function MoscowExpressPage() {
   const [cmsData, setCmsData] = useState<CmsTourData | null>(null)
 
   useEffect(() => {
-    const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
-    const token = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
-    if (!spaceId || !token) return
-    fetch(`https://cdn.contentful.com/spaces/${spaceId}/environments/master/entries?access_token=${token}&content_type=tourPackage&fields.slug[in]=moscow-discovery&limit=1`)
-      .then(r => r.json())
-      .then(d => {
-        const f = d.items?.[0]?.fields
-        if (!f) return
-        setCmsData({
-          price: f.price,
-          duration: f.duration,
-          highlights: f.highlights,
-          inclusions: f.inclusions,
-          exclusions: f.exclusions,
-          itinerary: f.itinerary?.map((desc: string, i: number) => ({
-            day: i + 1,
-            title: desc.replace(/^Day \d+: /, ""),
-            meals: "Breakfast",
-            transport: "Private transfer",
-            description: `Day ${i + 1} of the Moscow Discovery tour. ${desc}`,
-          })),
+    const id = requestIdleCallback(() => {
+      const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+      const token = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
+      if (!spaceId || !token) return
+      fetch(`https://cdn.contentful.com/spaces/${spaceId}/environments/master/entries?access_token=${token}&content_type=tourPackage&fields.slug[in]=moscow-discovery&limit=1`)
+        .then(r => r.json())
+        .then(d => {
+          const f = d.items?.[0]?.fields
+          if (!f) return
+          setCmsData({
+            price: f.price,
+            duration: f.duration,
+            highlights: f.highlights,
+            inclusions: f.inclusions,
+            exclusions: f.exclusions,
+            itinerary: f.itinerary?.map((desc: string, i: number) => ({
+              day: i + 1,
+              title: desc.replace(/^Day \d+: /, ""),
+              meals: "Breakfast",
+              transport: "Private transfer",
+              description: `Day ${i + 1} of the Moscow Discovery tour. ${desc}`,
+            })),
+          })
         })
-      })
-      .catch(() => {})
+        .catch(() => {})
+    })
+    return () => cancelIdleCallback(id)
   }, [])
 
   const { scrollYProgress } = useScroll({
@@ -129,37 +132,52 @@ export default function MoscowExpressPage() {
   const animPathRef = useRef<SVGPathElement>(null)
   const planeRef = useRef<SVGGElement>(null)
   const mobileTimelineRef = useRef<HTMLDivElement>(null)
-  const [pathLen, setPathLen] = useState(0)
+  const preparedPointsRef = useRef<{ x: number; y: number }[]>([])
+  const pathLenRef = useRef(0)
 
   useEffect(() => {
     const el = animPathRef.current
     if (!el) return
-    const len = Math.ceil(el.getTotalLength())
-    setPathLen(len)
+    const len = el.getTotalLength()
+    pathLenRef.current = len
+    const pts: { x: number; y: number }[] = []
+    for (let i = 0; i <= 100; i++) {
+      const pt = el.getPointAtLength((len * i) / 100)
+      pts.push({ x: pt.x, y: pt.y })
+    }
+    preparedPointsRef.current = pts
+    el.style.strokeDasharray = String(len + 100)
+    el.style.strokeDashoffset = String(len)
   }, [])
 
   useEffect(() => {
-    if (!pathLen) return
     const el = animPathRef.current
     const plane = planeRef.current
-    if (!el || !plane) return
-    el.style.strokeDasharray = String(pathLen + 100)
-    el.style.strokeDashoffset = String(pathLen)
-    const update = (v: number) => {
-      const offset = pathLen * (1 - v)
-      el.style.strokeDashoffset = String(offset)
-      const leading = Math.min(pathLen - 1, Math.max(0, pathLen + 100 - offset))
-      if (leading < 1 || leading > pathLen - 2) { plane.style.opacity = "0"; return }
+    const pts = preparedPointsRef.current
+    const pathLen = pathLenRef.current
+    if (!el || !plane || pts.length === 0 || !pathLen) return
+
+    const scrollUpdate = (v: number) => {
+      el.style.strokeDashoffset = String(pathLen * (1 - v))
+      if (v < 0.01 || v > 0.99) { plane.style.opacity = "0"; return }
       plane.style.opacity = "1"
-      const pt = el.getPointAtLength(leading)
-      const pt2 = el.getPointAtLength(Math.min(leading + 4, pathLen - 1))
-      const angle = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * (180 / Math.PI)
-      plane.setAttribute("transform", `translate(${pt.x},${pt.y}) rotate(${angle + 45})`)
+      const idx = v * 99
+      const i = Math.floor(idx)
+      const f = idx - i
+      const p1 = pts[i]
+      const p2 = pts[Math.min(i + 1, 99)]
+      const x = p1.x + (p2.x - p1.x) * f
+      const y = p1.y + (p2.y - p1.y) * f
+      const dx = p2.x - p1.x
+      const dy = p2.y - p1.y
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI)
+      plane.setAttribute("transform", `translate(${x},${y}) rotate(${angle + 45})`)
     }
-    update(scrollYProgress.get())
-    const unsub = scrollYProgress.on("change", update)
+
+    scrollUpdate(scrollYProgress.get())
+    const unsub = scrollYProgress.on("change", scrollUpdate)
     return () => unsub()
-  }, [scrollYProgress, pathLen])
+  }, [scrollYProgress])
 
   useEffect(() => {
     const el = mobileTimelineRef.current
@@ -360,7 +378,7 @@ export default function MoscowExpressPage() {
                     ref={animPathRef}
                     d="M 200 30 C 200 100, 60 120, 60 190 C 60 260, 340 280, 340 350 C 340 420, 60 440, 60 510 C 60 580, 340 600, 340 670 C 340 740, 60 760, 60 830 C 60 900, 340 920, 340 990 C 340 1060, 200 1080, 200 1150"
                     stroke="url(#pathGradient)" strokeWidth="4" strokeLinecap="round" fill="none" filter="url(#pathGlow)"
-                    style={{ transition: "stroke-dashoffset 0.25s ease-out" }}
+                    style={{ transition: "stroke-dashoffset 0.1s linear" }}
                   />
                   {/* Start marker */}
                   <g transform="translate(200,30)">

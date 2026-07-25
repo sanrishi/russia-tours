@@ -25,23 +25,26 @@ export default function WeatherWidget() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchWeather = async () => {
-      const results: Record<string, Weather | null> = {};
-      for (const city of cities) {
-        try {
-          const res = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&timezone=auto`
-          );
-          const data = await res.json();
-          results[city.name] = data.current_weather;
-        } catch {
-          results[city.name] = null;
+    const id = requestIdleCallback(() => {
+      const fetchWeather = async () => {
+        const results: Record<string, Weather | null> = {};
+        for (const city of cities) {
+          try {
+            const res = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&timezone=auto`
+            );
+            const data = await res.json();
+            results[city.name] = data.current_weather;
+          } catch {
+            results[city.name] = null;
+          }
         }
-      }
-      setWeather(results);
-      setLoading(false);
-    };
-    fetchWeather();
+        setWeather(results);
+        setLoading(false);
+      };
+      fetchWeather();
+    });
+    return () => cancelIdleCallback(id);
   }, []);
 
   if (loading) return null;

@@ -17,25 +17,28 @@ export default function CurrencyPopover() {
 
   useEffect(() => {
     let cancelled = false;
-    const fetchRates = async () => {
-      try {
-        const res = await fetch(
-          "https://api.exchangerate-api.com/v4/latest/USD"
-        );
-        if (!res.ok || cancelled) return;
-        const data = await res.json();
-        if (cancelled) return;
-        setRates({
-          inr: data.rates.RUB / data.rates.INR,
-          usd: data.rates.RUB,
-        });
-      } catch {
-        // silently fail
-      }
-    };
-    fetchRates();
+    const id = requestIdleCallback(() => {
+      const fetchRates = async () => {
+        try {
+          const res = await fetch(
+            "https://api.exchangerate-api.com/v4/latest/USD"
+          );
+          if (!res.ok || cancelled) return;
+          const data = await res.json();
+          if (cancelled) return;
+          setRates({
+            inr: data.rates.RUB / data.rates.INR,
+            usd: data.rates.RUB,
+          });
+        } catch {
+          // silently fail
+        }
+      };
+      fetchRates();
+    });
     return () => {
       cancelled = true;
+      cancelIdleCallback(id);
     };
   }, []);
 
