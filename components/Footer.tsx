@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Sparkles, ChevronRight, MessageCircle, Camera, Mail, Phone } from "lucide-react";
 import CertificationsSection from "@/components/CertificationsSection";
 
@@ -53,6 +53,25 @@ export default function Footer() {
     return () => mq.removeEventListener("change", handler)
   }, [])
 
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [videoSrc, setVideoSrc] = useState<string | null>(null)
+
+  useEffect(() => {
+    const el = videoRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !videoSrc) {
+          setVideoSrc("/footer_video.webm")
+          obs.disconnect()
+        }
+      },
+      { rootMargin: "300px" }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [videoSrc])
+
   return (
     <footer className="relative">
       {!isNews && (
@@ -64,7 +83,9 @@ export default function Footer() {
           }}
         />
         <video
-          autoPlay loop muted playsInline preload="auto"
+          ref={videoRef}
+          autoPlay loop muted playsInline preload="none"
+          src={videoSrc ?? undefined}
           className="w-full h-full object-cover"
           style={{
             WebkitMaskImage: `url(${maskUrl})`,
@@ -73,10 +94,7 @@ export default function Footer() {
             WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat",
             WebkitMaskPosition: "bottom center", maskPosition: "bottom center",
           }}
-        >
-          <source src="/footer_video.mp4" type="video/mp4" />
-          <source src="/footer_video.webm" type="video/webm" />
-        </video>
+        />
       </div>
       )}
 
