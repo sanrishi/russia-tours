@@ -43,3 +43,5 @@ next-env.d.ts
 .vercel
 .env*
 trace-home.json
+debug-webkit.js
+webkit-*.png
