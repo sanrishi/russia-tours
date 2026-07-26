@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Banknote, Utensils, Bus, MapPin, Shield, Waves, Sun, Globe, Languages, Shirt, Smartphone, Play, BookOpen, Sparkles } from "lucide-react";
+import DotsOverlay from "./DotsOverlay";
 
 function useInView() {
   const ref = useRef<HTMLDivElement>(null);
@@ -178,6 +179,7 @@ export default function TripExperience() {
       <div ref={ref} className={`trip-x transition-all duration-700 ease-out will-change-transform will-change-opacity ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         {/* ─── MOOD BOARD ─── */}
         <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 backdrop-blur-sm mb-10 overflow-hidden">
+          <DotsOverlay />
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
           <div className="relative px-6 pt-6 sm:px-8 sm:pt-8 pb-2">
             <span className="font-heading text-xs tracking-[0.25em] uppercase text-gold">The Moscow Express</span>
