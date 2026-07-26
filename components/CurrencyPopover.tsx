@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RefreshCw } from "lucide-react";
 import Link from "next/link";
+import { ric, cancelRic } from "@/lib/ric";
 
 type Currency = "INR" | "USD";
 
@@ -17,7 +18,7 @@ export default function CurrencyPopover() {
 
   useEffect(() => {
     let cancelled = false;
-    const id = requestIdleCallback(() => {
+    const id = ric(() => {
       const fetchRates = async () => {
         try {
           const res = await fetch(
@@ -38,7 +39,7 @@ export default function CurrencyPopover() {
     });
     return () => {
       cancelled = true;
-      cancelIdleCallback(id);
+      cancelRic(id);
     };
   }, []);
 

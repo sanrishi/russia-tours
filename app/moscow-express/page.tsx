@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { useScroll } from "framer-motion"
 import { Send, Sparkles, Compass, ArrowRight } from "lucide-react"
 import { playClick } from "@/lib/sounds"
+import { ric, cancelRic } from "@/lib/ric"
 import TripCard from "@/components/TripCard"
 import TripGallery from "@/components/TripGallery"
 import TripExperience from "@/components/TripExperience"
@@ -96,7 +97,7 @@ export default function MoscowExpressPage() {
   const [cmsData, setCmsData] = useState<CmsTourData | null>(null)
 
   useEffect(() => {
-    const id = requestIdleCallback(() => {
+    const id = ric(() => {
       const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
       const token = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
       if (!spaceId || !token) return
@@ -122,7 +123,7 @@ export default function MoscowExpressPage() {
         })
         .catch(() => {})
     })
-    return () => cancelIdleCallback(id)
+    return () => cancelRic(id)
   }, [])
 
   const { scrollYProgress } = useScroll({
@@ -191,11 +192,11 @@ export default function MoscowExpressPage() {
   }, [scrollYProgress])
 
   useEffect(() => {
-    const id = requestIdleCallback(() => {
+    const id = ric(() => {
       const isMobile = window.innerWidth < 640
       document.documentElement.style.setProperty("--hero-bg", `url(${isMobile ? "/mobile-bg.webp" : "/enhanced_moscow-bg_final_2.webp"})`)
     })
-    return () => cancelIdleCallback(id)
+    return () => cancelRic(id)
   }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

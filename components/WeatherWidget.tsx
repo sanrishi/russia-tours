@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CloudSun, Thermometer, MapPin } from "lucide-react";
+import { ric, cancelRic } from "@/lib/ric";
 
 interface Weather {
   temperature: number;
@@ -25,7 +26,7 @@ export default function WeatherWidget() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const id = requestIdleCallback(() => {
+    const id = ric(() => {
       const fetchWeather = async () => {
         const results: Record<string, Weather | null> = {};
         for (const city of cities) {
@@ -44,7 +45,7 @@ export default function WeatherWidget() {
       };
       fetchWeather();
     });
-    return () => cancelIdleCallback(id);
+    return () => cancelRic(id);
   }, []);
 
   if (loading) return null;
