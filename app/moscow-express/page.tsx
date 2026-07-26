@@ -190,6 +190,13 @@ export default function MoscowExpressPage() {
     return () => unsub()
   }, [scrollYProgress])
 
+  useEffect(() => {
+    const id = requestIdleCallback(() => {
+      const isMobile = window.innerWidth < 640
+      document.documentElement.style.setProperty("--hero-bg", `url(${isMobile ? "/mobile-bg.webp" : "/enhanced_moscow-bg_final_2.webp"})`)
+    })
+    return () => cancelIdleCallback(id)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -240,24 +247,25 @@ export default function MoscowExpressPage() {
   }
 
   return (
-    <main className="relative">
-      {/* Fixed background — viewport-anchored, works on all browsers including iOS */}
+    <><main className="relative">
+      {/* Fixed background — lazy-loaded via JS to avoid competing with LCP */}
       <div
-        className="fixed inset-0 -z-10 bg-cover bg-top bg-no-repeat bg-[url(/mobile-bg.webp)] sm:bg-[url(/enhanced_moscow-bg_final_2.webp)]"
+        className="fixed inset-0 -z-10 bg-cover bg-top bg-no-repeat"
         aria-hidden="true"
+        style={{ backgroundImage: "var(--hero-bg)" }}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripJsonLd) }} />
 
       {/* ─── HERO ─── */}
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-16 overflow-hidden">
-        {/* Animated background orbs */}
+        {/* Background orbs with static blur (composited — no animation) */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-[#D4AF37]/5 blur-[120px] animate-pulse" />
-          <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-[#DC2626]/5 blur-[120px] animate-pulse [animation-delay:2s]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#CA8A04]/3 blur-[150px] animate-pulse [animation-delay:4s]" />
+          <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-[#D4AF37]/30 blur-[80px]" />
+          <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-[#DC2626]/20 blur-[80px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#CA8A04]/15 blur-[100px]" />
         </div>
 
-        <div className="relative max-w-4xl mx-auto w-full p-8 sm:p-12 lg:p-16 rounded-2xl border border-white/[0.04] bg-[#1C1917]/70 shadow-[0_0_60px_-20px_rgba(0,0,0,0.5)]">
+        <div className="relative max-w-4xl mx-auto w-full p-8 sm:p-12 lg:p-16 rounded-2xl border border-white/[0.04] bg-[#1C1917]/70 backdrop-blur-sm shadow-[0_0_60px_-20px_rgba(0,0,0,0.5)]">
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
           <div className="text-center">
             {/* Decorative top line */}
@@ -427,9 +435,9 @@ export default function MoscowExpressPage() {
                     {/* Content */}
                     <div className={`pl-14 sm:pl-0 sm:w-1/2 ${isLeft ? "sm:pr-8 sm:text-right" : "sm:pl-8"}`}>
                       <div
-                        className={`group relative rounded-2xl border border-white/[0.06] bg-black/80 p-6 sm:p-8 transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)] ${
-                          activeChapter === ch.id ? "border-white/[0.12] shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)]" : ""
-                        }`}
+                        className={`group relative rounded-2xl border border-white/[0.06] bg-black/70 backdrop-blur-sm p-6 sm:p-8 transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)] ${
+                           activeChapter === ch.id ? "border-white/[0.12] shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)]" : ""
+                         }`}
                         style={{ '--card-accent': ch.accent } as React.CSSProperties}
                       >
                         <div
@@ -682,7 +690,8 @@ export default function MoscowExpressPage() {
         </section>
 
       <CostEstimator triggerRefs={[costBtnRef, calcBtnRef]} />
-
     </main>
+      <div className="pointer-events-none fixed inset-0 z-50" style={{ backgroundImage: `radial-gradient(circle, #d4af37 1.5px, transparent 1.5px)`, backgroundSize: "20px 20px", opacity: 0.2 }} />
+    </>
   )
 }
