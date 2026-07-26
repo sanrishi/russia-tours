@@ -63,9 +63,10 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    import("./HeroSlideshow").then((mod) => setHeroSlideshow(() => mod.default));
-    const delay = setTimeout(() => setSlidesStarted(true), 5000);
-    return () => clearTimeout(delay);
+    import("./HeroSlideshow").then((mod) => {
+      setHeroSlideshow(() => mod.default);
+      setSlidesStarted(true);
+    });
   }, []);
 
   useEffect(() => {

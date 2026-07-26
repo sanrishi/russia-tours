@@ -23,7 +23,7 @@ export default function AnimalSilhouettes({ slideIndex }: Props) {
   const svg = svgs[slideIndex] ?? svgs[0];
 
   return (
-    <div className="absolute bottom-0 right-0 pointer-events-none z-[5] w-full max-w-[1130px] max-sm:max-w-[300px] sm:max-md:bottom-40 lg:max-w-[720px] max-sm:[bottom:max(8rem,env(safe-area-inset-bottom)+6rem)] max-h-[35dvh]">
+    <div className="silhouettes-container absolute bottom-0 right-0 pointer-events-none z-[5] w-full max-w-[1130px] max-sm:max-w-[300px] sm:max-md:bottom-40 lg:max-w-[720px] max-sm:[bottom:max(8rem,env(safe-area-inset-bottom)+6rem)] max-h-[35dvh]">
       <svg
         width="1130"
         height="498"
@@ -45,7 +45,7 @@ export default function AnimalSilhouettes({ slideIndex }: Props) {
         />
       </svg>
       <style>{`
-        path {
+        .silhouettes-container path {
           animation: drawLine 5s ease-out forwards;
         }
         @keyframes drawLine {
