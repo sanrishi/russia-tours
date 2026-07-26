@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronLeft, ChevronRight, IndianRupee, Clock, Utensils, Bus, Shield, Check, X, ArrowRight, MessageCircle, Calculator } from "lucide-react";
+import DotsOverlay from "./DotsOverlay";
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import type { MouseEvent } from "react";
@@ -155,12 +156,13 @@ export default function TripCard({ costBtnRef, cmsData }: { costBtnRef?: React.R
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.15, duration: 0.6 }}
-            className={`rounded-2xl overflow-hidden transition-all duration-500 ${
+            className={`relative rounded-2xl overflow-hidden transition-all duration-500 ${
             trip.comingSoon
               ? "border border-white/5 bg-[#1C1917] opacity-60"
               : "border border-white/[0.04] bg-[#1C1917]/85 backdrop-blur-sm hover:shadow-[0_0_50px_-20px_rgba(202,138,4,0.15)]"
             }`}
         >
+          <DotsOverlay />
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
           {trip.comingSoon ? (
             <div className="p-4">
