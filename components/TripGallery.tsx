@@ -22,7 +22,7 @@ function useInView() {
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.unobserve(el); } },
-      { threshold: 0, rootMargin: "-40px" }
+      { threshold: 0, rootMargin: "40px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
