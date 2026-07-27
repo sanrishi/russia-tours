@@ -176,7 +176,7 @@ export default function TripExperience() {
   return (
     <>
       <style>{`@media (prefers-reduced-motion:reduce){.trip-x *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}`}</style>
-      <div ref={ref} className={`trip-x transition-all duration-700 ease-out will-change-transform will-change-opacity ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+      <div ref={ref} className={`trip-x transition-all duration-700 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         {/* ─── MOOD BOARD ─── */}
         <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 backdrop-blur-sm mb-10 overflow-hidden">
           <DotsOverlay />

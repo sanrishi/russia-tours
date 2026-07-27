@@ -68,7 +68,7 @@ export default function TripGallery() {
     <>
       <style>{`@media (prefers-reduced-motion:reduce){.gallery-x *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}`}</style>
 
-      <div ref={ref} className={`gallery-x transition-all duration-700 ease-out will-change-transform will-change-opacity ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+      <div ref={ref} className={`gallery-x transition-all duration-700 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         <div className="flex items-center justify-between mb-5">
           <div>
             <h2 className="font-heading text-lg sm:text-xl font-bold text-white">Trip Gallery</h2>
