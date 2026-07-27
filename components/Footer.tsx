@@ -54,15 +54,15 @@ export default function Footer() {
   }, [])
 
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [videoSrc, setVideoSrc] = useState<string | null>(null)
+  const [videoReady, setVideoReady] = useState(false)
 
   useEffect(() => {
     const el = videoRef.current
     if (!el) return
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !videoSrc) {
-          setVideoSrc("/footer_video.webm")
+        if (entry.isIntersecting && !videoReady) {
+          setVideoReady(true)
           obs.disconnect()
         }
       },
@@ -70,7 +70,15 @@ export default function Footer() {
     )
     obs.observe(el)
     return () => obs.disconnect()
-  }, [videoSrc])
+  }, [videoReady])
+
+  useEffect(() => {
+    if (!videoReady) return
+    const el = videoRef.current
+    if (!el) return
+    el.load()
+    el.play().catch(() => {})
+  }, [videoReady])
 
   return (
     <footer className="relative">
@@ -84,8 +92,7 @@ export default function Footer() {
         />
         <video
           ref={videoRef}
-          autoPlay loop muted playsInline preload="none"
-          src={videoSrc ?? undefined}
+          autoPlay loop muted playsInline preload="auto"
           className="w-full h-full object-cover"
           style={{
             WebkitMaskImage: `url(${maskUrl})`,
@@ -94,7 +101,14 @@ export default function Footer() {
             WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat",
             WebkitMaskPosition: "bottom center", maskPosition: "bottom center",
           }}
-        />
+        >
+          {videoReady && (
+            <>
+              <source src="/footer_video.mp4" type='video/mp4' />
+              <source src="/footer_video.webm" type='video/webm' />
+            </>
+          )}
+        </video>
       </div>
       )}
 
