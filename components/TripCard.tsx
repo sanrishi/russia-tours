@@ -152,7 +152,7 @@ export default function TripCard({ costBtnRef, cmsData }: { costBtnRef?: React.R
       {tripsWithCms.map((trip, i) => (
         <motion.div
           key={trip.title}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.15, duration: 0.6 }}
