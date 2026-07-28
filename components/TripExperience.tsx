@@ -178,7 +178,7 @@ export default function TripExperience() {
       <style>{`@media (prefers-reduced-motion:reduce){.trip-x *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}`}</style>
       <div ref={ref} className={`trip-x transition-all duration-700 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         {/* ─── MOOD BOARD ─── */}
-        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 backdrop-blur-sm mb-10 overflow-hidden">
+        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 mb-10 overflow-hidden">
           <DotsOverlay />
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
           <div className="relative px-6 pt-6 sm:px-8 sm:pt-8 pb-2">
@@ -198,7 +198,7 @@ export default function TripExperience() {
                       <div className={`absolute inset-0 bg-gradient-to-t ${vibeGradients[item.vibe]} transition-opacity duration-500`} />
                       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60" />
                       <div className="absolute top-3 left-3">
-                        <span className={`font-heading text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full border shadow-lg backdrop-blur-sm ${vibeBadge[item.vibe]}`}>{item.vibe}</span>
+                        <span className={`font-heading text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full border shadow-lg ${vibeBadge[item.vibe]}`}>{item.vibe}</span>
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <p className="font-heading text-white text-sm sm:text-base font-semibold leading-snug mb-1.5 line-clamp-1">{item.caption}</p>
@@ -220,7 +220,7 @@ export default function TripExperience() {
           </div>
 
         {/* ─── THE DETAILS ─── */}
-        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 backdrop-blur-sm mb-10 overflow-hidden">
+        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 mb-10 overflow-hidden">
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
         <section className="mb-5">
           <div className="flex items-center gap-3 mb-5 px-1">
@@ -230,7 +230,7 @@ export default function TripExperience() {
 
           <div className="space-y-4">
             {/* ─── PRICE BREAKDOWN CARD ─── */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/[0.04] bg-[#1C1917]/40 backdrop-blur-sm p-6 sm:p-7">
+            <div className="relative rounded-2xl overflow-hidden border border-white/[0.04] bg-[#1C1917]/40 p-6 sm:p-7">
               <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
               <div className="absolute -top-20 -left-20 w-40 h-40 rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #d4af37 0%, transparent 70%)" }} />
               <div className="relative">
@@ -270,7 +270,7 @@ export default function TripExperience() {
             </div>
 
             {/* ─── SOUNDTRACK CARD ─── */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/[0.04] bg-[#1C1917]/40 backdrop-blur-sm p-6 sm:p-7">
+            <div className="relative rounded-2xl overflow-hidden border border-white/[0.04] bg-[#1C1917]/40 p-6 sm:p-7">
               <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
               <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #d4af37 0%, transparent 70%)" }} />
               <div className="relative">
@@ -308,7 +308,7 @@ export default function TripExperience() {
         </div>
 
         {/* ─── KNOW BEFORE YOU GO ─── */}
-        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 backdrop-blur-sm overflow-hidden">
+        <div className="relative rounded-2xl border border-white/[0.04] bg-[#1C1917]/50 overflow-hidden">
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
             <section className="p-6 sm:p-7">
           <div className="relative">
