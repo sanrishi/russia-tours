@@ -193,11 +193,8 @@ export default function MoscowExpressPage() {
   }, [scrollYProgress])
 
   useEffect(() => {
-    const id = ric(() => {
-      const isMobile = window.innerWidth < 640
-      document.documentElement.style.setProperty("--hero-bg", `url(${isMobile ? "/mobile-bg.webp" : "/enhanced_moscow-bg_final_2.webp"})`)
-    })
-    return () => cancelRic(id)
+    const isMobile = window.innerWidth < 640
+    document.documentElement.style.setProperty("--hero-bg", `url(${isMobile ? "/mobile-bg.webp" : "/enhanced_moscow-bg_final_2.webp"})`)
   }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -252,7 +249,7 @@ export default function MoscowExpressPage() {
     <><main className="relative">
       {/* Fixed background — lazy-loaded via JS to avoid competing with LCP */}
       <div
-        className="fixed inset-0 -z-10 bg-cover bg-top bg-no-repeat"
+        className="fixed inset-0 -z-10 bg-[#0a0a0a] bg-cover bg-top bg-no-repeat"
         aria-hidden="true"
         style={{ backgroundImage: "var(--hero-bg)" }}
       />
