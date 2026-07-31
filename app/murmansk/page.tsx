@@ -23,8 +23,17 @@ const chapters = [
     accent: "#2DD4BF",
   },
   {
-    id: "husky",
+    id: "teriberka",
     label: "Day 2",
+    title: "Teriberka — Edge of the Earth",
+    subtitle: "Териберка",
+    desc: "Travel to one of the oldest settlements in the Murmansk region, on the shore of the Barents Sea. Photo stops at Polar Wind Park, the Ancient Ship Cemetery, Dragon Egg Beach, and Battery Waterfall among red cliffs. Return around 19:00.",
+    color: "from-[#0A0F1A] via-[#0F1A2E] to-[#0A0F1A]",
+    accent: "#38BDF8",
+  },
+  {
+    id: "husky",
+    label: "Day 3",
     title: "Husky & Reindeer Park",
     subtitle: "Хаски и северные олени",
     desc: "Meet the ancient northern people and their 3000-year-old culture. Feed reindeer, go husky sledding, try on traditional Sami costumes, and enjoy local cuisine lunch in a wooden house.",
@@ -32,22 +41,13 @@ const chapters = [
     accent: "#22C55E",
   },
   {
-    id: "khibiny",
-    label: "Day 3",
-    title: "Khibiny Mountains & Kirovsk",
-    subtitle: "Хибины и Кировск",
-    desc: "A 2.5-hour drive to the mountain resort. Visit the Snow Village (Book of World Records of Russia), speed across snowy landscapes on a snowmobile safari, and ride the funicular for a bird's-eye view. Return ~20:00.",
-    color: "from-[#0A0F1A] via-[#1A2E0F] to-[#0A0F1A]",
-    accent: "#A3E635",
-  },
-  {
-    id: "teriberka",
+    id: "icefloating",
     label: "Day 4",
-    title: "Teriberka — Edge of the Earth",
-    subtitle: "Териберка",
-    desc: "Travel to the Barents Sea on the Arctic Ocean. Visit Polar Wind Park, the Ancient Ship Cemetery, Dragon Egg Beach, and Battery Waterfall among red cliffs. Return to Murmansk around 19:00.",
-    color: "from-[#0A0F1A] via-[#0F1A2E] to-[#0A0F1A]",
-    accent: "#38BDF8",
+    title: "Snowmobile Safari & Ice Floating",
+    subtitle: "Снегоход и ледяное плавание",
+    desc: "Speed across snow-covered landscapes on a 1-hour snowmobile safari in the Tundra park, refuel with authentic Arctic cuisine and hot herbal tea, then plunge into the Kola Bay in a thermal wetsuit for the ultimate ice floating experience (~2 hours with instruction).",
+    color: "from-[#0A1A1A] via-[#0E2E2E] to-[#0A1A1A]",
+    accent: "#2DD4BF",
   },
 ]
 
@@ -139,7 +139,7 @@ export default function MurmanskPage() {
     const group_size = (f.namedItem("group_size") as HTMLSelectElement).value
     const message = (f.namedItem("message") as HTMLTextAreaElement).value
 
-    const msg = `*New Enquiry from Arctic Quest — Murmansk*
+    const msg = `*New Enquiry from Polar Saga — Murmansk (Ice Floating)*
 *Name:* ${name}
 *Email:* ${email}
 *Phone:* ${phone}
@@ -154,19 +154,19 @@ export default function MurmanskPage() {
     fetch("/api/enquiry", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ _captcha: "false", name, email, phone, group_size, message, page: "Arctic Quest — Murmansk" }),
+      body: JSON.stringify({ _captcha: "false", name, email, phone, group_size, message, page: "Polar Saga — Murmansk (Ice Floating)" }),
     }).catch(() => {})
   }
 
   const touristTripJsonLd = {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
-    name: "Arctic Quest — Murmansk, 4 Days",
-    description: "4-day guided tour of Murmansk with aurora hunting, husky & reindeer park, Khibiny Mountains, and Teriberka on the Arctic Ocean.",
+    name: "Polar Saga — Murmansk, 4 Days",
+    description: "4-day guided tour of Murmansk with aurora hunting, Teriberka on the Arctic Ocean, husky & reindeer park, and a snowmobile safari with ice floating in the Kola Bay.",
     touristType: "Indian Travelers",
     offers: {
       "@type": "Offer",
-      price: "770",
+      price: "782",
       priceCurrency: "USD",
       availability: "https://schema.org/LimitedAvailability",
     },
@@ -212,7 +212,7 @@ export default function MurmanskPage() {
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/[0.06] bg-white/[0.03] mb-8 hover:border-[#D4AF37]/20 transition-all duration-500">
               <Sparkles size={10} className="text-[#D4AF37]" />
               <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/60" style={{ fontFamily: "var(--font-body)" }}>
-                4 Days · Small Group · Aurora Hunting
+                4 Days · Small Group · Ice Floating & Aurora
               </span>
             </div>
 
@@ -222,7 +222,7 @@ export default function MurmanskPage() {
                 Murmansk
               </span>
               <span className="block text-4xl sm:text-6xl md:text-7xl font-bold tracking-[0.08em] mt-2 bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#2DD4BF] bg-clip-text text-transparent bg-[length:200%_100%] animate-border-flow">
-                Arctic Quest
+                Polar Saga
               </span>
             </h1>
 
@@ -235,8 +235,8 @@ export default function MurmanskPage() {
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base text-white/60 max-w-xl mx-auto mb-20 leading-relaxed tracking-wide font-light" style={{ fontFamily: "var(--font-body)" }}>
-              Chase the Northern Lights, meet Arctic huskies, and stand at the
-              edge of the Arctic Ocean — designed for Indian travelers.
+              Chase the Northern Lights, meet Arctic huskies, and float in the
+              icy Kola Bay — designed for Indian travelers.
             </p>
 
             {/* CTAs */}
@@ -424,6 +424,65 @@ export default function MurmanskPage() {
           </div>
         </div>
 
+        {/* ─── FLEXIBLE OPTIONS ─── */}
+        <div className="px-4 sm:px-6 pb-16">
+          <div className="max-w-[1728px] mx-auto">
+            <GlassCard>
+              <div className="p-8 sm:p-10">
+                <div className="text-center mb-8">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.25em] bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#2DD4BF] bg-clip-text text-transparent" style={{ fontFamily: "var(--font-body)" }}>
+                    Flexible Packages
+                  </span>
+                  <h2
+                    className="text-2xl sm:text-3xl font-bold text-white mt-2"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    More Ways to Experience Murmansk
+                  </h2>
+                  <p className="text-white/60 text-sm mt-3 max-w-2xl mx-auto" style={{ fontFamily: "var(--font-body)" }}>
+                    Polar Saga is our flagship tour. Want a shorter stay or the mountain adventure instead? We&apos;ll customize any of these for you on WhatsApp.
+                  </p>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                  {[
+                    {
+                      name: "Arctic Quest",
+                      days: "4 Days",
+                      price: "₽61,000/person",
+                      note: "Adds Khibiny Mountains & Kirovsk — Snow Village, snowmobile safari and funicular with a bird's-eye view.",
+                    },
+                    {
+                      name: "Awesome Arctic",
+                      days: "3 Days",
+                      price: "₽45,000/person",
+                      note: "A compact aurora escape — Teriberka on the Arctic Ocean and the husky & reindeer park in three days.",
+                    },
+                  ].map((opt) => (
+                    <div
+                      key={opt.name}
+                      className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 flex flex-col text-center sm:text-left"
+                    >
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-medium" style={{ fontFamily: "var(--font-body)" }}>{opt.days}</p>
+                      <h3 className="text-lg font-bold text-white mt-1" style={{ fontFamily: "var(--font-heading)" }}>{opt.name}</h3>
+                      <p className="text-[#D4AF37] font-bold text-sm mt-1" style={{ fontFamily: "var(--font-body)" }}>{opt.price}</p>
+                      <p className="text-white/50 text-sm leading-relaxed mt-3 flex-1" style={{ fontFamily: "var(--font-body)" }}>{opt.note}</p>
+                      <a
+                        href={`https://wa.me/917042987451?text=${encodeURIComponent(`Hi! I'm interested in the ${opt.name} — ${opt.days} Murmansk package (${opt.price}). Could you share the full itinerary?`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex items-center justify-center gap-2 border border-[#D4AF37]/40 text-[#D4AF37] text-sm font-medium px-5 py-2.5 rounded-full hover:bg-[#D4AF37] hover:text-[#0B0D1A] transition-all duration-300"
+                      >
+                        Enquire on WhatsApp
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </GlassCard>
+          </div>
+        </div>
+
         {/* ─── TRIP GALLERY ─── */}
         <div className="px-4 sm:px-6 pb-16">
           <div className="max-w-[1728px] mx-auto">
@@ -592,7 +651,7 @@ export default function MurmanskPage() {
 
       <CostEstimator
         triggerRefs={[costBtnRef, calcBtnRef]}
-        pricePerPerson={61000}
+        pricePerPerson={62000}
         durationDays={4}
         currency="RUB"
       />
@@ -603,28 +662,30 @@ export default function MurmanskPage() {
 
 const murmanskTrips = [
   {
-    title: "Arctic Quest — Murmansk · 4 Days",
-    tagline: "Aurora · Teriberka · Khibiny Mountains",
+    title: "Polar Saga — Murmansk · 4 Days",
+    tagline: "Aurora · Teriberka · Husky · Ice Floating",
     image: "/murmansk-hero.webp",
-    pricePerPerson: 61000,
+    pricePerPerson: 62000,
     duration: "4 days",
     groupSize: "Max 8 people",
     ageGroup: "All ages",
     seats: 8,
     description:
-      "Chase the Northern Lights over two nights, meet Arctic huskies and reindeer, ride snowmobiles in the Khibiny Mountains, and stand on the shore of the Arctic Ocean at Teriberka. Airport transfers, guide, and professional aurora photos included.",
+      "Two nights of aurora hunting, the edge of the Arctic Ocean at Teriberka, huskies and reindeer, then a snowmobile safari and the ultimate ice floating plunge into the Kola Bay. Airport transfers, guide, and professional aurora photos included.",
     included: [
       "Airport pickup and drop",
       "Two nights of Aurora hunting",
       "Transfers during the trip",
       "English-speaking guide",
       "Professional photos of Northern Lights",
-      "Hot tea and cookies",
-      "Tickets to Husky park and lunch",
+      "Hot tea and cookies onboard",
+      "Tickets to Husky park and lunch there",
       "Husky sledding",
       "Reindeer feeding",
       "Snowmobile sledding to the Arctic ocean",
-      "Tickets to the Snow village",
+      "Snowmobiles rent for 1 hour and lunch in Tundra",
+      "Ice floating wetsuits",
+      "Entrance fees for all attractions as per program",
     ],
     excluded: [
       "Air tickets to Murmansk and back",
@@ -632,8 +693,7 @@ const murmanskTrips = [
       "Accommodation in Murmansk",
       "Lunches and dinners",
       "Alcohol",
-      "Tips",
-      "Snowmobile safari and funicular tickets in Kirovsk",
+      "Other services not included in the program",
     ],
     itinerary: [
       {
@@ -642,31 +702,31 @@ const murmanskTrips = [
         meals: "—",
         transport: "Airport transfer by private car",
         description:
-          "At arrival our driver will meet you at the airport with a sign. After check-in you may visit a local restaurant and rest. At 21:00 (Moscow time) we pick you up at your hotel and start hunting — 3–5 hours depending on weather. Hot tea, cookies, and all aurora photos included.",
+          "At arrival our driver will meet you at the airport with a sign. After check-in you may visit a local restaurant and rest. At 21:00 (Moscow time) we pick you up at your hotel and start hunting — 3–5 hours depending on weather. Hot tea, cookies, and all aurora photos included. If the previous nights are unsuccessful, we provide a third night for free.",
       },
       {
         day: 2,
+        title: "Teriberka — Edge of the Earth",
+        meals: "Lunch (paid separately)",
+        transport: "Private car",
+        description:
+          "Head to Teriberka, one of the oldest settlements in the Murmansk region, right on the shore of the Barents Sea (Arctic Ocean). Photo stops at Polar Wind Park & Rock Garden, the Ancient Ship Cemetery, Dragon Egg Beach and Dragon's Lair, Battery Waterfall among Red Cliffs, Giant Swings on the Seashore, and the Famous Traveler's Bench. Lunch at a restaurant on the sandy beach (extra). Optional whale-watching by boat (extra, booked in advance). Return around 19:00.",
+      },
+      {
+        day: 3,
         title: "Husky & Reindeer Park",
         meals: "Lunch",
         transport: "Private car",
         description:
-          "Discover the culture and life of the ancient northern people, existing for almost 3000 years. Feed reindeer, go husky sledding, try on traditional Sami costumes, and enjoy local cuisine lunch in a wooden house. Husky sledding subject to snow cover.",
-      },
-      {
-        day: 3,
-        title: "Khibiny Mountains & Kirovsk",
-        meals: "—",
-        transport: "Private car (2.5h)",
-        description:
-          "Reach the mountain resort in about 2.5 hours. Visit the Snow Village built from snow and ice (included in the Book of World Records of Russia), speed across snow-covered landscapes on a snowmobile safari, and ride the funicular for a bird's-eye view. Return to Murmansk around 20:00.",
+          "Discover the culture and life of the ancient northern people, existing for almost 3000 years. Feed reindeer, go husky sledding, try on traditional Sami costumes, and enjoy local cuisine lunch in a wooden house. After lunch, walk around the park before returning to Murmansk. Husky sledding subject to snow cover.",
       },
       {
         day: 4,
-        title: "Teriberka — Edge of the Earth",
-        meals: "—",
+        title: "Snowmobile Safari & Ice Floating",
+        meals: "Lunch",
         transport: "Private car",
         description:
-          "Head to Teriberka, one of the oldest settlements in the Murmansk region, right on the shore of the Barents Sea (Arctic Ocean). Photo stops at Polar Wind Park, Ancient Ship Cemetery, Dragon Egg Beach, and Battery Waterfall among red cliffs. Optional whale-watching by boat (extra, booked in advance). Return around 19:00.",
+          "In the morning, travel to the Tundra park for a 1-hour snowmobile safari across snow-covered landscapes. Refuel and warm up with authentic Arctic cuisine and hot herbal tea, then experience the Ultimate Ice Floating — about 2 hours with instruction — plunging into the Kola Bay in a thermal wetsuit. The whole day takes about 5–6 hours with transfers. Start time subject to ticket availability.",
       },
     ],
     visaInfo:
@@ -696,9 +756,9 @@ const murmanskMedia = {
   },
   dayHighlights: {
     1: ["Airport meet & transfer", "Evening aurora hunting (21:00)", "Hot tea & cookies onboard", "Professional aurora photos included"],
-    2: ["Reindeer feeding", "Husky sledding", "Sami costumes & culture", "Local cuisine lunch in a wooden house"],
-    3: ["Snow Village — Book of World Records", "Snowmobile safari", "Funicular ride with bird's-eye view"],
-    4: ["Barents Sea / Arctic Ocean", "Polar Wind Park & Rock Garden", "Ancient Ship Cemetery", "Dragon Egg Beach", "Battery Waterfall among Red Cliffs"],
+    2: ["Barents Sea / Arctic Ocean", "Polar Wind Park & Rock Garden", "Ancient Ship Cemetery", "Dragon Egg Beach", "Battery Waterfall among Red Cliffs", "Giant Swings on the Seashore"],
+    3: ["Reindeer feeding", "Husky sledding", "Sami costumes & culture", "Local cuisine lunch in a wooden house"],
+    4: ["1-hour snowmobile safari", "Arctic cuisine lunch & hot herbal tea", "Ice floating in thermal wetsuit", "Plunge into the Kola Bay"],
   },
 }
 
@@ -706,7 +766,7 @@ const murmanskPhotos = [
   { src: "/murmansk-hero.webp", alt: "Northern Lights over Murmansk", tag: "Aurora Hunting", span: "tall" },
   { src: "/murmansk-aurora.webp", alt: "The aurora borealis in full colour", tag: "Northern Lights", span: "wide" },
   { src: "/murmansk-day2.webp", alt: "Arctic huskies in the snow", tag: "Husky Park", span: "sq" },
-  { src: "/murmansk-day3.webp", alt: "Snowmobile safari in Khibiny", tag: "Snowmobile Safari", span: "sq" },
+  { src: "/murmansk-day3.webp", alt: "Snowmobile safari across the tundra", tag: "Snowmobile Safari", span: "sq" },
   { src: "/murmansk-day1.webp", alt: "Winter tundra landscape", tag: "Arctic Tundra", span: "sq" },
-  { src: "/murmansk-day4.webp", alt: "Teriberka coast on the Barents Sea", tag: "Edge of the Earth", span: "wide" },
+  { src: "/murmansk-day4.webp", alt: "Ice floating in the Kola Bay", tag: "Ice Floating", span: "wide" },
 ]
