@@ -3,11 +3,13 @@ import { Lora, Inter } from "next/font/google"
 const lora = Lora({
   variable: "--font-heading",
   subsets: ["latin"],
+  display: "swap",
 })
 
 const inter = Inter({
   variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
 })
 
 export const metadata = {

@@ -256,7 +256,7 @@ export default function MoscowExpressPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripJsonLd) }} />
 
       {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-16 overflow-hidden">
+      <section className="relative min-h-svh flex items-center justify-center px-4 pt-24 pb-16 overflow-hidden">
         {/* Background orbs with static blur (composited — no animation) */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-[#D4AF37]/30 blur-[80px]" />

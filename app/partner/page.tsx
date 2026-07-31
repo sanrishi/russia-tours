@@ -14,7 +14,7 @@ export default function PartnerPage() {
       {/* Full-page faded background */}
       <div className="absolute inset-0">
         <Image
-          src="/unsplash-city.webp"
+          src="/enhanced_last_section.webp"
           alt=""
           fill
           className="object-cover object-center"
@@ -22,9 +22,10 @@ export default function PartnerPage() {
           sizes="100vw"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0c0a0a] via-[#0c0a0a]/85 to-[#0c0a0a]/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0c0a0a]/40 via-[#0c0a0a]/85 to-[#0c0a0a]/40" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a0a] via-transparent to-[#0c0a0a]/30" />
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(circle at 30% 50%, #d4af37 0.5px, transparent 0.5px)`, backgroundSize: "40px 40px" }} />
+      <div className="pointer-events-none fixed inset-0 z-50" style={{ backgroundImage: `radial-gradient(circle, #d4af37 0.8px, transparent 0.8px)`, backgroundSize: "20px 20px", opacity: 0.12 }} />
       <div className="relative z-10 max-w-[1728px] mx-auto px-6 py-16 sm:py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>

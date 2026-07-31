@@ -66,7 +66,7 @@ export default function PlacesContent() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0c0a0a] via-[#0c0a0a]/85 to-[#0c0a0a]/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a0a] via-transparent to-[#0c0a0a]/30" />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(circle at 30% 50%, #d4af37 0.5px, transparent 0.5px)`, backgroundSize: "40px 40px" }} />
-        <div className="relative w-full max-w-[1728px] mx-auto px-6 pt-28 pb-8 sm:pt-36 sm:pb-12">
+        <div className="relative w-full max-w-[1728px] mx-auto px-6 pt-28 pb-4 sm:pt-36 sm:pb-4">
           <div className="max-w-3xl">
             <motion.span
               initial={{ opacity: 0, y: 10 }}
@@ -99,7 +99,7 @@ export default function PlacesContent() {
       </section>
 
       {/* City cards */}
-      <div className="max-w-[1728px] mx-auto px-6 pb-20 pt-8 sm:pt-10">
+      <div className="max-w-[1728px] mx-auto px-6 pb-20 pt-0 sm:pt-0 -mt-24">
         <motion.div
           variants={container}
           initial="hidden"
