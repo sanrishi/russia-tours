@@ -45,3 +45,6 @@ next-env.d.ts
 trace-home.json
 debug-webkit.js
 webkit-*.png
+
+# OCR page renders of source PDFs (173 MB) — keep the PDFs + OCR text, not the PNGs
+/docs/murmansk/pages/

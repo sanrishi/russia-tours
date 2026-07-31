@@ -135,17 +135,41 @@ interface CmsOverride {
   itinerary?: { day: number; title: string; meals: string; transport: string; description: string }[];
 }
 
-export default function TripCard({ costBtnRef, cmsData }: { costBtnRef?: React.RefObject<HTMLButtonElement | null>; cmsData?: CmsOverride }) {
+interface MediaAssets {
+  slides: string[];
+  dayImages: Record<number, string>;
+  dayPositions: Record<number, string>;
+  dayHighlights: Record<number, string[]>;
+}
+
+export default function TripCard({
+  costBtnRef,
+  cmsData,
+  trips: tripsOverride,
+  media,
+  pageUrl = "/moscow-express",
+  currency = "INR",
+}: {
+  costBtnRef?: React.RefObject<HTMLButtonElement | null>;
+  cmsData?: CmsOverride;
+  trips?: Trip[];
+  media?: MediaAssets;
+  pageUrl?: string;
+  currency?: "INR" | "RUB";
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const tripsWithCms: Trip[] = cmsData ? trips.map(t => ({
+  const mediaAssets: MediaAssets = media ?? { slides, dayImages, dayPositions, dayHighlights };
+  const baseTrips: Trip[] = tripsOverride ?? trips;
+
+  const tripsWithCms: Trip[] = cmsData ? baseTrips.map(t => ({
     ...t,
     pricePerPerson: cmsData.price ? parseInt(cmsData.price.replace(/[^0-9]/g, "")) || t.pricePerPerson : t.pricePerPerson,
     duration: cmsData.duration || t.duration,
     included: cmsData.inclusions || t.included,
     excluded: cmsData.exclusions || t.excluded,
     itinerary: cmsData.itinerary || t.itinerary,
-  })) : trips;
+  })) : baseTrips;
 
   return (
     <div className="space-y-8">
@@ -178,7 +202,7 @@ export default function TripCard({ costBtnRef, cmsData }: { costBtnRef?: React.R
               </div>
             </div>
           ) : (
-            <HeaderSlideshow tagline={trip.tagline} title={trip.title} />
+            <HeaderSlideshow tagline={trip.tagline} title={trip.title} slides={mediaAssets.slides} />
           )}
 
           <div className="p-6">
@@ -188,11 +212,13 @@ export default function TripCard({ costBtnRef, cmsData }: { costBtnRef?: React.R
                   <Clock size={14} /> {trip.duration}
                 </span>
                 <span className="flex items-center gap-1.5 text-gold font-bold">
-                  <IndianRupee size={14} /> {trip.pricePerPerson.toLocaleString("en-IN")}/person
+                  {currency === "RUB" ? "₽" : <IndianRupee size={14} />} {trip.pricePerPerson.toLocaleString(currency === "RUB" ? "en-US" : "en-IN")}/person
                 </span>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-gold/10 text-gold text-xs font-medium">
-                  Age {trip.ageGroup}
-                </span>
+                {trip.ageGroup && (
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-gold/10 text-gold text-xs font-medium">
+                    Age {trip.ageGroup}
+                  </span>
+                )}
                 <div className="ml-auto flex items-center gap-2">
                     <button
                       type="button"
@@ -212,7 +238,7 @@ export default function TripCard({ costBtnRef, cmsData }: { costBtnRef?: React.R
                     Check Availability <ArrowRight size={12} />
                   </button>
                   <a
-                    href="https://wa.me/?text=Check%20out%20this%20Russia%20tour%3A%20Moscow%20Discovery%20%E2%80%94%207%20Days%20-%20https%3A%2F%2Ftripstorussia.com%2Fmoscow-express"
+                    href={`https://wa.me/?text=${encodeURIComponent(`Check%20out%20this%20Russia%20tour%3A%20${trip.title}%20-%20https%3A%2F%2Ftripstorussia.com${pageUrl}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-gold/50 text-white/50 hover:text-gold hover:border-gold bg-transparent text-xs transition-all cursor-pointer"
@@ -322,7 +348,7 @@ export default function TripCard({ costBtnRef, cmsData }: { costBtnRef?: React.R
                                 }`}
                               />
                             </button>
-                            <DayContent day={day} isOpen={isOpen} />
+                            <DayContent day={day} isOpen={isOpen} media={mediaAssets} />
                           </div>
                         </div>
                       );
@@ -378,7 +404,7 @@ const dayHighlights: Record<number, string[]> = {
   7: ["Breakfast at hotel", "Airport transfer included"],
 };
 
-function DayContent({ day, isOpen }: { day: Day; isOpen: boolean }) {
+function DayContent({ day, isOpen, media }: { day: Day; isOpen: boolean; media: MediaAssets }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
 
@@ -416,9 +442,9 @@ function DayContent({ day, isOpen }: { day: Day; isOpen: boolean }) {
           className="relative w-full aspect-video rounded-lg overflow-hidden border border-gold/20"
         >
           <img
-            src={dayImages[day.day]}
+            src={media.dayImages[day.day]}
             alt=""
-            className={`w-full h-full object-cover ${dayPositions[day.day]}`}
+            className={`w-full h-full object-cover ${media.dayPositions[day.day]}`}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent" />
         </motion.div>
@@ -428,7 +454,7 @@ function DayContent({ day, isOpen }: { day: Day; isOpen: boolean }) {
           animate={isOpen ? "visible" : "hidden"}
           className="space-y-1.5"
         >
-          {dayHighlights[day.day]?.map((h) => (
+          {media.dayHighlights[day.day]?.map((h) => (
             <motion.li key={h} variants={itemVariants} className="flex items-start gap-2 text-sm text-white/70">
               <span className="text-gold mt-1">&#9679;</span>
               {h}
@@ -448,7 +474,7 @@ function DayContent({ day, isOpen }: { day: Day; isOpen: boolean }) {
   );
 }
 
-function HeaderSlideshow({ tagline, title }: { tagline: string; title: string }) {
+function HeaderSlideshow({ tagline, title, slides }: { tagline: string; title: string; slides: string[] }) {
   const [index, setIndex] = useState(0);
   const readyRef = useRef<boolean[]>(slides.map(() => false));
   const indexRef = useRef(0);

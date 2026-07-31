@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { IndianRupee, Minus, Plus } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
-const PRICE_PER_PERSON = 160000
-const DURATION_DAYS = 7
+const DEFAULT_PRICE = 160000
+const DEFAULT_DURATION_DAYS = 7
 
-function AnimatedNumber({ value }: { value: number }) {
+function AnimatedNumber({ value, locale }: { value: number; locale: string }) {
   const [display, setDisplay] = useState(value)
   const prevRef = useRef(value)
   useEffect(() => {
@@ -27,10 +27,15 @@ function AnimatedNumber({ value }: { value: number }) {
     requestAnimationFrame(animate)
     return () => { running = false }
   }, [value])
-  return <span>{display.toLocaleString("en-IN")}</span>
+  return <span>{display.toLocaleString(locale)}</span>
 }
 
-export default function CostEstimator({ triggerRefs }: { triggerRefs: React.RefObject<HTMLElement | null>[] }) {
+export default function CostEstimator({ triggerRefs, pricePerPerson = DEFAULT_PRICE, durationDays = DEFAULT_DURATION_DAYS, currency = "INR" }: {
+  triggerRefs: React.RefObject<HTMLElement | null>[];
+  pricePerPerson?: number;
+  durationDays?: number;
+  currency?: "INR" | "RUB";
+}) {
   const [show, setShow] = useState(false)
   const [pos, setPos] = useState({ top: 0, left: 0 })
   const [groupSize, setGroupSize] = useState(4)
@@ -38,7 +43,9 @@ export default function CostEstimator({ triggerRefs }: { triggerRefs: React.RefO
   const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const showTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
-  const total = groupSize * PRICE_PER_PERSON
+  const total = groupSize * pricePerPerson
+  const sym = currency === "RUB" ? "₽" : "₹"
+  const loc = currency === "RUB" ? "en-US" : "en-IN"
 
   useEffect(() => {
     const els = triggerRefs.map(r => r.current).filter(Boolean) as HTMLElement[]
@@ -112,12 +119,12 @@ export default function CostEstimator({ triggerRefs }: { triggerRefs: React.RefO
               <div className="mt-4 grid grid-cols-2 gap-2 mb-4">
                 <div className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.03]">
                   <p className="text-[9px] text-white/30 uppercase tracking-wider mb-0.5">Per Person</p>
-                  <p className="text-lg font-bold text-white tabular-nums">₹{PRICE_PER_PERSON.toLocaleString("en-IN")}</p>
-                  <p className="text-[9px] text-white/20">7-day tour</p>
+                  <p className="text-lg font-bold text-white tabular-nums">{sym}{pricePerPerson.toLocaleString(loc)}</p>
+                  <p className="text-[9px] text-white/20">{durationDays}-day tour</p>
                 </div>
                 <div className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.03]">
                   <p className="text-[9px] text-white/30 uppercase tracking-wider mb-0.5">Per Day</p>
-                  <p className="text-lg font-bold text-white tabular-nums">₹{Math.round(PRICE_PER_PERSON / DURATION_DAYS).toLocaleString("en-IN")}</p>
+                  <p className="text-lg font-bold text-white tabular-nums">{sym}{Math.round(pricePerPerson / durationDays).toLocaleString(loc)}</p>
                   <p className="text-[9px] text-white/20">{groupSize} {groupSize === 1 ? "traveler" : "travelers"}</p>
                 </div>
               </div>
@@ -153,8 +160,8 @@ export default function CostEstimator({ triggerRefs }: { triggerRefs: React.RefO
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(202,138,4,0.06),transparent_60%)]" />
                 <div className="relative text-center">
                   <p className="text-[9px] text-white/30 uppercase tracking-widest mb-1">Estimated Total</p>
-                  <p className="text-2xl font-bold text-gold tabular-nums tracking-tight">₹<AnimatedNumber value={total} /></p>
-                  <p className="text-[10px] text-white/30 mt-1">₹{Math.round(total / DURATION_DAYS).toLocaleString("en-IN")} per day</p>
+                  <p className="text-2xl font-bold text-gold tabular-nums tracking-tight">{sym}<AnimatedNumber value={total} locale={loc} /></p>
+                  <p className="text-[10px] text-white/30 mt-1">{sym}{Math.round(total / durationDays).toLocaleString(loc)} per day</p>
                 </div>
               </div>
             </div>

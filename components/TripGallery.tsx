@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, Camera } from "lucide-react";
 
-const photos = [
+const defaultPhotos = [
   { src: "/riverside_smiling.webp", alt: "Group by Moscow River", tag: "Welcome to Moscow", span: "tall" },
   { src: "/unsplash-stbasil.webp", alt: "St. Basil's Cathedral", tag: "Iconic Landmark", span: "wide" },
   { src: "/restraunt_photo.webp", alt: "Indian restaurant dining", tag: "Dinner Inclusions", span: "sq" },
@@ -42,7 +42,8 @@ function useReducedMotion() {
   return reduced;
 }
 
-export default function TripGallery() {
+export default function TripGallery({ photos: photosOverride }: { photos?: { src: string; alt: string; tag: string; span: string }[] } = {}) {
+  const photos = photosOverride ?? defaultPhotos;
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const { ref, inView } = useInView();
   const reduced = useReducedMotion();
