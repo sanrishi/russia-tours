@@ -12,6 +12,7 @@ interface TourCardData {
   gradient: string;
   price: string;
   href: string;
+  currency?: "INR" | "RUB";
   comingSoon?: boolean;
 }
 
@@ -31,8 +32,19 @@ const fallbackDestinations: TourCardData[] = [
       "Red Square, Kremlin, world-class Indian restaurants, and halal dining in Russia's majestic capital.",
     image: "/moscow-hero.webp",
     gradient: "from-crimson/80 via-crimson/40 to-transparent",
-    price: "₹1,60,000",
+    price: "1,60,000",
     href: "/moscow-express",
+  },
+  {
+    city: "Murmansk",
+    tagline: "The Arctic Frontier",
+    description:
+      "Chase the Northern Lights, meet huskies and reindeer, and stand at the edge of the Arctic Ocean.",
+    image: "/murmansk-hero.webp",
+    gradient: "from-teal/80 via-teal/40 to-transparent",
+    price: "61,000",
+    currency: "RUB",
+    href: "/murmansk",
   },
   {
     city: "St. Petersburg",
@@ -86,7 +98,7 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
             Destinations
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mt-4">
-            Three Cities. Infinite Stories.
+            Four Cities. Infinite Stories.
           </h2>
           <p className="text-white/50 text-base mt-4 max-w-xl mx-auto">
             Each city offers a unique flavor of Russia, curated for the Indian
@@ -94,7 +106,7 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {destinations.map((dest, i) => (
             <motion.a
               key={dest.city}
@@ -111,7 +123,7 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
                 alt={dest.city}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
 
               <div
@@ -127,8 +139,8 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
                   </span>
                 )}
                 <span className="inline-flex items-center gap-1 bg-charcoal/60 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full border border-white/10">
-                  <IndianRupee size={11} />
-                  {dest.price}/person
+                  {dest.currency === "RUB" ? <span aria-hidden>₽</span> : <IndianRupee size={11} />}
+                  {dest.price.replace(/^[₹₽]/, "")}/person
                 </span>
               </div>
 

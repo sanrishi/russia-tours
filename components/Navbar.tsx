@@ -13,6 +13,7 @@ import { playClick, ensureAudio } from "@/lib/sounds";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/places", label: "Places" },
+  { href: "/murmansk", label: "Murmansk" },
   { href: "/visa", label: "E Visa" },
   { href: "/news", label: "News" },
   { href: "/tips", label: "Useful Tips" },

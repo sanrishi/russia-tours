@@ -8,6 +8,7 @@ import CertificationsSection from "@/components/CertificationsSection";
 
 const quickLinks = [
   { label: "Moscow Express", href: "/moscow-express" },
+  { label: "Murmansk Arctic Quest", href: "/murmansk" },
   { label: "Travel Tips", href: "/tips" },
   { label: "Visa Guide", href: "/tips/visa-guide" },
   { label: "About Us", href: "/about" },

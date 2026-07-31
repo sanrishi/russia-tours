@@ -16,6 +16,14 @@ const cities = [
     description: "Russia's vibrant capital. Iconic landmarks, world-class museums, and a thriving Indian food scene — Moscow offers everything for a comfortable stay.",
   },
   {
+    name: "Murmansk",
+    slug: "murmansk",
+    tagline: "The Arctic Frontier",
+    image: "/murmansk-hero.webp",
+    highlights: ["Aurora hunting", "Husky & reindeer park", "Khibiny Mountains", "Teriberka — Arctic Ocean"],
+    description: "Beyond the Arctic Circle — chase the Northern Lights, meet huskies and reindeer, and stand where Russia meets the Arctic Ocean. 4 days, small group, fully guided.",
+  },
+  {
     name: "St. Petersburg",
     slug: null,
     tagline: "The Cultural Capital",
@@ -91,8 +99,8 @@ export default function PlacesContent() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-gold/70 text-base sm:text-lg leading-relaxed max-w-2xl"
             >
-              Moscow, St. Petersburg, Kazan — discover Russia&apos;s most iconic cities,
-              curated for Indian travelers.
+              Moscow, St. Petersburg, Kazan and Murmansk — discover Russia, curated
+              for Indian travelers.
             </motion.p>
           </div>
         </div>
@@ -105,7 +113,7 @@ export default function PlacesContent() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid md:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {cities.map((city) => {
             const isMoscow = city.name === "Moscow";
@@ -131,7 +139,7 @@ export default function PlacesContent() {
                   alt={city.name}
                   fill
                   className="object-cover transition-all duration-700 ease-out group-hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a0a] via-[#0c0a0a]/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
                 <div className="absolute top-4 left-4">
