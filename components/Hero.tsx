@@ -96,7 +96,7 @@ export default function Hero() {
   const s = slides[0];
 
   const heroStatic = (
-    <section className="relative h-dvh w-full overflow-hidden bg-charcoal">
+    <section className="relative h-dvh w-full overflow-hidden bg-charcoal flex flex-col">
       {/* Background image */}
       <div
         className="absolute inset-0"
@@ -127,7 +127,7 @@ export default function Hero() {
 
       {/* Content — CSS animated entrance */}
       <div
-        className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center max-md:-mt-16"
+        className="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-center px-6 text-center max-md:-mt-16"
         style={{ opacity: contentOpacity }}
       >
         <div className="animate-hero-card flex flex-col items-center gap-8">
@@ -157,37 +157,40 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Progress indicators (non-interactive before slides start) */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            disabled
-            className="relative w-10 h-10 rounded-full bg-transparent border-none cursor-default group"
-          >
-            <span className={`absolute inset-1 rounded-full transition-all duration-300 ${
-              i === 0 ? "bg-gold" : "bg-white/20"
-            }`} />
-            {i === 0 && (
-              <svg className="absolute inset-0 -rotate-90 w-full h-full" viewBox="0 0 40 40">
-                <circle
-                  cx="20" cy="20" r="18"
-                  fill="none"
-                  stroke="#d4af37"
-                  strokeWidth="2"
-                  strokeDasharray="0 113.1"
-                  strokeLinecap="round"
-                />
-              </svg>
-            )}
-          </button>
-        ))}
-      </div>
+      {/* Bottom controls — normal flow, below centered content */}
+      <div className="relative z-10 flex flex-col items-center gap-6 pb-8">
+        {/* Progress indicators (non-interactive before slides start) */}
+        <div className="flex items-center gap-3">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              disabled
+              className="relative w-10 h-10 rounded-full bg-transparent border-none cursor-default group"
+            >
+              <span className={`absolute inset-1 rounded-full transition-all duration-300 ${
+                i === 0 ? "bg-gold" : "bg-white/20"
+              }`} />
+              {i === 0 && (
+                <svg className="absolute inset-0 -rotate-90 w-full h-full" viewBox="0 0 40 40">
+                  <circle
+                    cx="20" cy="20" r="18"
+                    fill="none"
+                    stroke="#d4af37"
+                    strokeWidth="2"
+                    strokeDasharray="0 113.1"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              )}
+            </button>
+          ))}
+        </div>
 
-      {/* Scroll indicator */}
-      <div className="animate-fade-in-15 absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <div className="animate-bounce-subtle">
-          <ChevronDown className="text-white/30" size={24} />
+        {/* Scroll indicator */}
+        <div className="animate-fade-in-15">
+          <div className="animate-bounce-subtle">
+            <ChevronDown className="text-white/30" size={24} />
+          </div>
         </div>
       </div>
     </section>

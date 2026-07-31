@@ -149,7 +149,20 @@ export default function VisaPage() {
                   step: "01",
                   icon: Monitor,
                   title: "Visit the official portal",
-                  body: "Go to evisa.kdmid.ru — the only official e-visa portal. Avoid third-party sites that charge extra.",
+                  body: (
+                    <>
+                      Go to{" "}
+                      <a
+                        href="https://evisa.kdmid.ru"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gold font-semibold underline underline-offset-4 decoration-gold/40 hover:decoration-gold hover:text-yellow-300 transition-colors"
+                      >
+                        evisa.kdmid.ru
+                      </a>{" "}
+                      — the only official e-visa portal. Avoid third-party sites that charge extra.
+                    </>
+                  ),
                 },
                 {
                   step: "02",
@@ -318,7 +331,29 @@ export default function VisaPage() {
                 },
                 {
                   q: "What types of tourist visas are available for Russia?",
-                  a: "There are two main types: Unified electronic visa (e-visa) — applied for online at evisa.kdmid.ru, and Paper (regular) tourist visa — applied for via the Russian consulate or embassy. Visa application form available at visa.kdmid.ru."
+                  a: (
+                    <>
+                      There are two main types: Unified electronic visa (e-visa) — applied for online at{" "}
+                      <a
+                        href="https://evisa.kdmid.ru"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gold font-semibold underline underline-offset-4 decoration-gold/40 hover:decoration-gold hover:text-yellow-300 transition-colors"
+                      >
+                        evisa.kdmid.ru
+                      </a>
+                      , and Paper (regular) tourist visa — applied for via the Russian consulate or embassy. Visa application form available at{" "}
+                      <a
+                        href="https://visa.kdmid.ru"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gold font-semibold underline underline-offset-4 decoration-gold/40 hover:decoration-gold hover:text-yellow-300 transition-colors"
+                      >
+                        visa.kdmid.ru
+                      </a>
+                      .
+                    </>
+                  ),
                 },
                 {
                   q: "What documents are required to obtain a tourist visa to Russia?",

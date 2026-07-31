@@ -52,7 +52,7 @@ export default function HeroSlideshow({
   imageY,
 }: Props) {
   return (
-    <section className="relative h-dvh w-full overflow-hidden bg-charcoal">
+    <section className="relative h-dvh w-full overflow-hidden bg-charcoal flex flex-col">
       {/* Background images */}
       <div
         className="absolute inset-0"
@@ -94,7 +94,7 @@ export default function HeroSlideshow({
 
       {/* Content */}
       <div
-        className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center max-md:-mt-16"
+        className="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-center px-6 text-center max-md:-mt-16"
         style={{ opacity: contentOpacity }}
       >
         <AnimatePresence mode="wait">
@@ -157,44 +157,46 @@ export default function HeroSlideshow({
         </AnimatePresence>
       </div>
 
-      {/* Progress indicators */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className="relative w-10 h-10 rounded-full bg-transparent border-none cursor-pointer group"
-          >
-            <span className={`absolute inset-1 rounded-full transition-all duration-300 ${
-              i === current ? "bg-gold" : "bg-white/20 group-hover:bg-white/40"
-            }`} />
-            {i === current && (
-              <svg className="absolute inset-0 -rotate-90 w-full h-full" viewBox="0 0 40 40">
-                <circle
-                  cx="20" cy="20" r="18"
-                  fill="none"
-                  stroke="#d4af37"
-                  strokeWidth="2"
-                  strokeDasharray={`${(progress / 100) * 113.1} 113.1`}
-                  strokeLinecap="round"
-                />
-              </svg>
-            )}
-          </button>
-        ))}
-      </div>
+      {/* Bottom controls — normal flow, below centered content */}
+      <div className="relative z-10 flex flex-col items-center gap-6 pb-8">
+        {/* Progress indicators */}
+        <div className="flex items-center gap-3">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className="relative w-10 h-10 rounded-full bg-transparent border-none cursor-pointer group"
+            >
+              <span className={`absolute inset-1 rounded-full transition-all duration-300 ${
+                i === current ? "bg-gold" : "bg-white/20 group-hover:bg-white/40"
+              }`} />
+              {i === current && (
+                <svg className="absolute inset-0 -rotate-90 w-full h-full" viewBox="0 0 40 40">
+                  <circle
+                    cx="20" cy="20" r="18"
+                    fill="none"
+                    stroke="#d4af37"
+                    strokeWidth="2"
+                    strokeDasharray={`${(progress / 100) * 113.1} 113.1`}
+                    strokeLinecap="round"
+                  />
+                </svg>
+              )}
+            </button>
+          ))}
+        </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-      >
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-          <ChevronDown className="text-white/30" size={24} />
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+        >
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+            <ChevronDown className="text-white/30" size={24} />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
