@@ -773,11 +773,11 @@ const murmanskTrips = [
 
 const murmanskMedia = {
   slides: [
-    "/sveta-01.webp",
     "/sveta-04.webp",
     "/sveta-10.webp",
     "/sveta-24.webp",
     "/sveta-03.webp",
+    "/sveta-01.webp",
   ],
   dayImages: {
     1: "/sveta-34.webp",
