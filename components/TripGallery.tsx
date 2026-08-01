@@ -126,21 +126,32 @@ export default function TripGallery({ photos: photosOverride }: { photos?: { src
 
       {/* ─── Lightbox ─── */}
       {lightboxIndex !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={close}>
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          onClick={(e) => {
+            if (!(e.target as HTMLElement).closest("img")) close();
+          }}
+        >
           <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" />
-          <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-8" onClick={(e) => e.stopPropagation()}>
+          <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-8">
             {/* Close */}
-            <button onClick={close} className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 flex items-center justify-center transition-all duration-300 cursor-pointer z-20">
+            <button onClick={close} className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-black/60 border border-white/25 backdrop-blur-md hover:bg-black/80 hover:border-white/50 flex items-center justify-center transition-all duration-300 cursor-pointer z-20">
               <X size={18} className="text-white" />
             </button>
 
             {/* Counter */}
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white/70 text-xs font-medium">
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 px-3 py-1.5 rounded-full bg-black/60 border border-white/20 backdrop-blur-md text-white/90 text-xs font-medium">
               {lightboxIndex + 1} / {photos.length}
             </div>
 
             {/* Prev */}
-            <button onClick={prev} className="absolute left-2 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 flex items-center justify-center transition-all duration-300 cursor-pointer z-20">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
+              className="absolute left-2 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-white/25 backdrop-blur-md hover:bg-black/80 hover:border-white/50 flex items-center justify-center transition-all duration-300 cursor-pointer z-20"
+            >
               <ChevronLeft size={20} className="text-white" />
             </button>
 
@@ -154,14 +165,20 @@ export default function TripGallery({ photos: photosOverride }: { photos?: { src
             </div>
 
             {/* Next */}
-            <button onClick={next} className="absolute right-2 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 flex items-center justify-center transition-all duration-300 cursor-pointer z-20">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
+              className="absolute right-2 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-white/25 backdrop-blur-md hover:bg-black/80 hover:border-white/50 flex items-center justify-center transition-all duration-300 cursor-pointer z-20"
+            >
               <ChevronRight size={20} className="text-white" />
             </button>
 
             {/* Caption */}
-            <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 text-center px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-md">
+            <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 text-center px-6 py-3 rounded-2xl bg-black/60 border border-white/15 backdrop-blur-md">
               <p className="text-white font-heading font-semibold text-sm">{photos[lightboxIndex].tag}</p>
-              <p className="text-white/50 text-xs mt-0.5">{photos[lightboxIndex].alt}</p>
+              <p className="text-white/60 text-xs mt-0.5">{photos[lightboxIndex].alt}</p>
             </div>
           </div>
         </div>
