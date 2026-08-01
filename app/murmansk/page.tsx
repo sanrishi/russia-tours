@@ -126,7 +126,7 @@ export default function MurmanskPage() {
 
   useEffect(() => {
     const isMobile = window.innerWidth < 640
-    document.documentElement.style.setProperty("--hero-bg", `url(${isMobile ? "/mobile-bg.webp" : "/sveta-30.webp"})`)
+    document.documentElement.style.setProperty("--hero-bg", `url(${isMobile ? "/murmansk-bg-mobile.webp" : "/murmansk-bg-desktop.webp"})`)
   }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
