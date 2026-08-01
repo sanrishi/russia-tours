@@ -183,7 +183,7 @@ export default function TripCard({
             className={`relative rounded-2xl overflow-hidden transition-all duration-500 ${
             trip.comingSoon
               ? "border border-white/5 bg-[#1C1917] opacity-60"
-              : "border border-white/[0.04] bg-[#1C1917]/85 hover:shadow-[0_0_50px_-20px_rgba(202,138,4,0.15)]"
+              : "border border-white/[0.04] bg-[#1C1917]/85 backdrop-blur-md hover:shadow-[0_0_50px_-20px_rgba(202,138,4,0.15)]"
             }`}
         >
           <DotsOverlay />

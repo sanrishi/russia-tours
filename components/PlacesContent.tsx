@@ -19,7 +19,7 @@ const cities = [
     name: "Murmansk",
     slug: "murmansk",
     tagline: "The Arctic Frontier",
-    image: "/murmansk-hero.webp",
+    image: "/sveta-30.webp",
     highlights: ["Aurora hunting", "Ice floating in Kola Bay", "Husky & reindeer park", "Teriberka — Arctic Ocean"],
     description: "Beyond the Arctic Circle — chase the Northern Lights, meet huskies and reindeer, and float in the icy Kola Bay. 4 days, small group, fully guided.",
   },

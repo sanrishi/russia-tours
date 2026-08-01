@@ -126,7 +126,7 @@ export default function MurmanskPage() {
 
   useEffect(() => {
     const isMobile = window.innerWidth < 640
-    document.documentElement.style.setProperty("--hero-bg", `url(${isMobile ? "/mobile-bg.webp" : "/murmansk-hero.webp"})`)
+    document.documentElement.style.setProperty("--hero-bg", `url(${isMobile ? "/mobile-bg.webp" : "/sveta-30.webp"})`)
   }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -197,7 +197,7 @@ export default function MurmanskPage() {
         </div>
 
         <div className="relative z-10 flex-1 min-h-0 flex items-center justify-center px-4 pt-24">
-        <div className="relative max-w-4xl mx-auto w-full p-8 sm:p-12 lg:p-16 rounded-2xl border border-white/[0.04] bg-[#1C1917]/70 shadow-[0_0_60px_-20px_rgba(0,0,0,0.5)] overflow-hidden">
+        <div className="relative max-w-4xl mx-auto w-full p-8 sm:p-12 lg:p-16 rounded-2xl border border-white/[0.04] bg-[#1C1917]/70 backdrop-blur-md shadow-[0_0_60px_-20px_rgba(0,0,0,0.5)] overflow-hidden">
           <DotsOverlay />
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
           <div className="text-center">
@@ -280,7 +280,7 @@ export default function MurmanskPage() {
         {/* ─── STORY CHAPTERS ─── */}
         <section id="story" className="px-4 sm:px-6 pt-32 pb-24">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-32 max-w-3xl mx-auto relative rounded-2xl border border-white/[0.06] bg-black/80 p-8 sm:p-10 overflow-hidden">
+            <div className="text-center mb-32 max-w-3xl mx-auto relative rounded-2xl border border-white/[0.06] bg-black/80 backdrop-blur-md p-8 sm:p-10 overflow-hidden">
               <DotsOverlay />
               <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
               <span className="text-[10px] font-semibold uppercase tracking-[0.25em] bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#2DD4BF] bg-clip-text text-transparent" style={{ fontFamily: "var(--font-body)" }}>
@@ -370,7 +370,7 @@ export default function MurmanskPage() {
                     {/* Content */}
                     <div className={`pl-14 sm:pl-0 sm:w-1/2 ${isLeft ? "sm:pr-8 sm:text-right" : "sm:pl-8"}`}>
                       <div
-                        className={`group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-black/70 p-6 sm:p-8 transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)] ${
+                        className={`group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-black/70 backdrop-blur-md p-6 sm:p-8 transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)] ${
                            activeChapter === ch.id ? "border-white/[0.12] shadow-[0_0_50px_-20px_rgba(212,175,55,0.15)]" : ""
                          }`}
                         style={{ '--card-accent': ch.accent } as React.CSSProperties}
@@ -461,7 +461,7 @@ export default function MurmanskPage() {
                   ].map((opt) => (
                     <div
                       key={opt.name}
-                      className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 flex flex-col text-center sm:text-left"
+                      className="rounded-2xl border border-white/[0.06] bg-white/[0.05] backdrop-blur-sm p-6 flex flex-col text-center sm:text-left"
                     >
                       <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-medium" style={{ fontFamily: "var(--font-body)" }}>{opt.days}</p>
                       <h3 className="text-lg font-bold text-white mt-1" style={{ fontFamily: "var(--font-heading)" }}>{opt.name}</h3>
@@ -489,6 +489,43 @@ export default function MurmanskPage() {
             <GlassCard>
               <div className="p-6 sm:p-8">
                 <TripGallery photos={murmanskPhotos} />
+              </div>
+            </GlassCard>
+          </div>
+        </div>
+
+        {/* ─── VIDEOS FROM THE ARCTIC ─── */}
+        <div className="px-4 sm:px-6 pb-16">
+          <div className="max-w-[1728px] mx-auto">
+            <GlassCard>
+              <div className="p-6 sm:p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h2
+                      className="text-lg sm:text-xl font-bold text-white"
+                      style={{ fontFamily: "var(--font-heading)" }}
+                    >
+                      Videos from the Arctic
+                    </h2>
+                    <p className="text-white/40 text-xs mt-0.5" style={{ fontFamily: "var(--font-body)" }}>
+                      Real moments from the Polar Saga journey
+                    </p>
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <video
+                      key={n}
+                      src={`/sveta-vid-${n}.mp4`}
+                      poster={`/sveta-vid-${n}-poster.webp`}
+                      controls
+                      preload="none"
+                      playsInline
+                      className="w-full aspect-video rounded-xl border border-white/[0.08] bg-black/60 object-cover cursor-pointer"
+                      aria-label={`Polar Saga video ${n}`}
+                    />
+                  ))}
+                </div>
               </div>
             </GlassCard>
           </div>
@@ -664,7 +701,7 @@ const murmanskTrips = [
   {
     title: "Polar Saga — Murmansk · 4 Days",
     tagline: "Aurora · Teriberka · Husky · Ice Floating",
-    image: "/murmansk-hero.webp",
+    image: "/sveta-30.webp",
     pricePerPerson: 62000,
     duration: "4 days",
     groupSize: "Max 8 people",
@@ -736,17 +773,17 @@ const murmanskTrips = [
 
 const murmanskMedia = {
   slides: [
-    "/murmansk-hero.webp",
-    "/murmansk-aurora.webp",
-    "/murmansk-day2.webp",
-    "/murmansk-day3.webp",
-    "/murmansk-day4.webp",
+    "/sveta-30.webp",
+    "/sveta-34.webp",
+    "/sveta-07.webp",
+    "/sveta-19.webp",
+    "/sveta-18.webp",
   ],
   dayImages: {
-    1: "/murmansk-day1.webp",
-    2: "/murmansk-day2.webp",
-    3: "/murmansk-day3.webp",
-    4: "/murmansk-day4.webp",
+    1: "/sveta-34.webp",
+    2: "/sveta-07.webp",
+    3: "/sveta-19.webp",
+    4: "/sveta-18.webp",
   },
   dayPositions: {
     1: "object-center",
@@ -763,10 +800,39 @@ const murmanskMedia = {
 }
 
 const murmanskPhotos = [
-  { src: "/murmansk-hero.webp", alt: "Northern Lights over Murmansk", tag: "Aurora Hunting", span: "tall" },
-  { src: "/murmansk-aurora.webp", alt: "The aurora borealis in full colour", tag: "Northern Lights", span: "wide" },
-  { src: "/murmansk-day2.webp", alt: "Arctic huskies in the snow", tag: "Husky Park", span: "sq" },
-  { src: "/murmansk-day3.webp", alt: "Snowmobile safari across the tundra", tag: "Snowmobile Safari", span: "sq" },
-  { src: "/murmansk-day1.webp", alt: "Winter tundra landscape", tag: "Arctic Tundra", span: "sq" },
-  { src: "/murmansk-day4.webp", alt: "Ice floating in the Kola Bay", tag: "Ice Floating", span: "wide" },
+  { src: "/sveta-01.webp", alt: "Winter Landscape 01", tag: "Winter Landscape", span: "tall" },
+  { src: "/sveta-02.webp", alt: "Winter Landscape 02", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-03.webp", alt: "Arctic Ocean & Sky 03", tag: "Arctic Ocean & Sky", span: "sq" },
+  { src: "/sveta-04.webp", alt: "Arctic Ocean & Sky 04", tag: "Arctic Ocean & Sky", span: "sq" },
+  { src: "/sveta-05.webp", alt: "Winter Landscape 05", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-06.webp", alt: "Winter Landscape 06", tag: "Winter Landscape", span: "wide" },
+  { src: "/sveta-07.webp", alt: "Arctic Ocean & Sky 07", tag: "Arctic Ocean & Sky", span: "sq" },
+  { src: "/sveta-08.webp", alt: "Winter Landscape 08", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-09.webp", alt: "Arctic Ocean & Sky 09", tag: "Arctic Ocean & Sky", span: "tall" },
+  { src: "/sveta-10.webp", alt: "Arctic Ocean & Sky 10", tag: "Arctic Ocean & Sky", span: "sq" },
+  { src: "/sveta-11.webp", alt: "Arctic Ocean & Sky 11", tag: "Arctic Ocean & Sky", span: "wide" },
+  { src: "/sveta-12.webp", alt: "Arctic Ocean & Sky 12", tag: "Arctic Ocean & Sky", span: "sq" },
+  { src: "/sveta-13.webp", alt: "Winter Landscape 13", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-14.webp", alt: "Winter Landscape 14", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-15.webp", alt: "Murmansk Moments 15", tag: "Murmansk Moments", span: "sq" },
+  { src: "/sveta-16.webp", alt: "Arctic Ocean & Sky 16", tag: "Arctic Ocean & Sky", span: "wide" },
+  { src: "/sveta-17.webp", alt: "Arctic Ocean & Sky 17", tag: "Arctic Ocean & Sky", span: "tall" },
+  { src: "/sveta-18.webp", alt: "Arctic Ocean & Sky 18", tag: "Arctic Ocean & Sky", span: "sq" },
+  { src: "/sveta-19.webp", alt: "Arctic Ocean & Sky 19", tag: "Arctic Ocean & Sky", span: "sq" },
+  { src: "/sveta-20.webp", alt: "Winter Landscape 20", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-21.webp", alt: "Winter Landscape 21", tag: "Winter Landscape", span: "wide" },
+  { src: "/sveta-22.webp", alt: "Murmansk Moments 22", tag: "Murmansk Moments", span: "sq" },
+  { src: "/sveta-23.webp", alt: "Winter Landscape 23", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-24.webp", alt: "Winter Landscape 24", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-25.webp", alt: "Murmansk Moments 25", tag: "Murmansk Moments", span: "tall" },
+  { src: "/sveta-26.webp", alt: "Winter Landscape 26", tag: "Winter Landscape", span: "wide" },
+  { src: "/sveta-27.webp", alt: "Winter Landscape 27", tag: "Winter Landscape", span: "sq" },
+  { src: "/sveta-28.webp", alt: "Murmansk Moments 28", tag: "Murmansk Moments", span: "sq" },
+  { src: "/sveta-29.webp", alt: "Murmansk Moments 29", tag: "Murmansk Moments", span: "sq" },
+  { src: "/sveta-30.webp", alt: "Aurora Night 30", tag: "Aurora Night", span: "sq" },
+  { src: "/sveta-31.webp", alt: "Arctic Ocean & Sky 31", tag: "Arctic Ocean & Sky", span: "wide" },
+  { src: "/sveta-32.webp", alt: "Murmansk Moments 32", tag: "Murmansk Moments", span: "sq" },
+  { src: "/sveta-33.webp", alt: "Winter Landscape 33", tag: "Winter Landscape", span: "tall" },
+  { src: "/sveta-34.webp", alt: "Aurora Night 34", tag: "Aurora Night", span: "sq" },
+  { src: "/sveta-35.webp", alt: "Winter Landscape 35", tag: "Winter Landscape", span: "sq" },
 ]

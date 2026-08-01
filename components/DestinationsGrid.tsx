@@ -40,7 +40,7 @@ const fallbackDestinations: TourCardData[] = [
     tagline: "The Arctic Frontier",
     description:
       "Chase the Northern Lights, meet huskies and reindeer, and float in the icy Kola Bay — the Arctic, close enough to touch.",
-    image: "/murmansk-hero.webp",
+    image: "/sveta-30.webp",
     gradient: "from-teal/80 via-teal/40 to-transparent",
     price: "62,000",
     currency: "RUB",
