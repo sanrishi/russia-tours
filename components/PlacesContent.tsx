@@ -118,6 +118,8 @@ export default function PlacesContent() {
           {cities.map((city) => {
             const isMoscow = city.name === "Moscow";
             const isMurmansk = city.name === "Murmansk";
+            const isSPB = city.name === "St. Petersburg";
+            const isKazan = city.name === "Kazan";
             return (
             <motion.div
               key={city.name}
@@ -132,6 +134,10 @@ export default function PlacesContent() {
                   ? "border-[#3a1010] bg-[#120606] hover:border-red-500/25 hover:shadow-[0_16px_48px_-12px_rgba(220,50,50,0.15)]"
                   : isMurmansk
                   ? "border-[#0e3d4a] bg-[#071c24] hover:border-[#22d3ee]/40 hover:shadow-[0_16px_48px_-12px_rgba(34,211,238,0.2)]"
+                  : isSPB
+                  ? "border-[#3d240b] bg-[#1a0e05] hover:border-[#f97316]/40 hover:shadow-[0_16px_48px_-12px_rgba(249,115,22,0.2)]"
+                  : isKazan
+                  ? "border-[#0b3d2e] bg-[#052014] hover:border-[#34d399]/40 hover:shadow-[0_16px_48px_-12px_rgba(52,211,153,0.2)]"
                   : "border-[#2a1a3a] bg-[#0c0a10] hover:border-[#6a3a9a] hover:shadow-[0_16px_48px_-12px_rgba(106,58,154,0.15)]"
               }`}
             >
@@ -151,6 +157,10 @@ export default function PlacesContent() {
                       ? "border-red-500/30 bg-[#120606]/80 text-red-400"
                       : isMurmansk
                       ? "border-[#22d3ee]/30 bg-[#071c24]/80 text-[#67e8f9]"
+                      : isSPB
+                      ? "border-[#f97316]/30 bg-[#1a0e05]/80 text-[#fb923c]"
+                      : isKazan
+                      ? "border-[#34d399]/30 bg-[#052014]/80 text-[#34d399]"
                       : "border-[#7a4aaa]/30 bg-[#0c0a10]/80 text-[#9a6aca]"
                   }`}>
                     {city.tagline}
@@ -161,7 +171,7 @@ export default function PlacesContent() {
               {/* Content */}
               <div className="p-5 sm:p-6">
                 <h2 className={`text-xl font-bold text-white mb-2 transition-colors duration-300 ${
-                  isMoscow ? "group-hover:text-red-400" : isMurmansk ? "group-hover:text-[#67e8f9]" : "group-hover:text-[#9a6aca]"
+                  isMoscow ? "group-hover:text-red-400" : isMurmansk ? "group-hover:text-[#67e8f9]" : isSPB ? "group-hover:text-[#fb923c]" : isKazan ? "group-hover:text-[#34d399]" : "group-hover:text-[#9a6aca]"
                 }`}>
                   {city.name}
                 </h2>
@@ -182,12 +192,12 @@ export default function PlacesContent() {
 
                 {city.slug ? (
                   <span className={`inline-flex items-center gap-2 text-sm font-medium group/link ${
-                    isMoscow ? "text-red-400" : isMurmansk ? "text-[#22d3ee]" : "text-gold"
+                    isMoscow ? "text-red-400" : isMurmansk ? "text-[#22d3ee]" : isSPB ? "text-[#fb923c]" : isKazan ? "text-[#34d399]" : "text-gold"
                   }`}>
                     <span className="relative">
                       View Tours
                       <span className={`absolute -bottom-px left-0 right-0 h-px scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 origin-left ${
-                        isMoscow ? "bg-red-400/40" : isMurmansk ? "bg-[#22d3ee]/40" : "bg-gold/40"
+                        isMoscow ? "bg-red-400/40" : isMurmansk ? "bg-[#22d3ee]/40" : isSPB ? "bg-[#fb923c]/40" : isKazan ? "bg-[#34d399]/40" : "bg-gold/40"
                       }`} />
                     </span>
                     <ArrowRight size={14} className="transition-transform duration-300 group-hover/link:translate-x-0.5" />

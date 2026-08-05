@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import { usePathname } from "next/navigation"
 import SiteLogo from "./SiteLogo"
@@ -150,6 +150,72 @@ const ICE_THEME = {
   underlineGrad: "linear-gradient(90deg, transparent, #0E7490, #06B6D4, #22D3EE, #67E8F9, #A5F3FC, #67E8F9, #22D3EE, #06B6D4, #0E7490, transparent)",
 }
 
+const ORANGE_THEME = {
+  bg: "bg-[#1A0E05]",
+  accent: "rgba(249,115,22,",
+  accent2: "rgba(194,65,12,",
+  glow: "rgba(249,115,22,0.3)",
+  gold: "text-orange-300/40",
+  pulseBg: "radial-gradient(circle, rgba(249,115,22,0.6) 0%, transparent 100%)",
+  progress: "linear-gradient(90deg, #7C2D12, #EA580C, #F97316, #FDBA74, #F97316, #EA580C, #7C2D12)",
+  ringStroke: "rgba(249,115,22,0.07)",
+  ringStroke2: "rgba(249,115,22,0.04)",
+  particleMain: "#FB923C",
+  particleSub: "#F97316",
+  heroParticle: "#FDBA74",
+  heroShadow: "rgba(249,115,22,0.45)",
+  heroShadow2: "rgba(249,115,22,0.22)",
+  heroShadow3: "rgba(249,115,22,0.1)",
+  bigShadow: "rgba(249,115,22,0.35), 0 8px 18px rgba(249,115,22,0.18), 0 0 6px rgba(251,146,60,0.45), 0 0 16px rgba(251,146,60,0.2)",
+  smallShadow: "rgba(249,115,22,0.3)",
+  glowBg: "radial-gradient(circle, rgba(249,115,22,0.22) 0%, transparent 60%)",
+  dotBg: "radial-gradient(circle, #FDBA74 0%, #F97316 60%, transparent 100%)",
+  dotShadow: "0 0 12px rgba(249,115,22,0.8), 0 0 24px rgba(249,115,22,0.35)",
+  flashBg: "radial-gradient(circle, rgba(251,146,60,0.3) 0%, transparent 60%)",
+  tagline: ["Imperial", "Highlights"],
+  dustOpacity: "radial-gradient(circle, rgba(251,146,60,0.55) 0%, rgba(194,65,12,0.35) 40%, transparent 100%)",
+  bgGrad1: "from-[#1A0E05]/70 via-[#1A0E05]/50 to-[#7C2D12]/25",
+  bgGrad2: "from-[#1A0E05] via-[#1A0E05]/60 to-transparent",
+  bgRadial: "radial-gradient(circle at 50% 42%, rgba(249,115,22,0.14) 0%, rgba(249,115,22,0.04) 35%, transparent 70%)",
+  goldFlowH: ["rgba(249,115,22,0)", "rgba(249,115,22,0)", "rgba(251,146,60,0.5)", "rgba(253,186,116,0.65)", "rgba(251,146,60,0.5)", "rgba(249,115,22,0)", "rgba(249,115,22,0)"],
+  goldFlowV: ["rgba(249,115,22,0)", "rgba(249,115,22,0)", "rgba(251,146,60,0.3)", "rgba(253,186,116,0.45)", "rgba(251,146,60,0.3)", "rgba(249,115,22,0)", "rgba(249,115,22,0)"],
+  textGlow: "0 0 24px rgba(249,115,22,0.4), 0 0 52px rgba(249,115,22,0.15)",
+  underlineGrad: "linear-gradient(90deg, transparent, #7C2D12, #EA580C, #F97316, #FDBA74, #FFE4C4, #FDBA74, #F97316, #EA580C, #7C2D12, transparent)",
+}
+
+const GREEN_THEME = {
+  bg: "bg-[#052014]",
+  accent: "rgba(16,185,129,",
+  accent2: "rgba(5,150,105,",
+  glow: "rgba(16,185,129,0.3)",
+  gold: "text-emerald-300/40",
+  pulseBg: "radial-gradient(circle, rgba(16,185,129,0.6) 0%, transparent 100%)",
+  progress: "linear-gradient(90deg, #064E3B, #10B981, #34D399, #6EE7B7, #34D399, #10B981, #064E3B)",
+  ringStroke: "rgba(16,185,129,0.07)",
+  ringStroke2: "rgba(16,185,129,0.04)",
+  particleMain: "#34D399",
+  particleSub: "#10B981",
+  heroParticle: "#6EE7B7",
+  heroShadow: "rgba(16,185,129,0.45)",
+  heroShadow2: "rgba(16,185,129,0.22)",
+  heroShadow3: "rgba(16,185,129,0.1)",
+  bigShadow: "rgba(16,185,129,0.35), 0 8px 18px rgba(16,185,129,0.18), 0 0 6px rgba(52,211,153,0.45), 0 0 16px rgba(52,211,153,0.2)",
+  smallShadow: "rgba(16,185,129,0.3)",
+  glowBg: "radial-gradient(circle, rgba(16,185,129,0.22) 0%, transparent 60%)",
+  dotBg: "radial-gradient(circle, #6EE7B7 0%, #10B981 60%, transparent 100%)",
+  dotShadow: "0 0 12px rgba(16,185,129,0.8), 0 0 24px rgba(16,185,129,0.35)",
+  flashBg: "radial-gradient(circle, rgba(52,211,153,0.3) 0%, transparent 60%)",
+  tagline: ["Crossroad", "of Worlds"],
+  dustOpacity: "radial-gradient(circle, rgba(52,211,153,0.55) 0%, rgba(5,150,105,0.35) 40%, transparent 100%)",
+  bgGrad1: "from-[#052014]/70 via-[#052014]/50 to-[#064E3B]/25",
+  bgGrad2: "from-[#052014] via-[#052014]/60 to-transparent",
+  bgRadial: "radial-gradient(circle at 50% 42%, rgba(16,185,129,0.14) 0%, rgba(16,185,129,0.04) 35%, transparent 70%)",
+  goldFlowH: ["rgba(16,185,129,0)", "rgba(16,185,129,0)", "rgba(52,211,153,0.5)", "rgba(110,231,183,0.65)", "rgba(52,211,153,0.5)", "rgba(16,185,129,0)", "rgba(16,185,129,0)"],
+  goldFlowV: ["rgba(16,185,129,0)", "rgba(16,185,129,0)", "rgba(52,211,153,0.3)", "rgba(110,231,183,0.45)", "rgba(52,211,153,0.3)", "rgba(16,185,129,0)", "rgba(16,185,129,0)"],
+  textGlow: "0 0 24px rgba(16,185,129,0.4), 0 0 52px rgba(16,185,129,0.15)",
+  underlineGrad: "linear-gradient(90deg, transparent, #064E3B, #10B981, #34D399, #6EE7B7, #D1FAE5, #6EE7B7, #34D399, #10B981, #064E3B, transparent)",
+}
+
 export default function Preloader() {
   const pathname = usePathname()
   const isHome = pathname === "/"
@@ -158,7 +224,7 @@ export default function Preloader() {
   const isSPB = pathname === "/st-petersburg"
   const isKazan = pathname === "/kazan"
   const shouldShow = isHome || isMoscow || isMurmansk || isSPB || isKazan
-  const theme = isMurmansk ? ICE_THEME : { ...CRIMSON_THEME, tagline: isMoscow ? ["Moscow", "Express"] : ["Signature", "Russia", "Tours"] }
+  const theme = isMurmansk ? ICE_THEME : isSPB ? ORANGE_THEME : isKazan ? GREEN_THEME : { ...CRIMSON_THEME, tagline: isMoscow ? ["Moscow", "Express"] : ["Signature", "Russia", "Tours"] }
 
   const [phase, setPhase] = useState<"loading" | "ready" | "exit" | "done">(shouldShow ? "loading" : "done")
   const ringProgress = useMotionValue(0)
@@ -175,7 +241,23 @@ export default function Preloader() {
   const [progressDone, setProgressDone] = useState(false)
   const [showLogo, setShowLogo] = useState(false)
   const [showTagline, setShowTagline] = useState(false)
+  const [prevPath, setPrevPath] = useState(pathname)
   const startTimeRef = useRef(performance.now())
+
+  useLayoutEffect(() => {
+    if (prevPath !== pathname && (pathname === "/murmansk" || pathname === "/st-petersburg" || pathname === "/kazan")) {
+      setPrevPath(pathname)
+      setPhase("loading")
+      ringProgress.set(0)
+      setProgressDone(false)
+      setShowLogo(false)
+      setShowTagline(false)
+      startTimeRef.current = performance.now()
+    } else if (prevPath !== pathname) {
+      setPrevPath(pathname)
+      setPhase("done")
+    }
+  }, [pathname, prevPath, ringProgress])
 
   useEffect(() => {
     if (!shouldShow || (phase !== "loading" && phase !== "ready")) return

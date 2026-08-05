@@ -32,6 +32,7 @@ interface RussiaHighlightsProps {
   enquiryTitle: string
   jsonLdName: string
   jsonLdDesc: string
+  accent?: "gold" | "emerald"
 }
 
 export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
@@ -39,9 +40,13 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
     city, heroTitle, heroSubtitle, gradientTitle, badge, description, heroBg,
     accentFrom, accentVia, accentTo, accentText,
     pageLabel, headline, trips, media, photos,
-    pricePerPerson, waText, enquiryTitle, jsonLdName, jsonLdDesc,
+    pricePerPerson, waText, enquiryTitle, jsonLdName, jsonLdDesc, accent,
   } = props
-
+  const isEmerald = accent === "emerald"
+  const focusBorder = isEmerald ? "focus:border-[#34D399]/60" : "focus:border-[#D4AF37]/60"
+  const focusBorderSoft = isEmerald ? "focus:border-[#34D399]/50" : "focus:border-[#D4AF37]/50"
+  const successBg = isEmerald ? "bg-[#34D399]/10" : "bg-[#D4AF37]/10"
+  const successIcon = isEmerald ? "text-[#34D399]" : "text-[#D4AF37]"
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const costBtnRef = useRef<HTMLButtonElement>(null)
@@ -99,37 +104,41 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
     <><main className="relative">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripJsonLd) }} />
 
+      {/* Fixed full-page background — stays behind all content while scrolling */}
+      <div className="fixed inset-0 -z-10" aria-hidden="true">
+        <img
+          src={heroBg}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[#0B0D1A]/70" />
+      </div>
+
       {/* ─── HERO ─── */}
       <section className="relative min-h-svh flex flex-col overflow-hidden">
-        {/* Hero background image */}
-        <div className="absolute inset-0 -z-10" aria-hidden="true">
-          <img
-            src={heroBg}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0D1A]/80 via-[#0B0D1A]/60 to-[#0B0D1A]" />
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(circle at 30% 50%, #d4af37 0.5px, transparent 0.5px)`, backgroundSize: "40px 40px" }} />
+        {/* Local vignette over the fixed bg — scrolls with the hero */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0D1A]/60 via-transparent to-[#0B0D1A]" />
         </div>
         {/* Background orbs with static blur */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-[#D4AF37]/20 blur-[80px]" />
+          <div className={`absolute -top-40 -left-40 w-80 h-80 rounded-full ${isEmerald ? "bg-[#34D399]/20" : "bg-[#D4AF37]/20"} blur-[80px]`} />
           <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-[#38BDF8]/10 blur-[80px]" />
         </div>
 
         <div className="relative z-10 flex-1 min-h-0 flex items-center justify-center px-4 pt-24">
         <div className="relative max-w-4xl mx-auto w-full p-8 sm:p-12 lg:p-16 rounded-2xl border border-white/[0.04] bg-[#1C1917]/70 backdrop-blur-md shadow-[0_0_60px_-20px_rgba(0,0,0,0.5)] overflow-hidden">
           <DotsOverlay />
-          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+          <div className={`absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent ${isEmerald ? "via-[#34D399]/30" : "via-[#D4AF37]/30"} to-transparent`} />
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-8">
-              <span className="w-8 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
-              <span className="w-1 h-1 rounded-full bg-[#D4AF37]" />
-              <span className="w-8 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
+              <span className={`w-8 h-px bg-gradient-to-r from-transparent ${isEmerald ? "to-[#34D399]/60" : "to-[#D4AF37]/60"}`} />
+              <span className={`w-1 h-1 rounded-full ${isEmerald ? "bg-[#34D399]" : "bg-[#D4AF37]"}`} />
+              <span className={`w-8 h-px bg-gradient-to-l from-transparent ${isEmerald ? "to-[#34D399]/60" : "to-[#D4AF37]/60"}`} />
             </div>
 
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/[0.06] bg-white/[0.03] mb-8 hover:border-[#D4AF37]/20 transition-all duration-500">
-              <Sparkles size={10} className="text-[#D4AF37]" />
+            <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/[0.06] bg-white/[0.03] mb-8 ${isEmerald ? "hover:border-[#34D399]/20" : "hover:border-[#D4AF37]/20"} transition-all duration-500`}>
+              <Sparkles size={10} className={isEmerald ? "text-[#34D399]" : "text-[#D4AF37]"} />
               <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/60" style={{ fontFamily: "var(--font-body)" }}>
                 {badge}
               </span>
@@ -191,10 +200,10 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
       </section>
 
       {/* ─── OVERVIEW ─── */}
-      <section className="px-4 sm:px-6 pt-16 pb-16">
-        <div className="max-w-4xl mx-auto text-center relative rounded-2xl border border-white/[0.06] bg-black/80 backdrop-blur-md p-8 sm:p-10 overflow-hidden">
+      <section className="px-4 sm:px-6 pt-32 pb-16">
+        <div className="max-w-4xl mx-auto text-center relative rounded-2xl border border-white/[0.06] bg-[#0B0D1A]/50 backdrop-blur-md p-8 sm:p-10 overflow-hidden">
           <DotsOverlay />
-          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+          <div className={`absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent ${accent === "emerald" ? "via-[#34D399]/30" : "via-[#D4AF37]/30"} to-transparent`} />
           <span className={`text-[10px] font-semibold uppercase tracking-[0.25em] bg-gradient-to-r ${accentFrom} ${accentVia} ${accentTo} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-body)" }}>
             {pageLabel}
           </span>
@@ -216,6 +225,7 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
             pageUrl={`/${city.toLowerCase()}`}
             trips={trips}
             media={media}
+            accent={accent}
           />
         </div>
       </section>
@@ -223,7 +233,7 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
       {/* ─── TRIP GALLERY ─── */}
       <div className="px-4 sm:px-6 pb-16">
         <div className="max-w-[1728px] mx-auto">
-          <GlassCard>
+          <GlassCard bg="bg-[#0B0D1A]/40">
             <div className="p-6 sm:p-8">
               <div className="mb-6">
                 <span className={`text-[10px] font-semibold uppercase tracking-[0.25em] bg-gradient-to-r ${accentFrom} ${accentVia} ${accentTo} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-body)" }}>
@@ -242,8 +252,8 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
       {/* ─── GROUP BOOKING CTA ─── */}
       <div className="px-4 sm:px-6 pb-16">
         <div className="max-w-[1728px] mx-auto">
-          <GlassCard>
-            <GroupBookingCallout calcBtnRef={calcBtnRef as React.RefObject<HTMLButtonElement | null>} />
+          <GlassCard bg="bg-[#0B0D1A]/40">
+            <GroupBookingCallout calcBtnRef={calcBtnRef as React.RefObject<HTMLButtonElement | null>} accent={accent} />
           </GlassCard>
         </div>
       </div>
@@ -253,7 +263,7 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
       {/* ─── BOOKING ─── */}
       <section id="booking" className="relative scroll-mt-24 px-4 sm:px-6 pb-24 flex justify-center">
         <div className="w-full max-w-2xl">
-          <GlassCard>
+          <GlassCard bg="bg-[#0B0D1A]/40">
             <div className="p-8 sm:p-10">
               <div className="text-center mb-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-heading)" }}>
@@ -266,8 +276,8 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
 
               {submitted ? (
                 <div className="text-center py-10">
-                  <div className="w-14 h-14 rounded-full bg-[#D4AF37]/10 flex items-center justify-center mx-auto mb-5">
-                    <Send size={22} className="text-[#D4AF37]" />
+                  <div className="w-14 h-14 rounded-full ${successBg} flex items-center justify-center mx-auto mb-5">
+                    <Send size={22} className={`${successIcon}`} />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-heading)" }}>
                     Thank You!
@@ -289,7 +299,7 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
                         id="name"
                         required
                         placeholder="Your name"
-                        className="w-full px-4 py-3 rounded-xl border border-white/[0.12] bg-white/[0.05] text-white text-sm placeholder-white/60 focus:outline-none focus:border-[#D4AF37]/60 transition-all duration-300 hover:border-white/30"
+                        className="w-full px-4 py-3 rounded-xl border border-white/[0.12] bg-white/[0.05] text-white text-sm placeholder-white/60 focus:outline-none ${focusBorder} transition-all duration-300 hover:border-white/30"
                       />
                     </div>
                     <div>
@@ -302,7 +312,7 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
                         id="email"
                         required
                         placeholder="your@email.com"
-                        className="w-full px-4 py-3 rounded-xl border border-white/[0.12] bg-white/[0.05] text-white text-sm placeholder-white/60 focus:outline-none focus:border-[#D4AF37]/60 transition-all duration-300 hover:border-white/30"
+                        className="w-full px-4 py-3 rounded-xl border border-white/[0.12] bg-white/[0.05] text-white text-sm placeholder-white/60 focus:outline-none ${focusBorder} transition-all duration-300 hover:border-white/30"
                       />
                     </div>
                   </div>
@@ -316,7 +326,7 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
                       id="phone"
                       required
                       placeholder="+91 98765 43210"
-                      className="w-full px-4 py-3 rounded-xl border border-white/[0.12] bg-white/[0.05] text-white text-sm placeholder-white/60 focus:outline-none focus:border-[#D4AF37]/60 transition-all duration-300 hover:border-white/30"
+                      className="w-full px-4 py-3 rounded-xl border border-white/[0.12] bg-white/[0.05] text-white text-sm placeholder-white/60 focus:outline-none ${focusBorder} transition-all duration-300 hover:border-white/30"
                     />
                   </div>
                   <div>
@@ -327,7 +337,7 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
                       name="group_size"
                       id="group_size"
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-white/[0.08] bg-white/[0.03] text-white text-sm focus:outline-none focus:border-[#D4AF37]/50 transition-all duration-300 hover:border-white/20"
+                      className="w-full px-4 py-3 rounded-xl border border-white/[0.08] bg-white/[0.03] text-white text-sm focus:outline-none ${focusBorderSoft} transition-all duration-300 hover:border-white/20"
                     >
                       <option value="" className="bg-[#0B0D1A]">Select...</option>
                       <option value="1" className="bg-[#0B0D1A]">1 person</option>

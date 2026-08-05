@@ -107,10 +107,10 @@ const stPetersburgTrips = [
 
 const stPetersburgMedia = {
   slides: [
+    "/spb-hermitage-1.webp",
+    "/spb-canal-buildings.webp",
+    "/spb-st-isaac-3.webp",
     "/spb-night-lake.webp",
-    "/spb-hermitage-gate.webp",
-    "/spb-savior-blood.webp",
-    "/spb-st-isaac-1.webp",
     "/spb-peter-city.webp",
   ],
   dayImages: {

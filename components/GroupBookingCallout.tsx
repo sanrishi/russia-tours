@@ -4,18 +4,32 @@ import { MessageCircle, ArrowRight, Users, Sparkles } from "lucide-react"
 
 const WHATSAPP_NUMBER = "917042987451"
 
-export default function GroupBookingCallout({ calcBtnRef }: { calcBtnRef?: React.RefObject<HTMLButtonElement | null> }) {
+export default function GroupBookingCallout({ calcBtnRef, accent = "gold" }: { calcBtnRef?: React.RefObject<HTMLButtonElement | null>; accent?: "gold" | "emerald" }) {
   const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi! I'm planning a trip for 4+ people. Can you share group pricing and availability?")}`
+
+  const acc = accent === "emerald"
+    ? {
+        sparkle: "text-emerald-400/60",
+        label: "text-emerald-400/50",
+        gradient: "from-[#34D399] via-[#6EE7B7] to-[#A7F3D0]",
+        hover: "hover:border-emerald-400/30 hover:bg-emerald-400/[0.06] hover:text-emerald-400 hover:[text-shadow:1px_0_0_rgba(16,185,129,0.3),_-1px_0_0_rgba(147,197,253,0.2)]",
+      }
+    : {
+        sparkle: "text-gold/60",
+        label: "text-gold/50",
+        gradient: "from-gold via-amber-300 to-rose-300",
+        hover: "hover:border-gold/30 hover:bg-gold/[0.06] hover:text-gold hover:[text-shadow:1px_0_0_rgba(202,138,4,0.3),_-1px_0_0_rgba(147,197,253,0.2)]",
+      }
 
   return (
     <div className="relative p-8 sm:p-10 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-10">
       <div className="flex-1 text-center md:text-left">
         <div className="flex items-center gap-2 justify-center md:justify-start mb-3">
-          <Sparkles size={12} className="text-gold/60" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold/50">Group Travel</span>
+          <Sparkles size={12} className={acc.sparkle} />
+          <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${acc.label}`}>Group Travel</span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-display)" }}>
-          Planning for <span className="bg-gradient-to-r from-gold via-amber-300 to-rose-300 bg-clip-text text-transparent animate-iridescent">4+ People</span>?
+          Planning for <span className={`bg-gradient-to-r ${acc.gradient} bg-clip-text text-transparent animate-iridescent`}>4+ People</span>?
         </h2>
         <p className="text-white/50 text-sm sm:text-base max-w-lg leading-relaxed mx-auto md:mx-0">
           Get an exclusive group quote with special pricing, customized itinerary, and dedicated support.
@@ -25,7 +39,7 @@ export default function GroupBookingCallout({ calcBtnRef }: { calcBtnRef?: React
       <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
           <button
             ref={calcBtnRef}
-            className="group inline-flex items-center gap-2 border border-white/[0.12] bg-white/[0.04] text-white/80 px-5 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:border-gold/30 hover:bg-gold/[0.06] hover:text-gold cursor-pointer hover:[text-shadow:1px_0_0_rgba(202,138,4,0.3),_-1px_0_0_rgba(147,197,253,0.2)]"
+            className={`group inline-flex items-center gap-2 border border-white/[0.12] bg-white/[0.04] text-white/80 px-5 py-3 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${acc.hover}`}
           >
             <Users size={15} />
             Calculate Cost

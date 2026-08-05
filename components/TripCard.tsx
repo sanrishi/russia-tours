@@ -142,6 +142,43 @@ interface MediaAssets {
   dayHighlights: Record<number, string[]>;
 }
 
+const ACCENTS = {
+  gold: {
+    text: "text-gold",
+    textSoft: "text-gold/60",
+    bg10: "bg-gold/10",
+    bg20: "bg-gold/20",
+    bg70: "bg-gold/70",
+    border: "border-gold",
+    border40: "border-gold/40",
+    border50: "border-gold/50",
+    border20: "border-gold/20",
+    dotOpen: "bg-gold shadow-[0_0_12px_rgba(212,175,55,0.8)] animate-pulse-dot",
+    openCard: "border-t-gold/20 shadow-[0_12px_40px_rgba(212,175,55,0.2)]",
+    hoverShadow: "hover:shadow-[0_0_50px_-20px_rgba(202,138,4,0.15)]",
+    topLine: "via-[#D4AF37]/30",
+    hoverText: "hover:text-gold hover:border-gold/40",
+    hoverBorder: "hover:text-gold hover:border-gold",
+  },
+  emerald: {
+    text: "text-emerald-400",
+    textSoft: "text-emerald-400/60",
+    bg10: "bg-emerald-400/10",
+    bg20: "bg-emerald-400/20",
+    bg70: "bg-emerald-400/70",
+    border: "border-emerald-400",
+    border40: "border-emerald-400/40",
+    border50: "border-emerald-400/50",
+    border20: "border-emerald-400/20",
+    dotOpen: "bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)] animate-pulse-dot",
+    openCard: "border-t-emerald-400/20 shadow-[0_12px_40px_rgba(52,211,153,0.2)]",
+    hoverShadow: "hover:shadow-[0_0_50px_-20px_rgba(52,211,153,0.15)]",
+    topLine: "via-[#34D399]/30",
+    hoverText: "hover:text-emerald-400 hover:border-emerald-400/40",
+    hoverBorder: "hover:text-emerald-400 hover:border-emerald-400",
+  },
+};
+
 export default function TripCard({
   costBtnRef,
   cmsData,
@@ -149,6 +186,7 @@ export default function TripCard({
   media,
   pageUrl = "/moscow-express",
   currency = "INR",
+  accent = "gold",
 }: {
   costBtnRef?: React.RefObject<HTMLButtonElement | null>;
   cmsData?: CmsOverride;
@@ -156,8 +194,11 @@ export default function TripCard({
   media?: MediaAssets;
   pageUrl?: string;
   currency?: "INR" | "RUB";
+  accent?: "gold" | "emerald";
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const acc = ACCENTS[accent];
 
   const mediaAssets: MediaAssets = media ?? { slides, dayImages, dayPositions, dayHighlights };
   const baseTrips: Trip[] = tripsOverride ?? trips;
@@ -183,11 +224,11 @@ export default function TripCard({
             className={`relative rounded-2xl overflow-hidden transition-all duration-500 ${
             trip.comingSoon
               ? "border border-white/5 bg-[#1C1917] opacity-60"
-              : "border border-white/[0.04] bg-[#1C1917]/85 backdrop-blur-md hover:shadow-[0_0_50px_-20px_rgba(202,138,4,0.15)]"
+              : `border border-white/[0.04] bg-[#1C1917]/55 backdrop-blur-md ${acc.hoverShadow}`
             }`}
         >
           <DotsOverlay />
-          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent pointer-events-none" />
+          <div className={`absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent ${acc.topLine} to-transparent pointer-events-none`} />
           {trip.comingSoon ? (
             <div className="p-4">
               <div className="flex items-start justify-between gap-4">
@@ -202,7 +243,7 @@ export default function TripCard({
               </div>
             </div>
           ) : (
-            <HeaderSlideshow tagline={trip.tagline} title={trip.title} slides={mediaAssets.slides} />
+            <HeaderSlideshow tagline={trip.tagline} title={trip.title} slides={mediaAssets.slides} accent={acc} />
           )}
 
           <div className="p-6">
@@ -211,11 +252,11 @@ export default function TripCard({
                 <span className="flex items-center gap-1.5">
                   <Clock size={14} /> {trip.duration}
                 </span>
-                <span className="flex items-center gap-1.5 text-gold font-bold">
+                <span className={`flex items-center gap-1.5 ${acc.text} font-bold`}>
                   {currency === "RUB" ? "₽" : <IndianRupee size={14} />} {trip.pricePerPerson.toLocaleString(currency === "RUB" ? "en-US" : "en-IN")}/person
                 </span>
                 {trip.ageGroup && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-gold/10 text-gold text-xs font-medium">
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full ${acc.bg10} ${acc.text} text-xs font-medium`}>
                     Age {trip.ageGroup}
                   </span>
                 )}
@@ -223,7 +264,7 @@ export default function TripCard({
                     <button
                       type="button"
                       ref={costBtnRef}
-                      className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-white/20 text-white/60 hover:text-gold hover:border-gold/40 bg-transparent text-xs transition-all cursor-pointer"
+                      className={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-white/20 text-white/60 ${acc.hoverText} bg-transparent text-xs transition-all cursor-pointer`}
                     >
                       <Calculator size={12} /> Cost
                     </button>
@@ -233,7 +274,7 @@ export default function TripCard({
                       e.preventDefault();
                       document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-gold text-gold bg-transparent font-semibold text-xs hover:bg-gold/10 transition-all cursor-pointer"
+                    className={`inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border ${acc.border} ${acc.text} bg-transparent font-semibold text-xs hover:${acc.bg10} transition-all cursor-pointer`}
                   >
                     Check Availability <ArrowRight size={12} />
                   </button>
@@ -241,7 +282,7 @@ export default function TripCard({
                     href={`https://wa.me/?text=${encodeURIComponent(`Check%20out%20this%20Russia%20tour%3A%20${trip.title}%20-%20https%3A%2F%2Ftripstorussia.com${pageUrl}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-gold/50 text-white/50 hover:text-gold hover:border-gold bg-transparent text-xs transition-all cursor-pointer"
+                    className={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full border ${acc.border50} text-white/50 ${acc.hoverBorder} bg-transparent text-xs transition-all cursor-pointer`}
                     aria-label="Share on WhatsApp"
                   >
                     <MessageCircle size={14} />
@@ -260,7 +301,7 @@ export default function TripCard({
               <>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
                   <div className="p-4 rounded-xl border border-white/10 bg-white/[0.05] lg:col-span-2">
-                    <p className="text-gold text-xs font-semibold uppercase tracking-wider mb-3">
+                    <p className={`${acc.text} text-xs font-semibold uppercase tracking-wider mb-3`}>
                       Included
                     </p>
                     <ul className="space-y-1.5">
@@ -288,7 +329,7 @@ export default function TripCard({
                 </div>
 
                 <div className="flex items-start gap-3 mb-4 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
-                  <Shield size={18} className="text-gold shrink-0 mt-0.5" />
+                  <Shield size={18} className={`${acc.text} shrink-0 mt-0.5`} />
                   <div>
                     <p className="text-white text-sm font-semibold mb-0.5">
                       Visa Information
@@ -301,23 +342,23 @@ export default function TripCard({
 
                 <div className="border-t border-white/5 pt-4">
                   <p className="text-xs text-white/30 uppercase tracking-wider mb-3 font-medium">
-                    <span className="text-gold">Day-by-Day Itinerary</span>
+                    <span className={acc.text}>Day-by-Day Itinerary</span>
                   </p>
                   <div className="space-y-2 pl-8 relative">
-                    <div className="absolute left-[11px] top-2 bottom-2 w-[2px] bg-gold/20" />
+                    <div className={`absolute left-[11px] top-2 bottom-2 w-[2px] ${acc.bg20}`} />
                     {trip.itinerary.map((day) => {
                       const isOpen = openIndex === day.day;
                       return (
                         <div key={day.day} className="relative">
                           <div
                             className={`absolute -left-[26px] top-5 w-[9px] h-[9px] rounded-full border-2 border-charcoal z-10 transition-all duration-300 ${
-                              isOpen ? "bg-gold shadow-[0_0_12px_rgba(212,175,55,0.8)] animate-pulse-dot" : "bg-gold/70"
+                              isOpen ? acc.dotOpen : acc.bg70
                             }`}
                           />
                           <div
                             className={`rounded-xl border overflow-hidden transition-all duration-300 ${
                               isOpen
-                              ? "bg-white/[0.08] border-t-gold/20 border-white/5 -translate-y-2 shadow-[0_12px_40px_rgba(212,175,55,0.2)]"
+                              ? `bg-white/[0.08] border-white/5 -translate-y-2 ${acc.openCard}`
                               : "bg-white/[0.03] border-white/5 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(0,0,0,0.3)] hover:bg-white/[0.06]"
                             }`}
                           >
@@ -329,7 +370,7 @@ export default function TripCard({
                             >
                               <div>
                                 <p className="text-sm font-semibold">
-                                  <span className="text-gold">Day {day.day}</span>
+                                  <span className={acc.text}>Day {day.day}</span>
                                   <span className="text-white"> — {day.title}</span>
                                 </p>
                                 <div className="flex flex-wrap gap-3 mt-1">
@@ -348,7 +389,7 @@ export default function TripCard({
                                 }`}
                               />
                             </button>
-                            <DayContent day={day} isOpen={isOpen} media={mediaAssets} />
+                            <DayContent day={day} isOpen={isOpen} media={mediaAssets} accent={acc} />
                           </div>
                         </div>
                       );
@@ -404,7 +445,7 @@ const dayHighlights: Record<number, string[]> = {
   7: ["Breakfast at hotel", "Airport transfer included"],
 };
 
-function DayContent({ day, isOpen, media }: { day: Day; isOpen: boolean; media: MediaAssets }) {
+function DayContent({ day, isOpen, media, accent }: { day: Day; isOpen: boolean; media: MediaAssets; accent: (typeof ACCENTS)["gold"] }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
 
@@ -439,7 +480,7 @@ function DayContent({ day, isOpen, media }: { day: Day; isOpen: boolean; media: 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.3, delay: 0.05 }}
-          className="relative w-full aspect-video rounded-lg overflow-hidden border border-gold/20"
+          className={`relative w-full aspect-video rounded-lg overflow-hidden border ${accent.border20}`}
         >
           <img
             src={media.dayImages[day.day]}
@@ -456,7 +497,7 @@ function DayContent({ day, isOpen, media }: { day: Day; isOpen: boolean; media: 
         >
           {media.dayHighlights[day.day]?.map((h) => (
             <motion.li key={h} variants={itemVariants} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-gold mt-1">&#9679;</span>
+              <span className={`${accent.text} mt-1`}>&#9679;</span>
               {h}
             </motion.li>
           ))}
@@ -474,7 +515,7 @@ function DayContent({ day, isOpen, media }: { day: Day; isOpen: boolean; media: 
   );
 }
 
-function HeaderSlideshow({ tagline, title, slides }: { tagline: string; title: string; slides: string[] }) {
+function HeaderSlideshow({ tagline, title, slides, accent }: { tagline: string; title: string; slides: string[]; accent: (typeof ACCENTS)["gold"] }) {
   const [index, setIndex] = useState(0);
   const readyRef = useRef<boolean[]>(slides.map(() => false));
   const indexRef = useRef(0);
@@ -533,7 +574,7 @@ function HeaderSlideshow({ tagline, title, slides }: { tagline: string; title: s
       </AnimatePresence>
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/10 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-6">
-        <p className="text-gold text-xs font-medium tracking-[0.15em] uppercase mb-1">
+        <p className={`${accent.text} text-xs font-medium tracking-[0.15em] uppercase mb-1`}>
           {tagline}
         </p>
         <h3 className="text-2xl sm:text-3xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
@@ -562,7 +603,7 @@ function HeaderSlideshow({ tagline, title, slides }: { tagline: string; title: s
             key={i}
             onClick={() => goTo(i)}
             className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-              i === index ? "bg-gold w-5" : "bg-white/40 hover:bg-white/60"
+              i === index ? `${accent.dotOpen} w-5` : "bg-white/40 hover:bg-white/60"
             }`}
           />
         ))}

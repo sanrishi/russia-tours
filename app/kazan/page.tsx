@@ -24,6 +24,7 @@ export default function KazanPage() {
       trips={kazanTrips}
       media={kazanMedia}
       photos={kazanPhotos}
+      accent="emerald"
     />
   )
 }
