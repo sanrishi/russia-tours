@@ -40,7 +40,7 @@ const fallbackDestinations: TourCardData[] = [
     tagline: "The Arctic Frontier",
     description:
       "Chase the Northern Lights, meet huskies and reindeer, and float in the icy Kola Bay — the Arctic, close enough to touch.",
-    image: "/sveta-30.webp",
+    image: "/placesMurmansk.webp",
     gradient: "from-teal/80 via-teal/40 to-transparent",
     price: "62,000",
     currency: "RUB",
@@ -53,9 +53,8 @@ const fallbackDestinations: TourCardData[] = [
       "Hermitage, canals, ballet — with Indian-friendly amenities in the Venice of the North.",
     image: "/stpetersburg-card.webp",
     gradient: "from-amber/80 via-amber/40 to-transparent",
-    price: "TBD",
-    href: "#",
-    comingSoon: true,
+    price: "65,000",
+    href: "/st-petersburg",
   },
   {
     city: "Kazan",
@@ -64,9 +63,8 @@ const fallbackDestinations: TourCardData[] = [
       "Russia's Muslim heritage, Kul Sharif Mosque, and a halal food paradise on the Volga.",
     image: "/kazan-card.webp",
     gradient: "from-emerald/80 via-emerald/40 to-transparent",
-    price: "TBD",
-    href: "#",
-    comingSoon: true,
+    price: "65,000",
+    href: "/kazan",
   },
 ];
 

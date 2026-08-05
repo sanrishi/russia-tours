@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import { usePathname } from "next/navigation"
 import SiteLogo from "./SiteLogo"
@@ -117,12 +117,48 @@ const CRIMSON_THEME = {
   underlineGrad: "linear-gradient(90deg, transparent, #DC3232, #FF4444, #DC3232, transparent)",
 }
 
+const ICE_THEME = {
+  bg: "bg-[#081B1F]",
+  accent: "rgba(45,212,191,",
+  accent2: "rgba(56,189,248,",
+  glow: "rgba(45,212,191,0.35)",
+  gold: "text-[#5EEAD4]/60",
+  pulseBg: "radial-gradient(circle, rgba(45,212,191,0.6) 0%, transparent 100%)",
+  progress: "linear-gradient(90deg, #0E7490, #06B6D4, #22D3EE, #67E8F9, #A5F3FC, #67E8F9, #22D3EE, #06B6D4, #0E7490)",
+  ringStroke: "rgba(45,212,191,0.08)",
+  ringStroke2: "rgba(45,212,191,0.12)",
+  particleMain: "#67E8F9",
+  particleSub: "#22D3EE",
+  heroParticle: "#A5F3FC",
+  heroShadow: "rgba(34,211,238,0.5)",
+  heroShadow2: "rgba(34,211,238,0.3)",
+  heroShadow3: "rgba(34,211,238,0.15)",
+  bigShadow: "rgba(34,211,238,0.4), 0 8px 20px rgba(34,211,238,0.2), 0 0 8px rgba(165,243,252,0.5), 0 0 20px rgba(165,243,252,0.2)",
+  smallShadow: "rgba(34,211,238,0.35)",
+  glowBg: "radial-gradient(circle, rgba(45,212,191,0.25) 0%, transparent 55%)",
+  dotBg: "radial-gradient(circle, #A5F3FC 0%, #67E8F9 40%, #22D3EE 70%, transparent 100%)",
+  dotShadow: "0 0 16px rgba(45,212,191,0.9), 0 0 32px rgba(45,212,191,0.4), 0 0 48px rgba(45,212,191,0.15)",
+  flashBg: "radial-gradient(circle, rgba(165,243,252,0.4) 0%, transparent 55%)",
+  tagline: ["Polar", "Saga"],
+  dustOpacity: "radial-gradient(circle, rgba(165,243,252,0.7) 0%, rgba(103,232,249,0.4) 40%, transparent 100%)",
+  bgGrad1: "from-[#081B1F]/70 via-[#081B1F]/50 to-[#0E7490]/20",
+  bgGrad2: "from-[#081B1F] via-[#081B1F]/60 to-transparent",
+  bgRadial: "radial-gradient(circle at 50% 42%, rgba(45,212,191,0.18) 0%, rgba(34,211,238,0.05) 35%, transparent 70%)",
+  goldFlowH: ["rgba(45,212,191,0)", "rgba(45,212,191,0)", "rgba(103,232,249,0.55)", "rgba(165,243,252,0.7)", "rgba(103,232,249,0.55)", "rgba(45,212,191,0)", "rgba(45,212,191,0)"],
+  goldFlowV: ["rgba(45,212,191,0)", "rgba(45,212,191,0)", "rgba(103,232,249,0.35)", "rgba(165,243,252,0.5)", "rgba(103,232,249,0.35)", "rgba(45,212,191,0)", "rgba(45,212,191,0)"],
+  textGlow: "0 0 28px rgba(45,212,191,0.45), 0 0 60px rgba(34,211,238,0.15)",
+  underlineGrad: "linear-gradient(90deg, transparent, #0E7490, #06B6D4, #22D3EE, #67E8F9, #A5F3FC, #67E8F9, #22D3EE, #06B6D4, #0E7490, transparent)",
+}
+
 export default function Preloader() {
   const pathname = usePathname()
   const isHome = pathname === "/"
   const isMoscow = pathname === "/moscow-express"
-  const shouldShow = isHome || isMoscow
-  const theme = { ...CRIMSON_THEME, tagline: isMoscow ? ["Moscow", "Express"] : ["Signature", "Russia", "Tours"] }
+  const isMurmansk = pathname === "/murmansk"
+  const isSPB = pathname === "/st-petersburg"
+  const isKazan = pathname === "/kazan"
+  const shouldShow = isHome || isMoscow || isMurmansk || isSPB || isKazan
+  const theme = isMurmansk ? ICE_THEME : { ...CRIMSON_THEME, tagline: isMoscow ? ["Moscow", "Express"] : ["Signature", "Russia", "Tours"] }
 
   const [phase, setPhase] = useState<"loading" | "ready" | "exit" | "done">(shouldShow ? "loading" : "done")
   const ringProgress = useMotionValue(0)
@@ -137,25 +173,9 @@ export default function Preloader() {
   const trail2Opacity = useTransform(ringProgress, [0, 1], [0, 0.5])
   const trail3Opacity = useTransform(ringProgress, [0, 1], [0, 0.25])
   const [progressDone, setProgressDone] = useState(false)
-  const [prevPath, setPrevPath] = useState(pathname)
   const [showLogo, setShowLogo] = useState(false)
   const [showTagline, setShowTagline] = useState(false)
   const startTimeRef = useRef(performance.now())
-
-  useLayoutEffect(() => {
-    if (prevPath !== pathname && (pathname === "/" || pathname === "/moscow-express")) {
-      setPrevPath(pathname)
-      setPhase("loading")
-      ringProgress.set(0)
-      setProgressDone(false)
-      setShowLogo(false)
-      setShowTagline(false)
-      startTimeRef.current = performance.now()
-    } else if (prevPath !== pathname) {
-      setPrevPath(pathname)
-      setPhase("done")
-    }
-  }, [pathname, prevPath, ringProgress])
 
   useEffect(() => {
     if (!shouldShow || (phase !== "loading" && phase !== "ready")) return
@@ -566,10 +586,11 @@ export default function Preloader() {
             </motion.div>
           </div>
 
-          {/* Kremlin skyline illustration */}
-          <div className="absolute bottom-28 left-1/2 -translate-x-1/2 w-[520px] max-w-[90vw] pointer-events-none">
-            <KremlinSkyline noBackground />
-          </div>
+          {isMoscow && (
+            <div className="absolute bottom-28 left-1/2 -translate-x-1/2 w-[520px] max-w-[90vw] pointer-events-none">
+              <KremlinSkyline noBackground />
+            </div>
+          )}
         </div>
       )}
 
