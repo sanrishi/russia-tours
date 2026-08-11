@@ -144,6 +144,9 @@ export default function ConversionFooter() {
                     <option value="kazan" className="bg-charcoal">
                       Kazan
                     </option>
+                    <option value="nn" className="bg-charcoal">
+                      Nizhny Novgorod
+                    </option>
                     <option value="multi" className="bg-charcoal">
                       Multi-City
                     </option>

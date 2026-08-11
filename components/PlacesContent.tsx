@@ -39,6 +39,14 @@ const cities = [
     highlights: ["Kremlin & Mosque", "Tatar cuisine", "Halal-friendly", "Rich culture"],
     description: "The capital of Tatarstan, where East meets West. Famous for its Islamic heritage, halal food scene, and the stunning Kul Sharif Mosque.",
   },
+  {
+    name: "Nizhny Novgorod",
+    slug: "nizhny-novgorod",
+    tagline: "Gateway to the Volga",
+    image: "/nn-kremlin.webp",
+    highlights: ["Ancient Kremlin", "Volga River views", "Chkalov Staircase", "High-speed train"],
+    description: "The unofficial 'capital of the Volga' — a 500-year-old Kremlin on a hilltop, the iconic Chkalov Staircase, and the mighty Volga–Oka confluence. Reached by high-speed train from Moscow.",
+  },
 ];
 
 const container = {
@@ -99,7 +107,7 @@ export default function PlacesContent() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-gold/70 text-base sm:text-lg leading-relaxed max-w-2xl"
             >
-              Moscow, St. Petersburg, Kazan and Murmansk — discover Russia, curated
+              Moscow, St. Petersburg, Kazan, Nizhny Novgorod and Murmansk — discover Russia, curated
               for Indian travelers.
             </motion.p>
           </div>
@@ -113,13 +121,14 @@ export default function PlacesContent() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {cities.map((city) => {
             const isMoscow = city.name === "Moscow";
             const isMurmansk = city.name === "Murmansk";
             const isSPB = city.name === "St. Petersburg";
             const isKazan = city.name === "Kazan";
+            const isNN = city.name === "Nizhny Novgorod";
             return (
             <motion.div
               key={city.name}
@@ -138,6 +147,8 @@ export default function PlacesContent() {
                   ? "border-[#3d240b] bg-[#1a0e05] hover:border-[#f97316]/40 hover:shadow-[0_16px_48px_-12px_rgba(249,115,22,0.2)]"
                   : isKazan
                   ? "border-[#0b3d2e] bg-[#052014] hover:border-[#34d399]/40 hover:shadow-[0_16px_48px_-12px_rgba(52,211,153,0.2)]"
+                  : isNN
+                  ? "border-[#0b2e47] bg-[#07121a] hover:border-[#38bdf8]/40 hover:shadow-[0_16px_48px_-12px_rgba(56,189,248,0.2)]"
                   : "border-[#2a1a3a] bg-[#0c0a10] hover:border-[#6a3a9a] hover:shadow-[0_16px_48px_-12px_rgba(106,58,154,0.15)]"
               }`}
             >
@@ -161,6 +172,8 @@ export default function PlacesContent() {
                       ? "border-[#f97316]/30 bg-[#1a0e05]/80 text-[#fb923c]"
                       : isKazan
                       ? "border-[#34d399]/30 bg-[#052014]/80 text-[#34d399]"
+                      : isNN
+                      ? "border-[#38bdf8]/30 bg-[#07121a]/80 text-[#7dd3fc]"
                       : "border-[#7a4aaa]/30 bg-[#0c0a10]/80 text-[#9a6aca]"
                   }`}>
                     {city.tagline}
@@ -171,7 +184,7 @@ export default function PlacesContent() {
               {/* Content */}
               <div className="p-5 sm:p-6">
                 <h2 className={`text-xl font-bold text-white mb-2 transition-colors duration-300 ${
-                  isMoscow ? "group-hover:text-red-400" : isMurmansk ? "group-hover:text-[#67e8f9]" : isSPB ? "group-hover:text-[#fb923c]" : isKazan ? "group-hover:text-[#34d399]" : "group-hover:text-[#9a6aca]"
+                  isMoscow ? "group-hover:text-red-400" : isMurmansk ? "group-hover:text-[#67e8f9]" : isSPB ? "group-hover:text-[#fb923c]" : isKazan ? "group-hover:text-[#34d399]" : isNN ? "group-hover:text-[#7dd3fc]" : "group-hover:text-[#9a6aca]"
                 }`}>
                   {city.name}
                 </h2>
@@ -192,12 +205,12 @@ export default function PlacesContent() {
 
                 {city.slug ? (
                   <span className={`inline-flex items-center gap-2 text-sm font-medium group/link ${
-                    isMoscow ? "text-red-400" : isMurmansk ? "text-[#22d3ee]" : isSPB ? "text-[#fb923c]" : isKazan ? "text-[#34d399]" : "text-gold"
+                    isMoscow ? "text-red-400" : isMurmansk ? "text-[#22d3ee]" : isSPB ? "text-[#fb923c]" : isKazan ? "text-[#34d399]" : isNN ? "text-[#38bdf8]" : "text-gold"
                   }`}>
                     <span className="relative">
                       View Tours
                       <span className={`absolute -bottom-px left-0 right-0 h-px scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 origin-left ${
-                        isMoscow ? "bg-red-400/40" : isMurmansk ? "bg-[#22d3ee]/40" : isSPB ? "bg-[#fb923c]/40" : isKazan ? "bg-[#34d399]/40" : "bg-gold/40"
+                        isMoscow ? "bg-red-400/40" : isMurmansk ? "bg-[#22d3ee]/40" : isSPB ? "bg-[#fb923c]/40" : isKazan ? "bg-[#34d399]/40" : isNN ? "bg-[#38bdf8]/40" : "bg-gold/40"
                       }`} />
                     </span>
                     <ArrowRight size={14} className="transition-transform duration-300 group-hover/link:translate-x-0.5" />

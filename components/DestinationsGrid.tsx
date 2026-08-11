@@ -66,6 +66,16 @@ const fallbackDestinations: TourCardData[] = [
     price: "65,000",
     href: "/kazan",
   },
+  {
+    city: "Nizhny Novgorod",
+    tagline: "Gateway to the Volga",
+    description:
+      "A 500-year-old Kremlin on a hill, the Chkalov Staircase, and the Volga–Oka confluence, reached by high-speed train.",
+    image: "/nn-kremlin.webp",
+    gradient: "from-sky/80 via-sky/40 to-transparent",
+    price: "65,000",
+    href: "/nizhny-novgorod",
+  },
 ];
 
 export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDescription, moscowImage, moscowPrice }: Props) {
@@ -96,7 +106,7 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
             Destinations
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mt-4">
-            Four Cities. Infinite Stories.
+            Five Cities. Infinite Stories.
           </h2>
           <p className="text-white/50 text-base mt-4 max-w-xl mx-auto">
             Each city offers a unique flavor of Russia, curated for the Indian
@@ -104,7 +114,7 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {destinations.map((dest, i) => (
             <motion.a
               key={dest.city}

@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/murmansk`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${base}/st-petersburg`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${base}/kazan`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${base}/nizhny-novgorod`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${base}/places`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${base}/visa`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },

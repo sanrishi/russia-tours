@@ -11,6 +11,7 @@ const quickLinks = [
   { label: "Murmansk Arctic Quest", href: "/murmansk" },
   { label: "St. Petersburg", href: "/st-petersburg" },
   { label: "Kazan", href: "/kazan" },
+  { label: "Nizhny Novgorod", href: "/nizhny-novgorod" },
   { label: "Travel Tips", href: "/tips" },
   { label: "Visa Guide", href: "/tips/visa-guide" },
   { label: "About Us", href: "/about" },
