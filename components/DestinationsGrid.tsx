@@ -72,7 +72,7 @@ const fallbackDestinations: TourCardData[] = [
     description:
       "A 500-year-old Kremlin on a hill, the Chkalov Staircase, and the Volga–Oka confluence, reached by high-speed train.",
     image: "/nn-kremlin.webp",
-    gradient: "from-sky/80 via-sky/40 to-transparent",
+    gradient: "from-purple/80 via-purple/40 to-transparent",
     price: "65,000",
     href: "/nizhny-novgorod",
   },

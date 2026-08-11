@@ -216,37 +216,37 @@ const GREEN_THEME = {
   underlineGrad: "linear-gradient(90deg, transparent, #064E3B, #10B981, #34D399, #6EE7B7, #D1FAE5, #6EE7B7, #34D399, #10B981, #064E3B, transparent)",
 }
 
-const RIVER_THEME = {
-  bg: "bg-[#07121A]",
-  accent: "rgba(56,189,248,",
-  accent2: "rgba(2,132,199,",
-  glow: "rgba(56,189,248,0.3)",
-  gold: "text-sky-300/40",
-  pulseBg: "radial-gradient(circle, rgba(56,189,248,0.6) 0%, transparent 100%)",
-  progress: "linear-gradient(90deg, #0C4A6E, #0284C7, #38BDF8, #7DD3FC, #BAE6FD, #7DD3FC, #38BDF8, #0284C7, #0C4A6E)",
-  ringStroke: "rgba(56,189,248,0.07)",
-  ringStroke2: "rgba(56,189,248,0.04)",
-  particleMain: "#7DD3FC",
-  particleSub: "#38BDF8",
-  heroParticle: "#BAE6FD",
-  heroShadow: "rgba(56,189,248,0.45)",
-  heroShadow2: "rgba(56,189,248,0.22)",
-  heroShadow3: "rgba(56,189,248,0.1)",
-  bigShadow: "rgba(56,189,248,0.35), 0 8px 18px rgba(56,189,248,0.18), 0 0 6px rgba(125,211,252,0.45), 0 0 16px rgba(125,211,252,0.2)",
-  smallShadow: "rgba(56,189,248,0.3)",
-  glowBg: "radial-gradient(circle, rgba(56,189,248,0.22) 0%, transparent 60%)",
-  dotBg: "radial-gradient(circle, #BAE6FD 0%, #38BDF8 60%, transparent 100%)",
-  dotShadow: "0 0 12px rgba(56,189,248,0.8), 0 0 24px rgba(56,189,248,0.35)",
-  flashBg: "radial-gradient(circle, rgba(125,211,252,0.3) 0%, transparent 60%)",
+const VIOLET_THEME = {
+  bg: "bg-[#140A1E]",
+  accent: "rgba(168,85,247,",
+  accent2: "rgba(126,34,206,",
+  glow: "rgba(168,85,247,0.3)",
+  gold: "text-purple-300/40",
+  pulseBg: "radial-gradient(circle, rgba(168,85,247,0.6) 0%, transparent 100%)",
+  progress: "linear-gradient(90deg, #4C1D95, #7C3AED, #A855F7, #C084FC, #E9D5FF, #C084FC, #A855F7, #7C3AED, #4C1D95)",
+  ringStroke: "rgba(168,85,247,0.07)",
+  ringStroke2: "rgba(168,85,247,0.04)",
+  particleMain: "#C084FC",
+  particleSub: "#A855F7",
+  heroParticle: "#E9D5FF",
+  heroShadow: "rgba(168,85,247,0.45)",
+  heroShadow2: "rgba(168,85,247,0.22)",
+  heroShadow3: "rgba(168,85,247,0.1)",
+  bigShadow: "rgba(168,85,247,0.35), 0 8px 18px rgba(168,85,247,0.18), 0 0 6px rgba(192,132,252,0.45), 0 0 16px rgba(192,132,252,0.2)",
+  smallShadow: "rgba(168,85,247,0.3)",
+  glowBg: "radial-gradient(circle, rgba(168,85,247,0.22) 0%, transparent 60%)",
+  dotBg: "radial-gradient(circle, #E9D5FF 0%, #A855F7 60%, transparent 100%)",
+  dotShadow: "0 0 12px rgba(168,85,247,0.8), 0 0 24px rgba(168,85,247,0.35)",
+  flashBg: "radial-gradient(circle, rgba(192,132,252,0.3) 0%, transparent 60%)",
   tagline: ["Volga", "Highlights"],
-  dustOpacity: "radial-gradient(circle, rgba(125,211,252,0.55) 0%, rgba(2,132,199,0.35) 40%, transparent 100%)",
-  bgGrad1: "from-[#07121A]/70 via-[#07121A]/50 to-[#0C4A6E]/25",
-  bgGrad2: "from-[#07121A] via-[#07121A]/60 to-transparent",
-  bgRadial: "radial-gradient(circle at 50% 42%, rgba(56,189,248,0.14) 0%, rgba(56,189,248,0.04) 35%, transparent 70%)",
-  goldFlowH: ["rgba(56,189,248,0)", "rgba(56,189,248,0)", "rgba(125,211,252,0.5)", "rgba(186,230,253,0.65)", "rgba(125,211,252,0.5)", "rgba(56,189,248,0)", "rgba(56,189,248,0)"],
-  goldFlowV: ["rgba(56,189,248,0)", "rgba(56,189,248,0)", "rgba(125,211,252,0.3)", "rgba(186,230,253,0.45)", "rgba(125,211,252,0.3)", "rgba(56,189,248,0)", "rgba(56,189,248,0)"],
-  textGlow: "0 0 24px rgba(56,189,248,0.4), 0 0 52px rgba(56,189,248,0.15)",
-  underlineGrad: "linear-gradient(90deg, transparent, #0C4A6E, #0284C7, #38BDF8, #7DD3FC, #BAE6FD, #7DD3FC, #38BDF8, #0284C7, #0C4A6E, transparent)",
+  dustOpacity: "radial-gradient(circle, rgba(192,132,252,0.55) 0%, rgba(126,34,206,0.35) 40%, transparent 100%)",
+  bgGrad1: "from-[#140A1E]/70 via-[#140A1E]/50 to-[#4C1D95]/25",
+  bgGrad2: "from-[#140A1E] via-[#140A1E]/60 to-transparent",
+  bgRadial: "radial-gradient(circle at 50% 42%, rgba(168,85,247,0.14) 0%, rgba(168,85,247,0.04) 35%, transparent 70%)",
+  goldFlowH: ["rgba(168,85,247,0)", "rgba(168,85,247,0)", "rgba(192,132,252,0.5)", "rgba(233,213,255,0.65)", "rgba(192,132,252,0.5)", "rgba(168,85,247,0)", "rgba(168,85,247,0)"],
+  goldFlowV: ["rgba(168,85,247,0)", "rgba(168,85,247,0)", "rgba(192,132,252,0.3)", "rgba(233,213,255,0.45)", "rgba(192,132,252,0.3)", "rgba(168,85,247,0)", "rgba(168,85,247,0)"],
+  textGlow: "0 0 24px rgba(168,85,247,0.4), 0 0 52px rgba(168,85,247,0.15)",
+  underlineGrad: "linear-gradient(90deg, transparent, #4C1D95, #7C3AED, #A855F7, #C084FC, #E9D5FF, #C084FC, #A855F7, #7C3AED, #4C1D95, transparent)",
 }
 
 export default function Preloader() {
@@ -258,7 +258,7 @@ export default function Preloader() {
   const isKazan = pathname === "/kazan"
   const isNN = pathname === "/nizhny-novgorod"
   const shouldShow = isHome || isMoscow || isMurmansk || isSPB || isKazan || isNN
-  const theme = isMurmansk ? ICE_THEME : isSPB ? ORANGE_THEME : isKazan ? GREEN_THEME : isNN ? RIVER_THEME : { ...CRIMSON_THEME, tagline: isMoscow ? ["Moscow", "Express"] : ["Signature", "Russia", "Tours"] }
+  const theme = isMurmansk ? ICE_THEME : isSPB ? ORANGE_THEME : isKazan ? GREEN_THEME : isNN ? VIOLET_THEME : { ...CRIMSON_THEME, tagline: isMoscow ? ["Moscow", "Express"] : ["Signature", "Russia", "Tours"] }
 
   const [phase, setPhase] = useState<"loading" | "ready" | "exit" | "done">(shouldShow ? "loading" : "done")
   const ringProgress = useMotionValue(0)
