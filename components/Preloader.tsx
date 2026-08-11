@@ -279,7 +279,7 @@ export default function Preloader() {
   const startTimeRef = useRef(performance.now())
 
   useLayoutEffect(() => {
-    if (prevPath !== pathname && (pathname === "/murmansk" || pathname === "/st-petersburg" || pathname === "/kazan" || pathname === "/nizhny-novgorod")) {
+    if (prevPath !== pathname && (pathname === "/murmansk" || pathname === "/st-petersburg" || pathname === "/kazan" || pathname === "/nizhny-novgorod" || pathname === "/moscow-express")) {
       setPrevPath(pathname)
       setPhase("loading")
       ringProgress.set(0)
