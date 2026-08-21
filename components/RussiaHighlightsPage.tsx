@@ -145,10 +145,10 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
             </div>
 
             <h1 className="mb-4" style={{ fontFamily: "var(--font-heading)" }}>
-              <span className="block text-5xl sm:text-7xl md:text-8xl font-bold tracking-[-0.02em] text-white leading-[0.9]">
+              <span data-split={heroTitle} className="block text-5xl sm:text-7xl md:text-8xl font-bold tracking-[-0.02em] text-white leading-[0.9]">
                 {heroTitle}
               </span>
-              <span className={`block text-4xl sm:text-6xl md:text-7xl font-bold tracking-[0.08em] mt-2 bg-gradient-to-r ${accentFrom} ${accentVia} ${accentTo} bg-clip-text text-transparent bg-[length:200%_100%] animate-border-flow`}>
+              <span data-split={gradientTitle} className={`block text-4xl sm:text-6xl md:text-7xl font-bold tracking-[0.08em] mt-2 bg-gradient-to-r ${accentFrom} ${accentVia} ${accentTo} bg-clip-text text-transparent bg-[length:200%_100%] animate-border-flow`}>
                 {gradientTitle}
               </span>
             </h1>
@@ -200,24 +200,24 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
       </section>
 
       {/* ─── OVERVIEW ─── */}
-      <section className="px-4 sm:px-6 pt-32 pb-16">
+      <section className="px-4 sm:px-6 pt-32 pb-16 sol-reveal">
         <div className="max-w-4xl mx-auto text-center relative rounded-2xl border border-white/[0.06] bg-[#0B0D1A]/50 backdrop-blur-md p-8 sm:p-10 overflow-hidden">
           <DotsOverlay />
           <div className={`absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent ${accent === "emerald" ? "via-[#34D399]/30" : "via-[#D4AF37]/30"} to-transparent`} />
           <span className={`text-[10px] font-semibold uppercase tracking-[0.25em] bg-gradient-to-r ${accentFrom} ${accentVia} ${accentTo} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-body)" }}>
             {pageLabel}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2" style={{ fontFamily: "var(--font-heading)" }}>
+          <h2 data-split={headline} className="text-3xl sm:text-4xl font-bold text-white mt-2" style={{ fontFamily: "var(--font-heading)" }}>
             {headline}
           </h2>
-          <p className="text-white/60 text-sm sm:text-base mt-4 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+          <p data-split={description} className="text-white/60 text-sm sm:text-base mt-4 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
             {description}
           </p>
         </div>
       </section>
 
       {/* ─── TRIP CARD ─── */}
-      <section id="tour" className="px-4 sm:px-6 pb-16 scroll-mt-24">
+      <section id="tour" className="px-4 sm:px-6 pb-16 scroll-mt-24 sol-reveal">
         <div className="max-w-[1728px] mx-auto">
           <TripCard
             costBtnRef={costBtnRef as React.RefObject<HTMLButtonElement | null>}
@@ -231,7 +231,7 @@ export default function RussiaHighlightsPage(props: RussiaHighlightsProps) {
       </section>
 
       {/* ─── TRIP GALLERY ─── */}
-      <div className="px-4 sm:px-6 pb-16">
+      <div className="px-4 sm:px-6 pb-16 sol-reveal">
         <div className="max-w-[1728px] mx-auto">
           <GlassCard bg="bg-[#0B0D1A]/40">
             <div className="p-6 sm:p-8">

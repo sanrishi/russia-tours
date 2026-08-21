@@ -381,6 +381,13 @@ export default function Preloader() {
 
   const isVisible = (phase === "loading" || phase === "ready") && shouldShow
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      (window as unknown as Record<string, unknown>).__solLoaderActive = isVisible;
+      window.dispatchEvent(new Event("__solLoader"));
+    }
+  }, [isVisible]);
+
   return (
     <motion.div
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center ${theme.bg}`}

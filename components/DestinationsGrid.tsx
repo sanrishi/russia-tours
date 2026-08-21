@@ -105,16 +105,16 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
           <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase">
             Destinations
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mt-4">
+          <h2 data-split="Five Cities. Infinite Stories." className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mt-4">
             Five Cities. Infinite Stories.
           </h2>
-          <p className="text-white/50 text-base mt-4 max-w-xl mx-auto">
+          <p data-split="Each city offers a unique flavor of Russia, curated for the Indian traveler." className="text-white/50 text-base mt-4 max-w-xl mx-auto">
             Each city offers a unique flavor of Russia, curated for the Indian
             traveler.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sol-reveal">
           {destinations.map((dest, i) => (
             <motion.a
               key={dest.city}

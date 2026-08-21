@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import Preloader from "@/components/Preloader";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 const lora = Lora({
@@ -54,6 +55,7 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/enhanced_a0420511-bb27-4d23-90f1-750eafefa96d_new.webp" fetchPriority="high" />
       </head>
       <body className="min-h-full bg-[#0c0a0a] text-white">
+        <SmoothScroll />
         <Preloader />
         <Navbar />
         {children}

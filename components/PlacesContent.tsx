@@ -105,6 +105,7 @@ export default function PlacesContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              data-split="Moscow, St. Petersburg, Kazan, Nizhny Novgorod and Murmansk — discover Russia, curated for Indian travelers."
               className="text-gold/70 text-base sm:text-lg leading-relaxed max-w-2xl"
             >
               Moscow, St. Petersburg, Kazan, Nizhny Novgorod and Murmansk — discover Russia, curated
@@ -121,7 +122,7 @@ export default function PlacesContent() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sol-reveal"
         >
           {cities.map((city) => {
             const isMoscow = city.name === "Moscow";
