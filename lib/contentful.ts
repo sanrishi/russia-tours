@@ -23,7 +23,7 @@ function apiUrl(path: string): string {
 
 export async function getTourPackages(): Promise<TourPackageFields[]> {
   const res = await fetch(apiUrl("/entries"), {
-    next: { revalidate: 60 },
+    next: { revalidate: 3600 },
     headers: { "Content-Type": "application/json" },
   });
   const data = await res.json();
@@ -40,7 +40,7 @@ export async function getTourPackages(): Promise<TourPackageFields[]> {
 
 export async function getTourPackageBySlug(slug: string): Promise<TourPackageFields | null> {
   const res = await fetch(apiUrl(`/entries?content_type=tourPackage&fields.slug[in]=${slug}&limit=1`), {
-    next: { revalidate: 60 },
+    next: { revalidate: 3600 },
   });
   const data = await res.json();
   return data.items?.length > 0 ? (data.items[0].fields as TourPackageFields) : null;

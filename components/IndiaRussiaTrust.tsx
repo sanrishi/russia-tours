@@ -70,8 +70,11 @@ export default function IndiaRussiaTrust() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-            India <span className="text-gold">&amp;</span> Russia
+          <span className="text-gold text-xs font-semibold tracking-[0.25em] uppercase">
+            Why now
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mt-3 mb-3">
+            India <span className="bg-gradient-to-r from-gold via-[#F59E0B] to-[#DC2626] bg-clip-text text-transparent">&amp;</span> Russia
           </h2>
           <p className="text-white/70 text-base max-w-xl mx-auto">
             Traveling to Russia is easier, safer, and more connected than ever

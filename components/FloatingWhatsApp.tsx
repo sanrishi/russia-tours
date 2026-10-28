@@ -55,12 +55,20 @@ export default function FloatingWhatsApp() {
     snap();
   }, [snap]);
 
+  // Jank fix: this fires on EVERY scroll/mousemove/wheel event during a
+  // Lenis glide, and each call did getBoundingClientRect (forced layout) +
+  // restarted a spring. Coalesced to one rAF — identical behavior, no churn.
+  const activityRaf = useRef(0);
   const onActivity = useCallback(() => {
-    if (hideTimer.current) clearTimeout(hideTimer.current);
-    reveal();
-    if (!hovering.current) {
-      hideTimer.current = setTimeout(hide, 1500);
-    }
+    if (activityRaf.current) return;
+    activityRaf.current = requestAnimationFrame(() => {
+      activityRaf.current = 0;
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+      reveal();
+      if (!hovering.current) {
+        hideTimer.current = setTimeout(hide, 1500);
+      }
+    });
   }, [reveal, hide]);
 
   useEffect(() => {
@@ -69,6 +77,7 @@ export default function FloatingWhatsApp() {
     events.forEach((e) => window.addEventListener(e, onActivity, { passive: true }));
     return () => {
       if (hideTimer.current) clearTimeout(hideTimer.current);
+      if (activityRaf.current) cancelAnimationFrame(activityRaf.current);
       events.forEach((e) => window.removeEventListener(e, onActivity));
     };
   }, [onActivity]);

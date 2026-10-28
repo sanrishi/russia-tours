@@ -3,7 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import AnimalSilhouettes from "./AnimalSilhouettes";
+import Magnetic from "./Magnetic";
 
 const slides = [
   {
@@ -34,29 +36,20 @@ const slides = [
 
 interface Props {
   current: number;
-  scrollY: number;
-  isMobile: boolean;
-  progress: number;
   goTo: (i: number) => void;
-  contentOpacity: number;
-  imageY: number;
 }
 
 export default function HeroSlideshow({
   current,
-  scrollY,
-  isMobile,
-  progress,
   goTo,
-  contentOpacity,
-  imageY,
 }: Props) {
   return (
     <section className="relative h-dvh w-full overflow-hidden bg-charcoal flex flex-col">
       {/* Background images */}
       <div
         className="absolute inset-0"
-        style={{ transform: `translateY(${imageY}px)`, willChange: "transform" }}
+        data-hero-bg
+        style={{ transform: "translateY(0px)", willChange: "transform" }}
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -71,13 +64,16 @@ export default function HeroSlideshow({
               className="absolute inset-0 scale-110"
               style={{ animation: "heroZoom 8s ease-out forwards" }}
             >
-              <img
+              <Image
                 src={slides[current].image}
                 alt=""
-                loading="eager"
+                fill
+                priority={current === 0}
                 fetchPriority={current === 0 ? "high" : "auto"}
-                className="w-full h-full object-cover"
-                 style={{ objectPosition: "center 25%", filter: "brightness(1.25) contrast(1.1) saturate(1.15)" }}
+                sizes="100vw"
+                quality={75}
+                className="object-cover"
+                style={{ objectPosition: "center 25%", filter: "brightness(1.25) contrast(1.1) saturate(1.15)" }}
               />
             </div>
           </motion.div>
@@ -88,14 +84,16 @@ export default function HeroSlideshow({
       <div className="absolute inset-0 bg-gradient-to-br from-charcoal/60 via-charcoal/40 to-crimson/25" />
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/50 to-transparent" />
 
-      <style>{`@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.1); } }`}</style>
+      <style>{`@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+      @keyframes heroProgress { from { stroke-dashoffset: 113.1; } to { stroke-dashoffset: 0; } }`}</style>
 
       <AnimalSilhouettes slideIndex={current} />
 
       {/* Content */}
       <div
         className="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-center px-6 text-center max-md:-mt-16"
-        style={{ opacity: contentOpacity }}
+        data-hero-content
+        style={{ opacity: 1 }}
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -136,30 +134,59 @@ export default function HeroSlideshow({
               </motion.p>
             </div>
 
-            {/* CTA Button below card */}
+            {/* CTA Buttons below card */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.5 }}
+              className="flex flex-col sm:flex-row items-center gap-4"
             >
+              <Magnetic>
+                <Link
+                  href={slides[current].href}
+                  className="group relative inline-flex items-center gap-2.5 bg-gradient-to-b from-transparent to-gold/[0.03] border border-gold text-gold font-semibold px-8 py-4 rounded-full text-base overflow-hidden transition-all duration-200 ease-in-out active:scale-95 hover:bg-black hover:text-white hover:-translate-y-[0.5px] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_15px_rgba(212,175,55,0.15)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_0_20px_rgba(212,175,55,0.3)] drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] hover:drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative z-10 flex items-center gap-2.5">
+                    {slides[current].cta}
+                    <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </Magnetic>
               <Link
-                href={slides[current].href}
-                className="group relative inline-flex items-center gap-2.5 bg-gradient-to-b from-transparent to-gold/[0.03] border border-gold text-gold font-semibold px-8 py-4 rounded-full text-base overflow-hidden transition-all duration-200 ease-in-out active:scale-95 hover:bg-black hover:text-white hover:-translate-y-[0.5px] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_15px_rgba(212,175,55,0.15)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_0_20px_rgba(212,175,55,0.3)] drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] hover:drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]"
+                href="/places"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/30 bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-sm transition-all duration-300"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                <span className="relative z-10 flex items-center gap-2.5">
-                  {slides[current].cta}
-                  <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
+                Explore destinations
+                <ArrowRight size={15} className="opacity-60" />
               </Link>
+            </motion.div>
+
+            {/* Assurance strip */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+              className="flex items-center gap-5 sm:gap-7 text-[11px] sm:text-xs tracking-[0.18em] uppercase text-white/45"
+            >
+              <span>Small groups</span>
+              <span className="w-1 h-1 rounded-full bg-gold/60" />
+              <span>Visa included</span>
+              <span className="w-1 h-1 rounded-full bg-gold/60" />
+              <span>Hindi support</span>
             </motion.div>
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* Bottom controls — normal flow, below centered content */}
-      <div className="relative z-10 flex flex-col items-center gap-6 pb-8">
-        {/* Progress indicators */}
+      <div className="relative z-10 flex flex-col items-center gap-4 pb-8">
+        {/* Slide counter */}
+        <div className="text-[11px] font-medium tracking-[0.35em] text-white/40 tabular-nums">
+          0{current + 1} <span className="text-white/20 mx-1">/</span> 0{slides.length}
+        </div>
+        {/* Progress indicators — CSS-driven 8s ring (was a 100ms setState
+            interval re-rendering the hero 10x/sec; same visual, zero JS) */}
         <div className="flex items-center gap-3">
           {slides.map((_, i) => (
             <button
@@ -171,14 +198,15 @@ export default function HeroSlideshow({
                 i === current ? "bg-gold" : "bg-white/20 group-hover:bg-white/40"
               }`} />
               {i === current && (
-                <svg className="absolute inset-0 -rotate-90 w-full h-full" viewBox="0 0 40 40">
+                <svg key={current} className="absolute inset-0 -rotate-90 w-full h-full" viewBox="0 0 40 40">
                   <circle
                     cx="20" cy="20" r="18"
                     fill="none"
                     stroke="#d4af37"
                     strokeWidth="2"
-                    strokeDasharray={`${(progress / 100) * 113.1} 113.1`}
+                    strokeDasharray="113.1"
                     strokeLinecap="round"
+                    style={{ animation: "heroProgress 8s linear forwards" }}
                   />
                 </svg>
               )}

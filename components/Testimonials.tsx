@@ -34,12 +34,15 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase">
-            Testimonials
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/25 bg-gold/[0.06] px-4 py-1.5 text-gold text-xs font-semibold tracking-[0.2em] uppercase">
+            ★ 4.9 · Testimonials
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mt-4">
-            Trusted by Indian Travelers
+          <h2 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mt-5">
+            Loved by Indian Travelers
           </h2>
+          <p className="text-white/50 text-base mt-3 max-w-lg mx-auto">
+            Real families, real journeys — from Red Square to the Volga.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-5">
@@ -67,9 +70,14 @@ export default function Testimonials() {
                 &ldquo;{t.text}&rdquo;
               </p>
 
-              <div>
-                <p className="text-white font-semibold text-sm">{t.name}</p>
-                <p className="text-white/60 text-xs">{t.location}</p>
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-full bg-gradient-to-br from-gold/40 to-crimson/40 border border-gold/30 flex items-center justify-center text-sm font-bold text-white shrink-0">
+                  {t.name.charAt(0)}
+                </span>
+                <div>
+                  <p className="text-white font-semibold text-sm">{t.name}</p>
+                  <p className="text-white/60 text-xs">{t.location}</p>
+                </div>
               </div>
             </motion.div>
           ))}

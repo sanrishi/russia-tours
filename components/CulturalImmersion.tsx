@@ -73,10 +73,10 @@ export default function CulturalImmersion() {
             <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase">
               The Experience
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mt-4 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold leading-[1.05] tracking-tight mt-4 mb-6">
               Beyond the Guidebook.
               <br />
-              <span className="text-white/50">Closer to Home.</span>
+              <span className="bg-gradient-to-r from-gold via-[#F59E0B] to-[#DC2626] bg-clip-text text-transparent">Closer to Home.</span>
             </h2>
             <p className="text-white/70 text-base sm:text-lg leading-relaxed mb-8">
               We don&apos;t just show you buildings — we unlock Russia through

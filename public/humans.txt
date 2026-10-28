@@ -1,0 +1,15 @@
+/* TEAM */
+  Developer: Sanchit Rishi
+  Company: Sanrishi Developments
+  Portfolio: https://frameforge-brown.vercel.app/
+  Phone: +91 79866 18423
+  Contact: sharmasanchitrishi@gmail.com
+  Location: India
+
+/* SITE */
+  Project: Trips to Russia by Indosvetka
+  URL: https://tripstorussia.com
+  Language: English
+  Doctype: HTML5
+  Framework: Next.js (React)
+  Last update: 2026-10-29

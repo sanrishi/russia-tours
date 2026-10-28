@@ -63,7 +63,7 @@ export default function TourModels() {
                   src={activeTab === "signature" ? "/group-tour.webp" : "/custom-tour.webp"}
                   alt={activeTab === "signature" ? "Signature group tour" : "Custom itinerary"}
                   fill
-                  quality={100}
+                  quality={75}
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
@@ -76,6 +76,21 @@ export default function TourModels() {
                   : "from-amber/20 via-gold/10 to-charcoal/60"
               }`}
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-white/50 mb-1">
+                  {activeTab === "signature" ? "Starting from" : "Pricing"}
+                </p>
+                <p className="text-2xl font-bold text-white">
+                  {activeTab === "signature" ? "₹1,60,000" : "Custom quote"}
+                  <span className="text-xs font-normal text-white/50"> /person</span>
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1 rounded-full bg-gold/15 border border-gold/30 px-3 py-1.5 text-xs font-semibold text-gold">
+                ★ 4.9 · 100+ travelers
+              </span>
+            </div>
           </div>
 
           <div>
@@ -85,7 +100,7 @@ export default function TourModels() {
                   onClick={() => setActiveTab("signature")}
                   className={`flex-1 px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                     activeTab === "signature"
-? "bg-white text-charcoal"
+? "bg-gold text-charcoal font-semibold shadow-[0_0_20px_rgba(212,175,55,0.35)]"
                     : "text-white/50 hover:text-white"
                   }`}
                 >
@@ -96,7 +111,7 @@ export default function TourModels() {
                   onClick={() => setActiveTab("custom")}
                   className={`flex-1 px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                     activeTab === "custom"
-? "bg-white text-charcoal"
+? "bg-gold text-charcoal font-semibold shadow-[0_0_20px_rgba(212,175,55,0.35)]"
                     : "text-white/50 hover:text-white"
                   }`}
                 >

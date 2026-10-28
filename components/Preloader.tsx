@@ -278,9 +278,29 @@ export default function Preloader() {
   const [prevPath, setPrevPath] = useState(pathname)
   const startTimeRef = useRef(performance.now())
 
+  // Skip the preloader entirely on repeat views within the same tab session.
+  // First visit keeps the identical visuals, just on a faster (~1.4s) timeline.
+  function hasSeenPreloader() {
+    try {
+      return sessionStorage.getItem("sol-preloader-seen") === "1"
+    } catch {
+      return false
+    }
+  }
+
+  useEffect(() => {
+    if (shouldShow && hasSeenPreloader()) {
+      setPhase("done")
+    }
+  }, [shouldShow])
+
   useLayoutEffect(() => {
     if (prevPath !== pathname && (pathname === "/murmansk" || pathname === "/st-petersburg" || pathname === "/kazan" || pathname === "/nizhny-novgorod" || pathname === "/moscow-express")) {
       setPrevPath(pathname)
+      if (hasSeenPreloader()) {
+        setPhase("done")
+        return
+      }
       setPhase("loading")
       ringProgress.set(0)
       setProgressDone(false)
@@ -302,7 +322,7 @@ export default function Preloader() {
 
   useEffect(() => {
     if (!shouldShow || (phase !== "loading" && phase !== "ready")) return
-    const totalDuration = 3500
+    const totalDuration = 1000
     let hiddenStart: number | null = null
     let running = true
 
@@ -345,7 +365,7 @@ export default function Preloader() {
         setPhase("ready")
       }
     }
-    t = setTimeout(fn, 3300)
+    t = setTimeout(fn, 800)
     return () => clearTimeout(t)
   }, [pathname, phase, shouldShow])
 
@@ -359,7 +379,7 @@ export default function Preloader() {
           setPhase("exit")
         }
       }
-      t = setTimeout(fn, 600)
+      t = setTimeout(fn, 300)
       return () => clearTimeout(t)
     }
   }, [phase])
@@ -372,9 +392,12 @@ export default function Preloader() {
           t = setTimeout(fn, 200)
         } else {
           setPhase("done")
+          try {
+            sessionStorage.setItem("sol-preloader-seen", "1")
+          } catch {}
         }
       }
-      t = setTimeout(fn, 900)
+      t = setTimeout(fn, 350)
       return () => clearTimeout(t)
     }
   }, [phase])
@@ -397,15 +420,9 @@ export default function Preloader() {
     >
       {isVisible && (
         <div key={pathname} className="absolute inset-0 flex flex-col items-center justify-center">
-          {/* Static background layers */}
+          {/* Static background layers (grain filter removed: 0.02 opacity,
+              invisible to the eye, but forced a full-screen SVG repaint) */}
           <div className="absolute inset-0 pointer-events-none">
-            <svg className="absolute inset-0 w-full h-full" style={{ opacity: 0.02, mixBlendMode: "overlay" }}>
-              <filter id="grain3">
-                <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" stitchTiles="stitch" />
-                <feColorMatrix type="saturate" values="0" />
-              </filter>
-              <rect width="100%" height="100%" filter="url(#grain3)" />
-            </svg>
             <div className={`absolute inset-0 bg-gradient-to-b ${theme.bgGrad1}`} />
             <div className={`absolute inset-0 bg-gradient-to-b ${theme.bgGrad2}`} />
             <div className="absolute inset-0" style={{ background: theme.bgRadial }} />
@@ -444,26 +461,27 @@ export default function Preloader() {
             ))}
           </div>
 
-          {/* Aurora blobs */}
+          {/* Aurora blobs — static gradients (identical final look, no infinite
+              drift/pulse repaints during the 1.4s preloader window) */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div
-              className="absolute w-[450px] h-[450px] -left-[120px] -top-[120px] rounded-full aurora-drift-1"
+              className="absolute w-[450px] h-[450px] -left-[120px] -top-[120px] rounded-full"
               style={{ background: "radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 60%)" }}
             />
             <div
-              className="absolute w-[550px] h-[300px] -right-[180px] bottom-[10%] rounded-full aurora-drift-2"
+              className="absolute w-[550px] h-[300px] -right-[180px] bottom-[10%] rounded-full"
               style={{ background: "radial-gradient(circle, rgba(212,175,55,0.035) 0%, transparent 60%)" }}
             />
             <div
-              className="absolute w-[350px] h-[350px] left-[35%] top-[15%] rounded-full aurora-pulse"
+              className="absolute w-[350px] h-[350px] left-[35%] top-[15%] rounded-full"
               style={{ background: "radial-gradient(circle, rgba(255,215,0,0.025) 0%, transparent 60%)" }}
             />
             <div
-              className="absolute w-[300px] h-[300px] -left-[50px] bottom-[5%] rounded-full aurora-drift-3"
+              className="absolute w-[300px] h-[300px] -left-[50px] bottom-[5%] rounded-full"
               style={{ background: "radial-gradient(circle, rgba(180,40,40,0.06) 0%, transparent 55%)" }}
             />
             <div
-              className="absolute w-[400px] h-[250px] right-[10%] top-[40%] rounded-full aurora-drift-4"
+              className="absolute w-[400px] h-[250px] right-[10%] top-[40%] rounded-full"
               style={{ background: "radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 55%)" }}
             />
           </div>

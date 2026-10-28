@@ -59,12 +59,17 @@ export default function ConversionFooter() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mb-4">
-            Ready for Your Russian Journey?
+          <span className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-gold/[0.06] px-4 py-1.5 text-gold text-xs font-semibold tracking-[0.2em] uppercase mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse-dot" />
+            August 2026 departure · 8 seats only
+          </span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-4">
+            Ready for Your{" "}
+            <span className="bg-gradient-to-r from-gold via-[#F59E0B] to-[#DC2626] bg-clip-text text-transparent">Russian Journey?</span>
           </h2>
           <p className="text-white/50 text-base max-w-xl mx-auto">
             Tell us about your dream trip. We&apos;ll curate a personalized
-            itinerary in 24 hours.
+            itinerary in 24 hours — reply on WhatsApp, no spam ever.
           </p>
         </motion.div>
 
@@ -72,8 +77,9 @@ export default function ConversionFooter() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="          max-w-2xl mx-auto rounded-2xl border border-white/[0.06] bg-black/30 backdrop-blur-sm p-8 md:p-10"
+          className="          max-w-2xl mx-auto rounded-2xl border border-gold/15 bg-black/40 backdrop-blur-sm p-8 md:p-10 shadow-[0_0_90px_-30px_rgba(212,175,55,0.35)] overflow-hidden relative"
         >
+          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
           {submitted ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -254,6 +260,29 @@ export default function ConversionFooter() {
             </form>
           )}
         </motion.div>
+
+        {/* Subtle studio credit — quiet for travelers, findable for
+            business owners looking for a website. Links to the portfolio. */}
+        <p className="mt-8 text-center text-[11px] tracking-[0.08em] text-white/30">
+          Website by{" "}
+          <a
+            href="https://frameforge-brown.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/45 underline decoration-white/20 underline-offset-4 transition-colors duration-300 hover:text-gold hover:decoration-gold/40"
+          >
+            Sanchit Rishi · Sanrishi Developments ↗
+          </a>
+          <span className="mx-1.5 text-white/15">·</span>
+          <a
+            href="https://wa.me/917986618423"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/45 transition-colors duration-300 hover:text-gold"
+          >
+            Need a website?
+          </a>
+        </p>
       </div>
     </section>
   );

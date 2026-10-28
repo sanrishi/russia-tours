@@ -29,9 +29,14 @@ export default function SmoothScroll() {
     const expoOut = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
     async function init() {
+      // Diagnostic bypass: ?native=1 skips Lenis so the page uses plain
+      // browser scroll (reveals/anchors still work). Compare the two to
+      // isolate "Lenis path" vs "paint cost".
+      const nativeOnly =
+        new URLSearchParams(window.location.search).get("native") === "1";
       // dynamically import to avoid SSR issues
-      const LenisMod = await import("lenis");
-      const Lenis = LenisMod.default;
+      const LenisMod = nativeOnly ? null : await import("lenis");
+      const Lenis = LenisMod?.default;
 
       try {
         const gsapMod = await import("gsap");
@@ -48,35 +53,57 @@ export default function SmoothScroll() {
 
       const isMobile = window.innerWidth <= 1000;
 
-      // FAST config — drops 1s drift: duration 0.8/1.2 + lerp 0.09/0.10 + expoOut + lagSmoothing(0)
+      // Buttery desktop wheel: lerp-only mode (Lenis ignores duration/easing
+      // whenever lerp is set, so passing both was dead config). lerp 0.055 =
+      // long ~1s coast after each flick; wheelMultiplier 1.25 cures the
+      // Windows notch-wheel step-step-step feel. Mobile untouched (it works).
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      lenis = new (Lenis as any)(
+      lenis = nativeOnly
+        ? null
+        : new (Lenis as any)(
         isMobile
           ? {
-              duration: 0.8, // was 1.5 → 0.8 = stops fast
-              easing: expoOut, // was linear → expoOut = snappy
-              lerp: 0.09, // was 0.05 → 0.09 = less drift
+              duration: 1.0,
+              easing: expoOut,
+              direction: "vertical",
+              gestureDirection: "vertical",
+              smooth: true,
+              smoothTouch: true,
               touchMultiplier: 1.5,
+              infinite: false,
+              lerp: 0.07,
               wheelMultiplier: 1,
+              orientation: "vertical",
+              smoothWheel: true,
+              syncTouch: true,
+              autoRaf: false,
             }
           : {
-              duration: 1.2, // was 2.0 → 1.2
-              easing: expoOut,
-              lerp: 0.1, // was 0.06 → 0.10
-              wheelMultiplier: 1,
+              lerp: 0.055,
+              wheelMultiplier: 1.25,
+              touchMultiplier: 1.5,
+              infinite: false,
+              orientation: "vertical",
+              gestureOrientation: "vertical",
+              smoothWheel: true,
+              syncTouch: false,
+              autoRaf: false,
             }
       );
 
       // expose for debugging / anchor handlers
-      (window as unknown as Record<string, unknown>).__lenis = lenis;
-      window.__lenis = lenis;
+      if (lenis) {
+        (window as unknown as Record<string, unknown>).__lenis = lenis;
+        window.__lenis = lenis;
+      }
 
-      if (hasGsap) {
+      // nativeOnly: ScrollTrigger (if present) syncs to native scroll alone.
+      if (lenis && hasGsap) {
         lenis.on("scroll", ScrollTrigger.update);
         tickerCb = (t: number) => lenis.raf(t * 1000);
         gsap.ticker.add(tickerCb);
         gsap.ticker.lagSmoothing(0);
-      } else {
+      } else if (lenis) {
         const loop = (t: number) => {
           lenis.raf(t);
           rafId = requestAnimationFrame(loop);
@@ -92,7 +119,8 @@ export default function SmoothScroll() {
         const href = a.getAttribute("href") || "";
         if (href === "#top") {
           e.preventDefault();
-          lenis.scrollTo(0, { duration: 1.2, offset: 0 });
+          if (lenis) lenis.scrollTo(0, { duration: 1.2, easing: expoOut, offset: 0 });
+          else window.scrollTo({ top: 0, behavior: "smooth" });
           return;
         }
         const hash = (a as HTMLAnchorElement).hash;
@@ -100,7 +128,8 @@ export default function SmoothScroll() {
         const target = document.querySelector(hash);
         if (!target) return;
         e.preventDefault();
-        lenis.scrollTo(target as HTMLElement, { duration: 1.2, offset: -76 });
+        if (lenis) lenis.scrollTo(target as HTMLElement, { duration: 1.2, easing: expoOut, offset: -76 });
+        else (target as HTMLElement).scrollIntoView({ behavior: "smooth", block: "start" });
       };
       document.querySelectorAll('a[href^="#"]').forEach((a) => {
         a.addEventListener("click", anchorHandler as EventListener);
@@ -337,9 +366,15 @@ export default function SmoothScroll() {
       const onResize = () => ScrollTrigger?.refresh();
       window.addEventListener("resize", onResize);
 
+      // images change layout as they load, leaving triggers stale (each
+      // per-frame update then does extra work). One refresh on load.
+      const onLoad = () => ScrollTrigger?.refresh();
+      window.addEventListener("load", onLoad);
+
       // cleanup helpers stored on window for later
       (window as unknown as Record<string, unknown>).__solCleanup = () => {
         window.removeEventListener("resize", onResize);
+        window.removeEventListener("load", onLoad);
         window.removeEventListener("__solLoader", onLoaderToggle as EventListener);
       };
     }
@@ -377,6 +412,7 @@ export default function SmoothScroll() {
       try {
         const l = (window as unknown as Record<string, unknown>).__lenis as { scrollTo?: (t: number, o?: unknown) => void } | undefined;
         if (l?.scrollTo) l.scrollTo(0, { immediate: true });
+        else window.scrollTo(0, 0);
       } catch {}
     }, 100);
     return () => clearTimeout(t);

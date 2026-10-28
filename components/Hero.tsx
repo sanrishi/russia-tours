@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import type { ComponentType } from "react";
 import AnimalSilhouettes from "./AnimalSilhouettes";
+import Magnetic from "./Magnetic";
 
 const slides = [
   {
@@ -34,33 +36,40 @@ const slides = [
 
 interface SlideshowProps {
   current: number;
-  scrollY: number;
-  isMobile: boolean;
-  progress: number;
   goTo: (i: number) => void;
-  contentOpacity: number;
-  imageY: number;
 }
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [slidesStarted, setSlidesStarted] = useState(false);
   const [HeroSlideshow, setHeroSlideshow] = useState<ComponentType<SlideshowProps> | null>(null);
 
+  // Buttery-scroll fix: parallax writes straight to the DOM instead of
+  // setState-per-frame (which re-rendered the whole hero tree on every
+  // Lenis tick — the main desktop "stucky" source). Same math as before:
+  // bg drifts up at 0.3x, content fades out over 800px.
+  const scrollRaf = useRef(0);
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+    const apply = () => {
+      scrollRaf.current = 0;
+      const y = window.scrollY;
+      const iy = window.innerWidth < 768 ? 0 : Math.min(0, -y * 0.3);
+      const op = Math.min(1, 1 - y / 800);
+      const bg = document.querySelector<HTMLElement>("[data-hero-bg]");
+      if (bg) bg.style.transform = `translateY(${iy}px)`;
+      const content = document.querySelector<HTMLElement>("[data-hero-content]");
+      if (content) content.style.opacity = String(op);
     };
-  }, []);
+    const onScroll = () => {
+      if (!scrollRaf.current) scrollRaf.current = requestAnimationFrame(apply);
+    };
+    apply();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (scrollRaf.current) cancelAnimationFrame(scrollRaf.current);
+    };
+  }, [slidesStarted]);
 
   useEffect(() => {
     import("./HeroSlideshow").then((mod) => {
@@ -73,26 +82,14 @@ export default function Hero() {
     if (!slidesStarted) return;
     const interval = setInterval(() => {
       setCurrent((c) => (c + 1) % slides.length);
-      setProgress(0);
     }, 8000);
     return () => clearInterval(interval);
   }, [slidesStarted]);
 
-  useEffect(() => {
-    if (!slidesStarted) return;
-    const tick = setInterval(() => {
-      setProgress((p) => Math.min(p + 100 / 80, 100));
-    }, 100);
-    return () => clearInterval(tick);
-  }, [current, slidesStarted]);
-
   const goTo = useCallback((i: number) => {
     setCurrent(i);
-    setProgress(0);
   }, []);
 
-  const imageY = isMobile ? 0 : Math.min(0, -scrollY * 0.3);
-  const contentOpacity = Math.min(1, 1 - scrollY / 800);
   const s = slides[0];
 
   const heroStatic = (
@@ -100,18 +97,22 @@ export default function Hero() {
       {/* Background image */}
       <div
         className="absolute inset-0"
-        style={{ transform: `translateY(${imageY}px)`, willChange: "transform" }}
+        data-hero-bg
+        style={{ transform: "translateY(0px)", willChange: "transform" }}
       >
         <div
           className="absolute inset-0 scale-110"
           style={{ animation: "heroZoom 8s ease-out forwards" }}
         >
-          <img
+          <Image
             src={s.image}
             alt=""
-            loading="eager"
+            fill
+            priority
             fetchPriority="high"
-            className="w-full h-full object-cover"
+            sizes="100vw"
+            quality={75}
+            className="object-cover"
             style={{ objectPosition: "center 25%", filter: "brightness(1.25) contrast(1.1) saturate(1.15)" }}
           />
         </div>
@@ -128,7 +129,8 @@ export default function Hero() {
       {/* Content — CSS animated entrance */}
       <div
         className="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-center px-6 text-center max-md:-mt-16"
-        style={{ opacity: contentOpacity }}
+        data-hero-content
+        style={{ opacity: 1 }}
       >
         <div className="animate-hero-card flex flex-col items-center gap-8">
           <div className="max-w-2xl w-full rounded-2xl border border-white/[0.04] bg-black/20 p-8 sm:p-10">
@@ -142,7 +144,8 @@ export default function Hero() {
               {s.subtitle}
             </p>
           </div>
-          <div className="animate-fade-in-8">
+          <div className="animate-fade-in-8 flex flex-col sm:flex-row items-center gap-4">
+            <Magnetic>
             <Link
               href={s.href}
               className="group relative inline-flex items-center gap-2.5 bg-gradient-to-b from-transparent to-gold/[0.03] border border-gold text-gold font-semibold px-8 py-4 rounded-full text-base overflow-hidden transition-all duration-200 ease-in-out active:scale-95 hover:bg-black hover:text-white hover:-translate-y-[0.5px] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_15px_rgba(212,175,55,0.15)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_0_20px_rgba(212,175,55,0.3)] drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] hover:drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]"
@@ -153,12 +156,30 @@ export default function Hero() {
                 <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
+            </Magnetic>
+            <Link
+              href="/places"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/30 bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-sm transition-all duration-300"
+            >
+              Explore destinations
+              <ArrowRight size={15} className="opacity-60" />
+            </Link>
+          </div>
+          <div className="animate-fade-in-15 flex items-center gap-5 sm:gap-7 text-[11px] sm:text-xs tracking-[0.18em] uppercase text-white/45">
+            <span>Small groups</span>
+            <span className="w-1 h-1 rounded-full bg-gold/60" />
+            <span>Visa included</span>
+            <span className="w-1 h-1 rounded-full bg-gold/60" />
+            <span>Hindi support</span>
           </div>
         </div>
       </div>
 
       {/* Bottom controls — normal flow, below centered content */}
-      <div className="relative z-10 flex flex-col items-center gap-6 pb-8">
+      <div className="relative z-10 flex flex-col items-center gap-4 pb-8">
+        <div className="text-[11px] font-medium tracking-[0.35em] text-white/40 tabular-nums">
+          01 <span className="text-white/20 mx-1">/</span> 03
+        </div>
         {/* Progress indicators (non-interactive before slides start) */}
         <div className="flex items-center gap-3">
           {slides.map((_, i) => (
@@ -203,12 +224,7 @@ export default function Hero() {
   return (
     <HeroSlideshow
       current={current}
-      scrollY={scrollY}
-      isMobile={isMobile}
-      progress={progress}
       goTo={goTo}
-      contentOpacity={contentOpacity}
-      imageY={imageY}
     />
   );
 }

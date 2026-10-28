@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import CurrencyPopover from "@/components/CurrencyPopover";
 import WeatherWidget from "@/components/WeatherWidget";
 import SiteLogo from "@/components/SiteLogo";
+import Magnetic from "@/components/Magnetic";
 import { playClick, ensureAudio } from "@/lib/sounds";
 
 const navLinks = [
@@ -26,7 +27,18 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [lang, setLang] = useState<"en" | "ru">("en");
 
-  useEffect(() => { ensureAudio() }, [])
+  // Defer AudioContext creation until first user gesture.
+  // playClick() already calls ensureAudio(), so click sounds are preserved
+  // with zero audible/visual change — just no early AudioContext cost.
+  useEffect(() => {
+    const init = () => { ensureAudio(); };
+    window.addEventListener("pointerdown", init, { once: true, passive: true });
+    window.addEventListener("keydown", init, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", init);
+      window.removeEventListener("keydown", init);
+    };
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -99,14 +111,16 @@ export default function Navbar() {
               RU
             </button>
           </div>
-          <Link
-            href="/moscow-express#booking"
-            onClick={playClick}
-            className="inline-flex items-center gap-2 bg-[#F4AA01] text-[#010101] font-semibold text-sm px-5 py-2.5 rounded-full active:scale-95 hover:bg-black hover:text-white transition-all duration-500 ease-in-out"
-          >
-            <Phone size={14} />
-            <span>Plan Your Tour</span>
-          </Link>
+          <Magnetic>
+            <Link
+              href="/moscow-express#booking"
+              onClick={playClick}
+              className="inline-flex items-center gap-2 bg-[#F4AA01] text-[#010101] font-semibold text-sm px-5 py-2.5 rounded-full active:scale-95 hover:bg-black hover:text-white transition-all duration-500 ease-in-out"
+            >
+              <Phone size={14} />
+              <span>Plan Your Tour</span>
+            </Link>
+          </Magnetic>
         </nav>
 
         <button
@@ -181,14 +195,16 @@ export default function Navbar() {
                   RU
                 </button>
               </div>
-              <Link
-                href="/moscow-express#booking"
-                onClick={(e) => { playClick(); setMobileOpen(false); }}
-                className="inline-flex items-center justify-center gap-2 bg-[#F4AA01] text-[#010101] font-semibold text-sm px-5 py-3 rounded-full active:scale-95 hover:bg-black hover:text-white transition-all duration-500 ease-in-out mt-2"
-              >
-                <Phone size={14} />
-                <span>Plan Your Tour</span>
-              </Link>
+              <Magnetic>
+                <Link
+                  href="/moscow-express#booking"
+                  onClick={(e) => { playClick(); setMobileOpen(false); }}
+                  className="inline-flex items-center justify-center gap-2 bg-[#F4AA01] text-[#010101] font-semibold text-sm px-5 py-3 rounded-full active:scale-95 hover:bg-black hover:text-white transition-all duration-500 ease-in-out mt-2"
+                >
+                  <Phone size={14} />
+                  <span>Plan Your Tour</span>
+                </Link>
+              </Magnetic>
             </div>
           </motion.div>
         )}

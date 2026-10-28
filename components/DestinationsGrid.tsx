@@ -102,11 +102,13 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-gold text-sm font-medium tracking-[0.15em] uppercase">
+          <span className="inline-flex items-center gap-3 text-gold text-sm font-medium tracking-[0.25em] uppercase">
+            <span className="h-px w-8 bg-gold/50" />
             Destinations
+            <span className="h-px w-8 bg-gold/50" />
           </span>
-          <h2 data-split="Five Cities. Infinite Stories." className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mt-4">
-            Five Cities. Infinite Stories.
+          <h2 data-split="Five Cities. Infinite Stories." className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mt-4">
+            Five Cities. <span className="bg-gradient-to-r from-gold via-[#F59E0B] to-[#DC2626] bg-clip-text text-transparent">Infinite Stories.</span>
           </h2>
           <p data-split="Each city offers a unique flavor of Russia, curated for the Indian traveler." className="text-white/50 text-base mt-4 max-w-xl mx-auto">
             Each city offers a unique flavor of Russia, curated for the Indian
@@ -122,9 +124,9 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              whileHover={{ y: -4 }}
-              className="group relative aspect-[3/4] md:aspect-auto md:h-[520px] rounded-2xl overflow-hidden bg-charcoal border border-white/5 hover:border-gold/20 transition-all duration-500"
+              transition={{ delay: (i % 3) * 0.12, duration: 0.6 }}
+              whileHover={{ y: -6 }}
+              className={`group relative aspect-[3/4] md:aspect-auto md:h-[520px] rounded-2xl overflow-hidden bg-charcoal border border-white/5 hover:border-gold/30 hover:shadow-[0_24px_70px_-24px_rgba(212,175,55,0.25)] transition-all duration-500 ${i % 3 === 1 ? "lg:mt-14" : ""}`}
             >
               <Image
                 src={dest.image}
@@ -138,8 +140,14 @@ export default function DestinationsGrid({ moscowTitle, moscowTagline, moscowDes
                 className={`absolute inset-0 bg-gradient-to-b ${dest.gradient} opacity-60 group-hover:opacity-80 transition-opacity duration-500`}
               />
 
+              {/* Shine sweep on hover — compositor-only, matches hero CTA */}
+              <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
 
+              <span className="absolute top-5 right-5 z-10 text-5xl font-bold text-white/[0.14] group-hover:text-gold/30 transition-colors duration-500 tabular-nums select-none" aria-hidden="true">
+                0{i + 1}
+              </span>
               <div className="absolute top-4 left-4 z-10 flex gap-2">
                 {dest.comingSoon && (
                   <span className="inline-flex items-center bg-gold text-charcoal text-xs font-bold px-3 py-1.5 rounded-full">

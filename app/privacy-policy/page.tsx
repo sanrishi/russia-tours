@@ -42,9 +42,27 @@ export default function PrivacyPolicyPage() {
             please email us at svetaindia07@gmail.com.
           </p>
 
-          <p className="text-white/40 text-xs pt-6 border-t border-white/5">
-            Last updated: July 2026
-          </p>
+          <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-white/40">
+            <p>Last updated: July 2026</p>
+            <p>
+              Website designed &amp; developed by{" "}
+              <a
+                href="https://frameforge-brown.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/70 hover:text-gold underline decoration-gold/20 underline-offset-4 transition-colors"
+              >
+                Sanchit Rishi — Sanrishi Developments
+              </a>
+              <span className="mx-1.5 text-white/20">·</span>
+              <a
+                href="tel:+917986618423"
+                className="text-white/50 hover:text-gold transition-colors"
+              >
+                +91 79866 18423
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </main>

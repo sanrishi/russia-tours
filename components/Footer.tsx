@@ -96,7 +96,7 @@ export default function Footer() {
         />
         <video
           ref={videoRef}
-          autoPlay loop muted playsInline preload="auto"
+          autoPlay loop muted playsInline preload="metadata"
           className="w-full h-full object-cover"
           style={{
             WebkitMaskImage: `url(${maskUrl})`,
